@@ -7,7 +7,7 @@ export default class StreamWsClient {
 
 	//helper to check if websocket is alive before sending
 	send = (json) => { 
-		if(this.open){
+		if(this.open && this.webSocket){
 			this.webSocket.send(json);
 		}
 	}
@@ -28,6 +28,7 @@ export default class StreamWsClient {
 
 		webSocket.onclose = (e) => {
 			this.webSocket = null;
+			this.open = false
 			console.debug('Socket is closed. Reconnecting..', e.reason);
 		    setTimeout(() => {
 		      this.connect();

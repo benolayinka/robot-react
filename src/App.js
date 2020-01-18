@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import StreamConfig from './components/StreamConfig/StreamConfig.js'
 import StreamViewIndex from './components/StreamView/StreamViewIndex.js'
@@ -6,29 +7,29 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect,
 } from "react-router-dom";
 
-//export const JanusServerContext = React.createContext('/janusbase/janus');
 window.server = '/janusbase/janus'
 
 function App() {
   return (
-//    <JanusServerContext.Provider>
     <Router>  
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/config">config</Link>
-            </li>
-            <li>
-              <Link to="/view">view</Link>
-            </li>
-          </ul>
-        </nav>
-
         <Switch>
+          <Route path="/nav">
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/config">config</Link>
+                </li>
+                <li>
+                  <Link to="/view">view</Link>
+                </li>
+              </ul>
+            </nav>
+          </Route>
           <Route path="/config">
             <StreamConfig />
           </Route>
@@ -36,12 +37,11 @@ function App() {
             <StreamViewIndex />
           </Route>
           <Route path="/">
-            hi
+            <Redirect to="/view/2" />
           </Route>
         </Switch>
       </div>
     </Router> 
-//    </JanusServerContext.Provider>
   );
 }
 

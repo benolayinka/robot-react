@@ -62,15 +62,19 @@ class StreamViewIndex extends React.Component{
 
         return (<div>
                     <Switch>
+                        <Route path={`${match.path}/debug`}>
+                            <StreamView debug={true} />
+                        </Route>
                         <Route path={`${match.path}/:id`}
                         render={(props) => <StreamView {...props} />}
                         />
-                        <Route path={match.path}>
-                            <ol >
+                        <Route path={`${match.path}`}>
+                            <ol>
                                 {StreamsList}
                             </ol>
                         </Route>
                     </Switch>
+                    
                 </div>
 
                 

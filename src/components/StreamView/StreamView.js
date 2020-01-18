@@ -1,38 +1,44 @@
 import React, { useLayoutEffect, useState } from 'react'
 import ReactJanusController from '../Janus/ReactJanusController';
 import StreamController from './StreamController.js'
+import StreamCard from './StreamCard'
+import {Container} from 'react-bootstrap'
 
 class StreamView extends React.Component{
     constructor(props) {
         super(props);
-        this.streamId = props.match.params.id
-        this.janusController = null;
-        this.server = window.server
-        this.streamingPlugin = 'janus.plugin.streaming'
-        this.streamingPluginHandle = null
-        this.user = 'ben'
-        this.rover = 'mars'
 
-        this.state = {
-            stream: null,
-            gotRemoteStream: false,
-            width: null,
-            renderControls: false,
-        };
+        //if we're rendering debug, fix some values
+        if(props.debug) {
+            console.log('debugging!')
+            this.user = 'ben'
+            this.rover = 'debug'
+        }
+        else{
+            console.log('not debugging!')
+            this.streamId = props.match.params.id
+            this.janusController = null;
+            this.server = window.server
+            this.streamingPlugin = 'janus.plugin.streaming'
+            this.streamingPluginHandle = null
+            this.user = 'ben'
+            this.rover = 'mars'
+
+            this.state = {
+                stream: null,
+                gotRemoteStream: false,
+                width: null,
+                renderControls: false,
+            };
+        }
       }
-    
-    updateDimensions = () => {
-        this.setState({ width: window.innerWidth});
-      };
 
     async componentDidMount() {
         console.debug('StreamView Mounted')
 
-        //save width in state to resize gamepad element
-        this.state.width = this.refs.container.offsetWidth
-
-        //TODO resize crashes on createjoystick
-        //window.addEventListener('resize', this.updateDimensions)
+        //don't bother to connect to janus if we're debugging
+        if(this.props.debug)
+            return
 
         var janusController = new ReactJanusController()
         this.janusController = janusController
@@ -73,7 +79,7 @@ class StreamView extends React.Component{
             this.setState({gotRemoteStream:true})
 
             //video resizes window, so render stuff after
-            this.refs.video.addEventListener("playing",
+            this.refs.videoRef.addEventListener("playing",
                  ()=> { this.setState({renderControls:true}) }, true);
         }
     }
@@ -90,10 +96,22 @@ class StreamView extends React.Component{
 
     render() {
         //stream must be muted to autoplay
-        return (<div className='StreamView' ref='container'>
-                    <video src={this.state.stream} ref="video" width="100%" id="stream" muted autoPlay playsInline/>
-                    <StreamController user={this.user} rover={this.rover} width={this.state.width} renderControls={this.state.renderControls}/>
-                </div>
+        return (
+            <div className='StreamView' ref='container'>
+                {this.props.debug ?
+                    <div>
+                        <StreamController user={this.user} rover={'debug'} renderControls={true}/>
+                    </div>
+                    :
+                    <div>
+                        <StreamCard></StreamCard>
+                        <Container>
+                            <video src={this.state.stream} className = 'center' ref='videoRef' width="100%" id="stream" muted autoPlay playsInline/>
+                            <StreamController user={this.user} rover={this.rover} renderControls={this.state.renderControls}/>
+                        </Container>
+                    </div>
+                }
+            </div>
         );
     }
 }
