@@ -37,7 +37,7 @@ function App() {
             <StreamViewIndex />
           </Route>
           <Route path="/">
-            <Redirect to="/view/2" />
+            <Redirect to="/view/1" />
           </Route>
         </Switch>
       </div>

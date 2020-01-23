@@ -44,7 +44,7 @@ class StreamViewIndex extends React.Component{
     }
 
     handleStreamClick = (streamId)=> {
-        if(!confirm('Watch stream ' + streamId + '?')) return;
+        if(!window.confirm('Watch stream ' + streamId + '?')) return;
         this.setState({ redirectToId: streamId });
         this.props.history.push('/view/' + streamId)
     }

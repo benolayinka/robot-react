@@ -1,6 +1,6 @@
 import React, { useRef, useLayoutEffect, useState } from "react";
 import ReactNipple from 'react-nipple'
-import {Row} from 'simple-flexbox'
+import {Row, Col} from 'react-bootstrap'
 
 //gamepad, two joysticks and a button pad.
 //props are leftStick, rightStick, onMove 
@@ -78,36 +78,40 @@ export default function StreamGamepad(props) {
     return (
         <div className='StreamGamepad' ref={containerRef}>
             {dimensions.width && 
-            <Row>
-                {props.leftStick && 
-                <ReactNipple
-                    options={{ mode: 'static', size: dimensions.width/4, color: 'black', position: { top: '50%', left: '50%' } }}
-                    //options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
-                    className='LeftJoystick'
-                    // any unknown props will be passed to the container element, e.g. 'title', 'style' etc
-                    style={{
-                        width: dimensions.width / 4,
-                        height: dimensions.width / 4,
-                        position: 'relative'
-                    }}
-                    onMove={(evt, data) => onMove('leftJoystick', data)}
-                    onEnd={(evt, data) => onEnd('leftJoystick', data)}
-                />
-                }
-                {props.rightStick && 
-                <ReactNipple
-                    options={{ mode: 'static', size: dimensions.width/4, color: 'black', position: { top: '50%', left: '50%' } }}
-                    className='RightJoystick'
-                    // any unknown props will be passed to the container element, e.g. 'title', 'style' etc
-                    style={{
-                        width: dimensions.width / 4,
-                        height: dimensions.width / 4,
-                        position: 'relative'
-                    }}
-                    onMove={(evt, data) => onMove('rightJoystick', data)}
-                    onEnd={(evt, data) => onEnd('rightJoystick', data)}
-                />
-                }
+            <Row className='justify-content-center'>
+                <Col xs={4}>
+                    {props.leftStick && 
+                    <ReactNipple
+                        options={{ mode: 'static', size: dimensions.width/4, color: 'black', position: { top: '50%', left: '50%' } }}
+                        //options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
+                        className='LeftJoystick'
+                        // any unknown props will be passed to the container element, e.g. 'title', 'style' etc
+                        style={{
+                            //width: dimensions.width / 4,
+                            height: dimensions.width / 4,
+                            position: 'relative'
+                        }}
+                        onMove={(evt, data) => onMove('leftJoystick', data)}
+                        onEnd={(evt, data) => onEnd('leftJoystick', data)}
+                    />
+                    }
+                </Col>
+                <Col xs={4}>
+                    {props.rightStick && 
+                    <ReactNipple
+                        options={{ mode: 'static', size: dimensions.width/4, color: 'black', position: { top: '50%', left: '50%' } }}
+                        className='RightJoystick'
+                        // any unknown props will be passed to the container element, e.g. 'title', 'style' etc
+                        style={{
+                            //width: dimensions.width / 4,
+                            height: dimensions.width / 4,
+                            position: 'relative'
+                        }}
+                        onMove={(evt, data) => onMove('rightJoystick', data)}
+                        onEnd={(evt, data) => onEnd('rightJoystick', data)}
+                    />
+                    }
+                </Col>
             </Row>
             }
         </div>

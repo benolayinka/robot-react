@@ -2,6 +2,7 @@ import React from 'react'
 import StreamItem from './StreamItem.jsx'
 import ReactJanusController from '../Janus/ReactJanusController';
 import CreateStreamForm from './CreateStreamForm.jsx';
+import {Modal, Form, Button, ListGroup} from 'react-bootstrap'
 
 class StreamConfig extends React.Component{
     constructor(props) {
@@ -12,6 +13,9 @@ class StreamConfig extends React.Component{
             server: '/janusbase/janus',
             plugin: 'janus.plugin.streaming',
             list: [],
+            deleteStreamId: null,
+            showDeleteModal:false,
+            deleteModalHeading:null,
         };
       }
 
@@ -30,7 +34,7 @@ class StreamConfig extends React.Component{
     }
 
     updateStreamInfo = async(streamId) => {
-        let streamIndex = this.state.list.findIndex((obj => obj.id == streamId));
+        let streamIndex = this.state.list.findIndex((obj => obj.id === streamId));
         let updatedList = this.state.list.slice()
         let updatedStream = await this.getStreamInfo(streamId)
         updatedList[streamIndex] = updatedStream
@@ -47,10 +51,25 @@ class StreamConfig extends React.Component{
         return response.info
     }
 
-    handleDestroyClick = (streamId) => {
-        if(!confirm('Delete stream ' + streamId + '?')) return;
-        this.destroyStream(streamId, false)
+    handleDeleteModal = (event) => {
+         // upon submit, prevent whole page from refreshing
+        event.preventDefault()
+        let form = event.target
+        let permanent = form.elements.permanent.checked
+        let secret = form.elements.secret.value
+        let streamId = this.state.deleteStreamId
+        this.setState({showDeleteModal:false})
+        console.log('delete', form.elements)
+        this.destroyStream(streamId, permanent, secret)
         this.getStreams()
+    }
+
+    handleDestroyClick = (streamId) => {
+        this.setState({
+            deleteStreamId: streamId,
+            deleteModalHeading: 'Delete stream ' + streamId + '?',
+            showDeleteModal:true,
+            })
     }
 
     destroyStream = async(streamId, permanent, secret='') => {
@@ -66,7 +85,7 @@ class StreamConfig extends React.Component{
     }
 
     handleCreateStreamClick = (formData)=> {
-        if(!confirm('Create stream?')) return;
+        if(!window.confirm('Create stream?')) return;
         this.createStream(formData)
     }
 
@@ -92,6 +111,29 @@ class StreamConfig extends React.Component{
                         {StreamsList}
                     </ol>
                     <CreateStreamForm notifySubmit={this.handleCreateStreamClick}/>
+                    <Modal show={this.state.showDeleteModal}>
+                        <Form autoComplete="off" onSubmit={this.handleDeleteModal}>
+                        <Modal.Header closeButton>
+                        <Modal.Title>{this.state.deleteModalHeading}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form.Group controlId="formPermanent">
+                                <Form.Check type="checkbox" name='permanent' label="permanent" />
+                            </Form.Group>
+                            <Form.Group controlId="formSecret">
+                                <Form.Control type="text" name='secret' placeholder="secret" />
+                            </Form.Group>
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button variant="secondary" onClick={()=>{this.setState({showDeleteModal:false})}}>
+                            cancel
+                        </Button>
+                        <Button variant="primary" type="submit">
+                            delete stream
+                        </Button>
+                        </Modal.Footer>
+                        </Form>
+                    </Modal>
                 </div>
         );
     }

@@ -12,6 +12,7 @@ class CreateStreamForm extends React.Component {
       title: 'create stream',
       type: "object",
       properties: {
+        permanent: {type: "boolean", title: "permanent", default: true},
         type: {type: "string", title: "type", enum:['rtp', 'live', 'ondemand', 'rtsp'], default: 'rtp'},
         admin_key: {type: "string", title: "admin_key"},
         id: {type: "integer", title: "id (optional, leave blank for random)"},
@@ -20,10 +21,9 @@ class CreateStreamForm extends React.Component {
         secret: {type: "string", title: "secret (optional)"},
         pin: {type: "integer", title: "pin (optional)"},
         is_private: {type: "boolean", title: "is_private", default: false},
-        video: {type: "boolean", title: "video", default: false},
+        video: {type: "boolean", title: "video", default: true},
         audio: {type: "boolean", title: "audio", default: false},
         data: {type: "boolean", title: "data", default: false},
-        permanent: {type: "boolean", title: "permanent", default: false},
       }
     }
 
@@ -40,9 +40,9 @@ class CreateStreamForm extends React.Component {
       rtpSchema.properties = Object.assign(rtpSchema.properties, {
         videoport: {type: "integer", title: "videoport"},
         videortcport: {type: "integer", title: "videortcport"},
-        videopt: {type: "integer", title: "videopt (payload type, e.g 96)"},
-        videortpmap: {type: "string", title: "videortpmap (e.g VP8/90000)"},
-        videofmtp: {type: "string", title: "videofmtp (optional codec specific)"},
+        videopt: {type: "integer", title: "videopt (payload type, e.g H264 is 96)"},
+        videortpmap: {type: "string", title: "videortpmap (e.g H264/90000)"},
+        videofmtp: {type: "string", title: "videofmtp (optional codec specific, e.g profile-level-id=42e01f;packetization-mode=1)"},
       })
     } else {
       rtpSchema.properties = Object.assign({},rtpSchema.properties)
@@ -51,9 +51,7 @@ class CreateStreamForm extends React.Component {
     this.setState({
       formData,
       rtpSchema
-    }, ()=>console.log('wtf'))
-
-    console.log(this)
+    })
   }
 
   onSubmit = ({formData}, event) => {
@@ -68,7 +66,6 @@ class CreateStreamForm extends React.Component {
         formData={this.state.formData}
         onChange={this.onChange}
         onSubmit={this.onSubmit} />
-        {console.log(this.state)}
         </div>
     );
     }

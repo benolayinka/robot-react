@@ -1,73 +1,143 @@
 import React from 'react'
 import StreamGamepad from './StreamGamepad.js'
-import StreamWsClient from './StreamWsClient.js'
+import io from 'socket.io-client'
+import {Container, Row, Col, Button} from 'react-bootstrap'
+import LineTo from 'react-lineto';
+import StreamControllerUserList from './StreamControllerUserList.js'
+const uuidv1 = require('uuid/v1');
+
+var defaultControlText = 'click me to drive!'
+
+const controlStates = {
+    AVAILABLE: 'available',
+    REQUESTING: 'requesting',
+    UNAVAILABLE: 'unavailable',
+    HAVE: 'have'
+}
+
+const controlTexts = {
+    AVAILABLE: 'click me to drive!',
+    REQUESTING: 'requesting',
+    UNAVAILABLE: 'unavailable',
+}
 
 export default class StreamController extends React.Component {
     constructor(props) {
 		super(props)
-		this.userSent = false
+
 		this.pressed = {}
 		this.gamepadData = {}
 		this.controlLoopRunning = false
-		this.wsClient = new StreamWsClient('wss://benolayinka.com/ws')
-		this.wsClient.connect();
-	}
-	
-	componentDidMount() {
-		this.controlLoop()
-	}
 
-    sendUser() {
-		if(!this.userSent) {
-			this.userSent = true;
-			let json = JSON.stringify({event:"userConnected", user:this.props.user})
-			this.wsClient.send(json)
+		if(this.props.debug)
+			this.uuid = 'debug'
+		else
+			this.uuid = uuidv1();
+
+		this.user = {name: this.props.name, uuid: this.uuid}
+
+		this.socket = io()
+		this.socket.on('connect', this.onSocketConnect);
+
+		this.state = {
+			controlState:controlStates.AVAILABLE,
+			controlText:controlTexts.AVAILABLE,
+			usersInRoom: null,
+			activeUserInRoom: null
 		}
 	}
 
-	sendStop(){
-		let json = JSON.stringify({
-			rover: this.props.rover,
-			event: 'stop',
-			user: this.props.user
+	updateUsersByRooms = (usersByRooms)=>{
+		//get users just in our room
+		console.log('usersByRooms', usersByRooms)
+		this.setState({usersInRoom: usersByRooms[this.props.rover]})
+	}
+
+	handleRequestAck = (message)=>{
+		if(message.uuid === this.uuid) {
+			if(message.requestGranted){
+				this.setState({controlState:controlStates.HAVE})
+			} else {
+				this.setState({controlState:controlStates.UNAVAILABLE})
+			}
+		}
+	}
+
+	handleSecondsRemaining = (message)=>{
+		//get the index of the active user from the uuid of the seconds message
+		let userIndex = this.state.usersInRoom.map(function(user) { return user.uuid; })
+					.indexOf(message.uuid);
+
+		//set activeuser if found
+		if (userIndex >= 0) {
+				let user = this.state.usersInRoom[userIndex]
+				this.setState({activeUserInRoom: user})
+		}
+
+		//update state based on who is using
+		if(message.uuid === this.uuid) {
+			this.setState({controlState:controlStates.HAVE})
+		} else {
+			this.setState({controlState:controlStates.UNAVAILABLE})
+		}
+
+		//update control text
+		this.setState({controlText: message.secondsRemaining})
+
+		//update state when time expires
+		if(message.secondsRemaining === 0){
+			this.setState({
+				controlText:controlTexts.AVAILABLE,
+				controlState:controlStates.AVAILABLE,
+				activeUserInRoom: null,
+				})
+		}
+	}
+
+	onSocketConnect = () => {
+		this.socket.on('users by rooms', (usersByRooms) => this.updateUsersByRooms(usersByRooms))
+
+		this.socket.on('message', (message)=> {
+			console.log('message received', message)
+			switch(message.type) {
+				case 'request ack':
+					this.handleRequestAck(message)
+					break
+				case 'seconds remaining':
+					this.handleSecondsRemaining(message)
+					break
+				default:
+					// code block
+				}
 		})
-		this.wsClient.send(json);
-	}
 
-	//keypresses bound to joystick commands
-	bindKeysPressed() {
-		onkeydown=function(e){
-		 e = e || window.event;
-		 this.pressed[e.key] = true;
+		//defining and using all program logic within connected context..
+		this.sendControls = () => {
+			this.socket.emit('message', {
+				type: 'controls',
+				data: this.gamepadData,
+				uuid: this.uuid
+			})
 		}
-	
-		onkeyup=function(e){
-		 e = e || window.event;
-		 delete this.pressed[e.key];
-		}
-	
-		document.addEventListener('keydown', onkeydown);
-		document.addEventListener('keyup', onkeyup);
-	}
 
-	sendControls(){
-		let json = JSON.stringify({
-			rover: this.props.rover,
-			event: 'controls',
-			data: this.gamepadData,
-			user: this.props.user
-		})
-		this.wsClient.send(json)
-	}
-
-	 // Send control updates to the server every .1 seconds.
-	controlLoop () {
-		setTimeout(() => {
-			this.controlLoop()
-			if (this.controlLoopRunning) {
+		this.controlLoop = ()=>{
+			if (this.props.debug ||  this.state.controlState === controlStates.HAVE) {
 				this.sendControls()
 			}
-		}, 100)
+		}
+
+		// Send control updates to the server every .1 seconds.
+		window.setInterval(this.controlLoop, 100)
+
+		this.socket.emit('user connected', {
+				name: this.props.name,
+				uuid: this.uuid,
+			})
+
+		//join room for rover
+		this.socket.emit('join', this.props.rover, (response)=>{
+			console.log('join room response: ' + response)
+		})
 	}
 
 	gamepadCallback = ({active, gamepadElementData}) => {
@@ -79,12 +149,54 @@ export default class StreamController extends React.Component {
 		else{
 			this.controlLoopRunning = false
 		}
-    }
+	}
+	
+	onRequestButton = ()=>{
+		this.setState({controlText:controlTexts.REQUESTING, controlState:controlStates.REQUESTING})
+		//also need to check for user, give request an id
+		this.socket.emit('message', {
+			type: 'request',
+			uuid: this.uuid,
+		})
+
+		//if we don't get an ack, become available again after 5 seconds
+		setTimeout(()=>{
+			if(this.state.controlState === controlStates.REQUESTING){
+				this.setState({controlState:controlStates.AVAILABLE})
+			}
+		}, 5000)
+
+	}
 
 	render() {
 		return(
 			<div className="StreamController">
-				{this.props.renderControls && <StreamGamepad onMove={this.gamepadCallback} leftStick='true' rightStick='true'/>}
+				<Row className=' p-2 justify-content-center'>
+					<Col xs={8}>
+						{this.props.debug || 
+						(this.state.controlState === controlStates.HAVE) 
+						&& 
+						<StreamGamepad onMove={this.gamepadCallback} leftStick='true' rightStick='true'/>
+						}
+						{console.log('state', this.state.controlState)}
+					</Col>
+				</Row>
+				<Row className=' p-2 justify-content-center'>
+					<Col xs={4} className='text-center'>
+						<Button
+						variant="dark"
+						disabled={this.state.controlState !== controlStates.AVAILABLE}
+						onClick={this.onRequestButton}
+						>
+							{this.state.controlText}
+						</Button>
+					</Col>
+				</Row>
+				<Row className=' p-2 justify-content-center'>
+					<Col xs={4} className='text-center'>
+						<StreamControllerUserList userList={this.state.usersInRoom} activeUser={this.state.activeUserInRoom}/>
+					</Col>
+				</Row>
 			</div>
 		)
 	}

@@ -1,35 +1,37 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React from 'react'
 import ReactJanusController from '../Janus/ReactJanusController';
 import StreamController from './StreamController.js'
-import StreamCard from './StreamCard'
-import {Container} from 'react-bootstrap'
+import {Container, Row, Col, Button, Form} from 'react-bootstrap'
 
 class StreamView extends React.Component{
     constructor(props) {
         super(props);
 
+        this.remoteStream = null
+
+        this.state = {
+            handlingName: false,
+            haveName: false,
+            haveRemoteStream: false,
+            renderControls: false,
+            name: null,
+        };
+
         //if we're rendering debug, fix some values
         if(props.debug) {
-            console.log('debugging!')
-            this.user = 'ben'
+            this.name = 'debug'
             this.rover = 'debug'
+            this.state.handlingName = true
+            this.state.haveName = true
+            this.state.renderControls = true
         }
         else{
-            console.log('not debugging!')
             this.streamId = props.match.params.id
             this.janusController = null;
             this.server = window.server
             this.streamingPlugin = 'janus.plugin.streaming'
             this.streamingPluginHandle = null
-            this.user = 'ben'
             this.rover = 'mars'
-
-            this.state = {
-                stream: null,
-                gotRemoteStream: false,
-                width: null,
-                renderControls: false,
-            };
         }
       }
 
@@ -74,9 +76,11 @@ class StreamView extends React.Component{
         var videoTracks = stream.getVideoTracks();
         if(videoTracks === null || videoTracks === undefined || videoTracks.length === 0) {
             // No remote video
+            //disabling haveremotestream causes really annoying re rendering
+            //this.setState({haveRemoteStream:false})
         } else {
-            this.setState({stream: window.URL.createObjectURL(stream)})
-            this.setState({gotRemoteStream:true})
+            this.remoteStream = window.URL.createObjectURL(stream)
+            this.setState({haveRemoteStream:true})
 
             //video resizes window, so render stuff after
             this.refs.videoRef.addEventListener("playing",
@@ -94,24 +98,80 @@ class StreamView extends React.Component{
         console.log(response)
     }
 
+    handleChange = (event) => {
+        this.setState({name: event.target.value});
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        if(!this.state.name) {
+            alert("what's your name?");
+            return
+        }
+
+        this.name = this.state.name
+        this.setState({
+            handlingName: true,
+        })
+
+        //feels weird if it happens instantly
+        setTimeout(()=>{
+            this.setState({haveName: true})
+        }, 100)
+    }
+
     render() {
-        //stream must be muted to autoplay
         return (
-            <div className='StreamView' ref='container'>
-                {this.props.debug ?
-                    <div>
-                        <StreamController user={this.user} rover={'debug'} renderControls={true}/>
-                    </div>
-                    :
-                    <div>
-                        <StreamCard></StreamCard>
-                        <Container>
-                            <video src={this.state.stream} className = 'center' ref='videoRef' width="100%" id="stream" muted autoPlay playsInline/>
-                            <StreamController user={this.user} rover={this.rover} renderControls={this.state.renderControls}/>
-                        </Container>
-                    </div>
-                }
-            </div>
+            <Container className='StreamView p-2' ref='container'>
+                <Row className='p-2'>
+                    <Col>
+                        <Row>
+                            <Col>
+                                <h1>sharing is caring</h1>
+                                <p>hi! i'm <strong style={{color: 'HotPink'}}>diana!</strong> i'm a robot you can drive 👾
+                                </p>
+                                <p>when i get bigger, i'm gonna clean plastic off the beach 🏖
+                                </p>
+                                <p>i'm a little robot but i have big dreams!
+                                </p>
+                                <p>what's your name?
+                                </p>
+                            </Col>
+                        </Row>
+                        
+                        <Form autoComplete="off" onSubmit={this.handleSubmit}>
+                            <Form.Group as={Row} controlId="formName">
+                                <Col xs="4">
+                                    <Form.Control readOnly = {this.state.haveName ? true : false} type="text" placeholder={this.name} onChange={this.handleChange}/>
+                                </Col>
+                                <Col xs="2">
+                                    <Button disabled = {this.state.handlingName ? true : false} variant="dark" type="submit">
+                                        start
+                                    </Button>
+                                </Col>
+                            </Form.Group>
+                        </Form>
+                            
+                    </Col>
+                </Row>
+                <Row className={(this.state.haveName ? 'p-2' : 'd-none')}>
+                    <Col>
+                        {this.state.haveRemoteStream ?
+                        <video src={this.remoteStream} ref='videoRef' width="100%" id="stream" muted autoPlay playsInline/>
+                        :
+                        <h3>whoops! can't connect</h3>
+                        }
+                    </Col>
+                </Row>
+                <Row className={(this.state.haveName ? 'p-2' : 'd-none')}>
+                    <Col>
+                        {this.state.renderControls && 
+                        <StreamController name={this.name} rover={this.rover} debug={this.props.debug}/>
+                        }
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }
