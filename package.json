@@ -12,6 +12,7 @@
     "janus-gateway": "git://github.com/meetecho/janus-gateway.git",
     "jspm": "^2.0.0-beta.7",
     "minnie-janus": "^0.7.0",
+    "node-sass": "^4.13.1",
     "react": "^16.12.0",
     "react-app-rewire-hot-loader": "^2.0.1",
     "react-bootstrap": "^1.0.0-beta.16",

@@ -4,21 +4,20 @@ import io from 'socket.io-client'
 import {Container, Row, Col, Button} from 'react-bootstrap'
 import LineTo from 'react-lineto';
 import StreamControllerUserList from './StreamControllerUserList.js'
-const uuidv1 = require('uuid/v1');
-
-var defaultControlText = 'click me to drive!'
+const uuidv1 = require('uuid/v1'); 
 
 const controlStates = {
     AVAILABLE: 'available',
     REQUESTING: 'requesting',
     UNAVAILABLE: 'unavailable',
-    HAVE: 'have'
+    HAVE: 'have' 
 }
 
 const controlTexts = {
-    AVAILABLE: 'click me to drive!',
+    AVAILABLE: 'touch me to drive!',
     REQUESTING: 'requesting',
     UNAVAILABLE: 'unavailable',
+	HAVE: 'ok!', 
 }
 
 export default class StreamController extends React.Component {
@@ -56,7 +55,10 @@ export default class StreamController extends React.Component {
 	handleRequestAck = (message)=>{
 		if(message.uuid === this.uuid) {
 			if(message.requestGranted){
-				this.setState({controlState:controlStates.HAVE})
+				this.setState({
+					controlState:controlStates.HAVE,
+					controlText:controlTexts.HAVE,
+					})
 			} else {
 				this.setState({controlState:controlStates.UNAVAILABLE})
 			}
@@ -82,7 +84,7 @@ export default class StreamController extends React.Component {
 		}
 
 		//update control text
-		this.setState({controlText: message.secondsRemaining})
+		this.setState({controlText: 'time left: ' + message.secondsRemaining})
 
 		//update state when time expires
 		if(message.secondsRemaining === 0){
@@ -90,8 +92,16 @@ export default class StreamController extends React.Component {
 				controlText:controlTexts.AVAILABLE,
 				controlState:controlStates.AVAILABLE,
 				activeUserInRoom: null,
-				})
+			})
 		}
+	}
+
+	handleAvailable = () => {
+		this.setState({
+			controlText:controlTexts.AVAILABLE,
+			controlState:controlStates.AVAILABLE,
+			activeUserInRoom: null,
+		})
 	}
 
 	onSocketConnect = () => {
@@ -105,6 +115,9 @@ export default class StreamController extends React.Component {
 					break
 				case 'seconds remaining':
 					this.handleSecondsRemaining(message)
+					break
+				case 'available':
+					this.handleAvailable()
 					break
 				default:
 					// code block
@@ -152,7 +165,10 @@ export default class StreamController extends React.Component {
 	}
 	
 	onRequestButton = ()=>{
-		this.setState({controlText:controlTexts.REQUESTING, controlState:controlStates.REQUESTING})
+		this.setState({
+			controlText:controlTexts.REQUESTING,
+			controlState:controlStates.REQUESTING
+			})
 		//also need to check for user, give request an id
 		this.socket.emit('message', {
 			type: 'request',
@@ -162,7 +178,10 @@ export default class StreamController extends React.Component {
 		//if we don't get an ack, become available again after 5 seconds
 		setTimeout(()=>{
 			if(this.state.controlState === controlStates.REQUESTING){
-				this.setState({controlState:controlStates.AVAILABLE})
+				this.setState({
+					controlState:controlStates.AVAILABLE,
+					controlText:controlTexts.AVAILABLE,
+					})
 			}
 		}, 5000)
 
@@ -170,34 +189,44 @@ export default class StreamController extends React.Component {
 
 	render() {
 		return(
-			<div className="StreamController">
-				<Row className=' p-2 justify-content-center'>
-					<Col xs={8}>
-						{this.props.debug || 
-						(this.state.controlState === controlStates.HAVE) 
-						&& 
-						<StreamGamepad onMove={this.gamepadCallback} leftStick='true' rightStick='true'/>
-						}
-						{console.log('state', this.state.controlState)}
-					</Col>
-				</Row>
-				<Row className=' p-2 justify-content-center'>
-					<Col xs={4} className='text-center'>
-						<Button
-						variant="dark"
-						disabled={this.state.controlState !== controlStates.AVAILABLE}
-						onClick={this.onRequestButton}
-						>
-							{this.state.controlText}
-						</Button>
-					</Col>
-				</Row>
-				<Row className=' p-2 justify-content-center'>
-					<Col xs={4} className='text-center'>
-						<StreamControllerUserList userList={this.state.usersInRoom} activeUser={this.state.activeUserInRoom}/>
-					</Col>
-				</Row>
-			</div>
+			<>
+				{this.props.debug ?
+				<div className="StreamController Debug">
+					<Row className=' p-2 justify-content-center'>
+						<Col xs={8}>
+							<StreamGamepad onMove={this.gamepadCallback} leftStick='true' rightStick='true'/>
+						</Col>
+					</Row>
+				</div>
+				:
+				<div className="StreamController">
+					<Row className=' p-2 justify-content-center'>
+						<Col xs={12} md={8}>
+							{this.state.controlState === controlStates.HAVE
+							&& 
+							<StreamGamepad onMove={this.gamepadCallback} leftStick='true' rightStick='true'/>
+							}
+						</Col>
+					</Row>
+					<Row className=' p-2 justify-content-center'>
+						<Col xs={8} md={4} className='text-center'>
+							<Button
+							variant="dark"
+							disabled={this.state.controlState !== controlStates.AVAILABLE}
+							onClick={this.onRequestButton}
+							>
+								{this.state.controlText}
+							</Button>
+						</Col>
+					</Row>
+					<Row className=' p-2 justify-content-center'>
+						<Col xs={8} md={4} className='text-center'>
+							<StreamControllerUserList userList={this.state.usersInRoom} activeUser={this.state.activeUserInRoom}/>
+						</Col>
+					</Row>
+				</div>
+				}
+			</>
 		)
 	}
 }

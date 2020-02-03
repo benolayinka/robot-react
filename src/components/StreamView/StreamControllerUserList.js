@@ -2,6 +2,8 @@
 import React from 'react'
 import {ListGroup} from 'react-bootstrap'
 
+//how are we going to add video?
+
 export default function StreamControllerUserList(props) {
 
     if(!props.userList)
@@ -20,6 +22,9 @@ export default function StreamControllerUserList(props) {
     );
 
     return(
-        <ListGroup>{listItems}</ListGroup>
+        <ListGroup variant="flush">
+            <strong>online now</strong>
+            {listItems}
+        </ListGroup>
     )
 }

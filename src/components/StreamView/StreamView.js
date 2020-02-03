@@ -12,18 +12,15 @@ class StreamView extends React.Component{
         this.state = {
             handlingName: false,
             haveName: false,
+            remoteStreamStarted: false,
             haveRemoteStream: false,
-            renderControls: false,
-            name: null,
+            remoteStreamPlaying: false,
+            haveRover: false,
         };
 
         //if we're rendering debug, fix some values
         if(props.debug) {
-            this.name = 'debug'
-            this.rover = 'debug'
-            this.state.handlingName = true
-            this.state.haveName = true
-            this.state.renderControls = true
+            //skip everything
         }
         else{
             this.streamId = props.match.params.id
@@ -31,7 +28,7 @@ class StreamView extends React.Component{
             this.server = window.server
             this.streamingPlugin = 'janus.plugin.streaming'
             this.streamingPluginHandle = null
-            this.rover = 'mars'
+            this.rover = 'debug'
         }
       }
 
@@ -48,11 +45,24 @@ class StreamView extends React.Component{
         this.streamingPluginHandle = await this.janusController.attachPlugin(this.streamingPlugin)
         this.janusController.attachCallback(this.streamingPlugin, 'onmessage', this.onMessageCallback)
         this.janusController.attachCallback(this.streamingPlugin, 'onremotestream', this.onRemoteStreamCallback)
+        this.getRoverFromStream();
         this.watchStream();
     }
 
     onMessageCallback = (msg, jsep)=> {
         console.log('StreamView OnMessageCallback', msg)
+        var result = msg["result"];
+        if(result !== null && result !== undefined) {
+            if(result["status"] !== undefined && result["status"] !== null) {
+                var status = result["status"];
+                if(status === 'starting')
+                    console.log('StreamView OnMessage Starting')
+                else if(status === 'started')
+                    this.setState({remoteStreamStarted:true})
+                else if(status === 'stopped')
+                    console.log('StreamView OnMessage Stopped')
+            }
+        }
         if(jsep !== undefined && jsep !== null) {
             console.log('StreamView JsepCallback', jsep)
             console.log(this.streamingPlugin)
@@ -61,6 +71,7 @@ class StreamView extends React.Component{
                     jsep: jsep,
                     media: { audioSend: false, videoSend: false, data: true },
                     success: (jsep)=> {
+                        console.log("StreamView Jsep Answer Success")
                         var body = { "request": "start" };
                         this.streamingPluginHandle.send({"message": body, "jsep": jsep});
                     },
@@ -82,9 +93,18 @@ class StreamView extends React.Component{
             this.remoteStream = window.URL.createObjectURL(stream)
             this.setState({haveRemoteStream:true})
 
+            //this is a hack - re send the watch command if we don't get a play event
+            setTimeout(()=>{
+                if(!this.state.remoteStreamStarted){
+                    this.stopStream()
+                    console.log('StreamView Start Stream Error, Restarting')
+                    this.watchStream()
+                }
+            }, 1000)
+
             //video resizes window, so render stuff after
             this.refs.videoRef.addEventListener("playing",
-                 ()=> { this.setState({renderControls:true}) }, true);
+                 ()=> { this.setState({remoteStreamPlaying:true}) }, true);
         }
     }
 
@@ -93,9 +113,23 @@ class StreamView extends React.Component{
             request: 'watch',
             id: parseInt(this.streamId)
         }
-        console.log('body', body)
         var response = await this.janusController.sendMessage(this.streamingPlugin, body)
-        console.log(response)
+    }
+
+    stopStream = async () => {
+        let body = { "request": "stop" };
+	    let response = await this.janusController.sendMessage(this.streamingPlugin, body)
+    }
+
+    getRoverFromStream = async () => {
+        let body = {
+            request: 'info',
+            id: parseInt(this.streamId)
+        }
+        var response = await this.janusController.sendMessage(this.streamingPlugin, body)
+        this.rover = response.info.description
+        this.setState({haveRover:true})
+        console.log('rover', this.rover)
     }
 
     handleChange = (event) => {
@@ -105,12 +139,15 @@ class StreamView extends React.Component{
     handleSubmit = (event) => {
         event.preventDefault();
 
-        if(!this.state.name) {
+        let form = event.target
+        let name = form.elements.name.value
+
+        if(!name || name === '') {
             alert("what's your name?");
             return
         }
 
-        this.name = this.state.name
+        this.name = name
         this.setState({
             handlingName: true,
         })
@@ -123,6 +160,13 @@ class StreamView extends React.Component{
 
     render() {
         return (
+            <>
+            {this.props.debug ?
+            <Container className='StreamView Debug p-2' ref='container'>
+                <h1>sharing is caring - debug menu!</h1>
+                <StreamController name='debug' rover='debug' debug={true}/>
+            </Container>
+            :
             <Container className='StreamView p-2' ref='container'>
                 <Row className='p-2'>
                     <Col>
@@ -139,11 +183,10 @@ class StreamView extends React.Component{
                                 </p>
                             </Col>
                         </Row>
-                        
                         <Form autoComplete="off" onSubmit={this.handleSubmit}>
                             <Form.Group as={Row} controlId="formName">
                                 <Col xs="4">
-                                    <Form.Control readOnly = {this.state.haveName ? true : false} type="text" placeholder={this.name} onChange={this.handleChange}/>
+                                    <Form.Control name='name' readOnly = {this.state.haveName ? true : false} type="text" placeholder={this.name}/>
                                 </Col>
                                 <Col xs="2">
                                     <Button disabled = {this.state.handlingName ? true : false} variant="dark" type="submit">
@@ -166,12 +209,15 @@ class StreamView extends React.Component{
                 </Row>
                 <Row className={(this.state.haveName ? 'p-2' : 'd-none')}>
                     <Col>
-                        {this.state.renderControls && 
-                        <StreamController name={this.name} rover={this.rover} debug={this.props.debug}/>
+                        {this.state.remoteStreamPlaying && this.state.haveRover &&
+                        <StreamController name={this.name} rover={this.rover} debug={false}/>
                         }
                     </Col>
                 </Row>
             </Container>
+            }
+            </>
+            
         );
     }
 }

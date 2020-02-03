@@ -1,4 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import './custom.scss';
 import React from 'react';
 import StreamConfig from './components/StreamConfig/StreamConfig.js'
 import StreamViewIndex from './components/StreamView/StreamViewIndex.js'

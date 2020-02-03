@@ -79,37 +79,57 @@ export default function StreamGamepad(props) {
         <div className='StreamGamepad' ref={containerRef}>
             {dimensions.width && 
             <Row className='justify-content-center'>
-                <Col xs={4}>
+                <Col xs={6}>
                     {props.leftStick && 
                     <ReactNipple
-                        options={{ mode: 'static', size: dimensions.width/4, color: 'black', position: { top: '50%', left: '50%' } }}
+                        options={{ mode: 'dynamic', size: 150, color: 'black', position: { top: '50%', left: '50%' } }}
                         //options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
                         className='LeftJoystick'
                         // any unknown props will be passed to the container element, e.g. 'title', 'style' etc
                         style={{
                             //width: dimensions.width / 4,
-                            height: dimensions.width / 4,
-                            position: 'relative'
+                            //height: 150,
+                            textAlign: 'center',
+                            outline: '2px dashed hotpink',
+                            position: 'relative',
+                            MozUserSelect:'none', /* Old versions of Firefox */
+                            WebkitUserSelect:'none', /* Safari */
+                            msUserSelect:'none', /* Internet Explorer/Edge */
+                            WebkitTouchCallout:'none', /* iOS Safari */
+                            userSelect:'none',
                         }}
                         onMove={(evt, data) => onMove('leftJoystick', data)}
                         onEnd={(evt, data) => onEnd('leftJoystick', data)}
-                    />
+                    >
+                    <p>drag me to drive</p>
+                    <p>🚕</p>
+                    </ReactNipple>
                     }
                 </Col>
-                <Col xs={4}>
+                <Col xs={6}>
                     {props.rightStick && 
                     <ReactNipple
-                        options={{ mode: 'static', size: dimensions.width/4, color: 'black', position: { top: '50%', left: '50%' } }}
+                        options={{ mode: 'dynamic', size: 150, color: 'black', position: { top: '50%', left: '50%' } }}
                         className='RightJoystick'
                         // any unknown props will be passed to the container element, e.g. 'title', 'style' etc
                         style={{
                             //width: dimensions.width / 4,
-                            height: dimensions.width / 4,
-                            position: 'relative'
+                            //height: 150,
+                            textAlign: 'center',
+                            outline: '2px dashed hotpink',
+                            position: 'relative',
+                            MozUserSelect:'none', /* Old versions of Firefox */
+                            WebkitUserSelect:'none', /* Safari */
+                            msUserSelect:'none', /* Internet Explorer/Edge */
+                            WebkitTouchCallout:'none', /* iOS Safari */
+                            userSelect:'none',
                         }}
                         onMove={(evt, data) => onMove('rightJoystick', data)}
                         onEnd={(evt, data) => onEnd('rightJoystick', data)}
-                    />
+                    >
+                    <p>drag me to look</p>
+                    <p>👀</p>
+                    </ReactNipple>
                     }
                 </Col>
             </Row>
