@@ -164,7 +164,9 @@ export default class StreamController extends React.Component {
 		}
 	}
 	
-	onRequestButton = ()=>{
+	onRequestButton = (event)=>{
+		event.preventDefault()
+		
 		this.setState({
 			controlText:controlTexts.REQUESTING,
 			controlState:controlStates.REQUESTING

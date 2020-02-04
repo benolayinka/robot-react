@@ -101,8 +101,9 @@ export default function StreamGamepad(props) {
                         onMove={(evt, data) => onMove('leftJoystick', data)}
                         onEnd={(evt, data) => onEnd('leftJoystick', data)}
                     >
-                    <p>drag me to drive</p>
-                    <p>🚕</p>
+                    i'm a joystick!
+                    <br />move me to drive!
+                    <br />🚕
                     </ReactNipple>
                     }
                 </Col>
@@ -127,8 +128,9 @@ export default function StreamGamepad(props) {
                         onMove={(evt, data) => onMove('rightJoystick', data)}
                         onEnd={(evt, data) => onEnd('rightJoystick', data)}
                     >
-                    <p>drag me to look</p>
-                    <p>👀</p>
+                    i'm a joystick!
+                    <br />move me to look!!
+                    <br />👀
                     </ReactNipple>
                     }
                 </Col>

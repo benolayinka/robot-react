@@ -15,6 +15,7 @@ class StreamView extends React.Component{
             remoteStreamStarted: false,
             haveRemoteStream: false,
             remoteStreamPlaying: false,
+            remoteStreamDisconnected: false,
             haveRover: false,
         };
 
@@ -86,21 +87,26 @@ class StreamView extends React.Component{
         console.debug('StreamView OnRemoteStreamCallback', stream)
         var videoTracks = stream.getVideoTracks();
         if(videoTracks === null || videoTracks === undefined || videoTracks.length === 0) {
+            console.debug('StreamView OnRemoteStreamCallback No Remote Video Track Found')
             // No remote video
-            //disabling haveremotestream causes really annoying re rendering
-            //this.setState({haveRemoteStream:false})
-        } else {
-            this.remoteStream = window.URL.createObjectURL(stream)
-            this.setState({haveRemoteStream:true})
-
-            //this is a hack - re send the watch command if we don't get a play event
+            this.setState({remoteStreamDisconnected:true})
+            // Wait one second for reconnect, then error out
             setTimeout(()=>{
-                if(!this.state.remoteStreamStarted){
-                    this.stopStream()
-                    console.log('StreamView Start Stream Error, Restarting')
-                    this.watchStream()
+                if(this.state.remoteStreamDisconnected){
+                    this.setState({
+                        haveRemoteStream:false,
+                        remoteStreamPlaying: false,
+                        })
                 }
             }, 1000)
+            //this.setState({haveRemoteStream:false})
+        } else {
+            console.debug('StreamView OnRemoteStreamCallback Remote Video Track Found')
+            this.remoteStream = window.URL.createObjectURL(stream)
+            this.setState({
+                haveRemoteStream:true,
+                remoteStreamDisconnected: false,
+                })
 
             //video resizes window, so render stuff after
             this.refs.videoRef.addEventListener("playing",
@@ -130,10 +136,6 @@ class StreamView extends React.Component{
         this.rover = response.info.description
         this.setState({haveRover:true})
         console.log('rover', this.rover)
-    }
-
-    handleChange = (event) => {
-        this.setState({name: event.target.value});
     }
 
     handleSubmit = (event) => {
@@ -203,7 +205,10 @@ class StreamView extends React.Component{
                         {this.state.haveRemoteStream ?
                         <video src={this.remoteStream} ref='videoRef' width="100%" id="stream" muted autoPlay playsInline/>
                         :
-                        <h3>whoops! can't connect</h3>
+                        <div>
+                            <h3>whoops! can't connect!</h3>
+                            <h4>maybe i'm napping. try again later!</h4>
+                        </div>
                         }
                     </Col>
                 </Row>
