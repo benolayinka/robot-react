@@ -1,6 +1,6 @@
 import React from 'react'
-import ReactJanusController from '../Janus/ReactJanusController';
-import StreamController from './StreamController.js'
+import ReactJanusController from '../components/Janus/ReactJanusController'
+import StreamController from '../components/StreamView/StreamController'
 import {Container, Row, Col, Button, Form} from 'react-bootstrap'
 
 class StreamView extends React.Component{
@@ -29,7 +29,7 @@ class StreamView extends React.Component{
             this.server = window.server
             this.streamingPlugin = 'janus.plugin.streaming'
             this.streamingPluginHandle = null
-            this.rover = 'debug'
+            this.rover = 'none'
         }
       }
 
@@ -40,6 +40,7 @@ class StreamView extends React.Component{
         if(this.props.debug)
             return
 
+        console.log('debug', this.props.debug)
         var janusController = new ReactJanusController()
         this.janusController = janusController
         await this.janusController.init(this.server)
@@ -95,10 +96,9 @@ class StreamView extends React.Component{
                 if(this.state.remoteStreamDisconnected){
                     this.setState({
                         haveRemoteStream:false,
-                        remoteStreamPlaying: false,
                         })
                 }
-            }, 1000)
+            }, 3000)
             //this.setState({haveRemoteStream:false})
         } else {
             console.debug('StreamView OnRemoteStreamCallback Remote Video Track Found')
@@ -212,7 +212,7 @@ class StreamView extends React.Component{
                         }
                     </Col>
                 </Row>
-                <Row className={(this.state.haveName ? 'p-2' : 'd-none')}>
+                <Row className={(this.state.haveName && this.state.haveRemoteStream ? 'p-2' : 'd-none')}>
                     <Col>
                         {this.state.remoteStreamPlaying && this.state.haveRover &&
                         <StreamController name={this.name} rover={this.rover} debug={false}/>

@@ -25,7 +25,11 @@ export default class StreamController extends React.Component {
 		super(props)
 
 		this.pressed = {}
-		this.gamepadData = {}
+		this.gamepadData = {
+            leftJoystick: {x:0, y:0},
+            rightJoystick: {x:0, y:0}
+        }
+		
 		this.controlLoopRunning = false
 
 		if(this.props.debug)
@@ -153,15 +157,18 @@ export default class StreamController extends React.Component {
 		})
 	}
 
-	gamepadCallback = ({active, gamepadElementData}) => {
-		this.gamepadData = {...this.gamepadData, ...gamepadElementData}
+	onGamepadEventLeft = (evt, data) => {
+		this.onGamepadEvent('leftJoystick', evt, data)
+	}
 
-		if(Object.entries(this.gamepadData).length !== 0){
-			this.controlLoopRunning = true
-		}
-		else{
-			this.controlLoopRunning = false
-		}
+	onGamepadEventRight = (evt, data) => {
+		this.onGamepadEvent('rightJoystick', evt, data)
+	}
+
+	onGamepadEvent = (joystick, evt, data) => {
+		let joystickData = StreamGamepad.prototype.getUsefulJoystickData(evt, data)
+		this.gamepadData[joystick].x = joystickData.x
+		this.gamepadData[joystick].y = joystickData.y
 	}
 	
 	onRequestButton = (event)=>{
@@ -196,7 +203,7 @@ export default class StreamController extends React.Component {
 				<div className="StreamController Debug">
 					<Row className=' p-2 justify-content-center'>
 						<Col xs={8}>
-							<StreamGamepad onMove={this.gamepadCallback} leftStick='true' rightStick='true'/>
+							<StreamGamepad onEventLeft={this.onGamepadEventLeft} leftJoystick='true' onEventRight={this.onGamepadEventRight} rightJoystick='true'/>
 						</Col>
 					</Row>
 				</div>
@@ -206,7 +213,7 @@ export default class StreamController extends React.Component {
 						<Col xs={12} md={8}>
 							{this.state.controlState === controlStates.HAVE
 							&& 
-							<StreamGamepad onMove={this.gamepadCallback} leftStick='true' rightStick='true'/>
+							<StreamGamepad onEventLeft={this.onGamepadEventLeft} leftJoystick='true' onEventRight={this.onGamepadEventRight} rightJoystick='true'/>
 							}
 						</Col>
 					</Row>

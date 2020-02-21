@@ -1,7 +1,6 @@
 import React from 'react'
-import ReactJanusController from '../Janus/ReactJanusController';
-import StreamView from './StreamView.js'
-import StreamItem from '../StreamConfig/StreamItem'
+import ReactJanusController from '../components/Janus/ReactJanusController';
+import StreamItem from '../components/StreamConfig/StreamItem'
 import {
     Switch,
     Route,
@@ -61,20 +60,9 @@ class StreamViewIndex extends React.Component{
         const match = this.props.match;
 
         return (<div>
-                    <Switch>
-                        <Route path={`${match.path}/debug`}>
-                            <StreamView debug={true} />
-                        </Route>
-                        <Route path={`${match.path}/:id`}
-                        render={(props) => <StreamView {...props} />}
-                        />
-                        <Route path={`${match.path}`}>
-                            <ol>
-                                {StreamsList}
-                            </ol>
-                        </Route>
-                    </Switch>
-                    
+                    <ol>
+                        {StreamsList}
+                    </ol>
                 </div>
 
                 
@@ -82,4 +70,4 @@ class StreamViewIndex extends React.Component{
     }
 }
 
-export default withRouter(StreamViewIndex);
+export default StreamViewIndex;
