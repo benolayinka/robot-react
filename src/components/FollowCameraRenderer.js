@@ -7,17 +7,9 @@ const DEFAULT_FOLLOW_DIST = 45;
 const FOLLOW_HEIGHT = 15;
 const LOOK_HEIGHT = 8;
 
-const ANGULAR_VELOCITY_HISTORY_LENGTH = 10
-const SMOOTHED_CAM_STRENGTH = 0.1
-
-const ORBIT_START_DELAY = 3300
-const ORBIT_DISTANCE = 60
-const ORBIT_RATE = 1 / 2000
-
 const CAMERA_MODES = {
   FIRST_PERSON: 'FIRST_PERSON',
   FOLLOW: 'FOLLOW',
-  ORBIT: 'ORBIT',
 }
 
 class FollowCameraRenderer extends CameraRenderer {
@@ -66,11 +58,7 @@ class FollowCameraRenderer extends CameraRenderer {
                 this.stepFollowSmooth();
                 //this.stepFollowFixed();
                 break;
-
-            case CAMERA_MODES.ORBIT:
-                this.stepOrbit();
-                break;
-
+                
             default:
                 break;
             }

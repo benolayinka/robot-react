@@ -2,28 +2,18 @@ import * as CANNON from 'cannon'
 import * as THREE from 'three'
 import Colors from '../scripts/colors'
 import CannonDebugRenderer from '../scripts/cannonDebugRenderer'
-import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader.js'
-//import odibee from '../fonts/OdibeeSans-Regular.ttf'
-//import odibee from '../fonts/Odibee.json'
+import images from '../images'
 
 var textureLoader = new THREE.TextureLoader()
 var fontLoader = new THREE.FontLoader()
-var ttfLoader = new TTFLoader()
 
-const FAR = 2000
 const FREQUENCY = 60
 
-const ARENA_RADIUS = 100
-const SKY_RADIUS = 200
+const ARENA_RADIUS = 300
+const SKY_RADIUS = 400
 
 var particlesPool = []
 var particlesInUse = []
-
-function loadFont(font) {
-  return new Promise(resolve => {
-    fontLoader.load(font, resolve)
-  })
-}
 
 function Checkpoint(conditionFunc){
     this.completed = false
@@ -31,35 +21,47 @@ function Checkpoint(conditionFunc){
 }
 
 Checkpoint.prototype.update = function(){
-    console.log(this)
     if(this.conditionFunc()){
         this.completed = true
         this.update = null
     }   
 }
 
-function Intro(color, size, font){
-    this.mesh = new THREE.Object3D()
+function Billboard() {
 
-    var words
-    if('ontouchstart' in document.documentElement)
-        words = 'use\ncontrols to\nmove around!'
-    else
-        words = 'use\nW,A,S,D to\nmove around!'
+    var size = this.size = 20
+    var he = size / 2
+    this.mass = 0
 
-    var textDiana = new Text(words, color, size, font) //words, color, size, font
-    this.mesh.add(textDiana.mesh)
+	var cubeGeometry = new THREE.BoxGeometry(size,size,size);
 
-    this.update = () => {
-        if(this.mesh.position.z > 100) {
-            this.mesh.parent.remove(this.mesh)
-            this.mesh.visible = false
-            this.update = null
-            return
-        }
-        this.mesh.position.z += 0.05
-        this.mesh.rotation.z += 0.001
-    }
+    var imageText = images['slide1-text.png']
+    var textureText = textureLoader.load( imageText );
+
+    var imagePic = images['slide1-pic.jpg']
+    var texturePic = textureLoader.load( imagePic );
+
+    var blankMaterial = new THREE.MeshBasicMaterial({color: Colors.white})
+
+    var cubeMaterials = [
+        new THREE.MeshLambertMaterial({map: texturePic}),  // Left side
+        new THREE.MeshLambertMaterial({map: texturePic}), // Right side
+        blankMaterial, // Top side
+        blankMaterial,  // Bottom side
+        new THREE.MeshLambertMaterial({map: textureText}), // Front side
+        new THREE.MeshLambertMaterial({map: textureText}), // Back side
+    ];
+
+    this.mesh = new THREE.Mesh(cubeGeometry,cubeMaterials);
+
+    //create a shape equal to the geometry
+    var vec = new CANNON.Vec3(he,he,he);
+    var boxShape = new CANNON.Box(vec);
+
+    this.body = new CANNON.Body({
+        mass: this.mass,
+        shape: boxShape
+    });
 }
 
 function Text(words, color, size, loadedFont) {
@@ -74,8 +76,8 @@ function Text(words, color, size, loadedFont) {
         //bevelEnabled: true,
         //bevelThickness: 1,
         //bevelSize: 1,
-        // bevelOffset: 0,
-        // bevelSegments: 5
+        //bevelOffset: 0,
+        //bevelSegments: 5
     } );
 
     geometry.computeBoundingBox();
@@ -84,7 +86,7 @@ function Text(words, color, size, loadedFont) {
     this.centerOffsetX = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
     this.centerOffsetY = - 0.5 * ( geometry.boundingBox.max.y - geometry.boundingBox.min.y );
 
-    var mat = new THREE.MeshPhongMaterial({
+    var mat = new THREE.MeshBasicMaterial({
         color:color,
     });
 
@@ -104,10 +106,10 @@ Text.prototype.addAnimation = function(animationFunc, checkpoint){
 
 function ExplosionParticle(){
     var geom = new THREE.TetrahedronGeometry(3,0);
-    var mat = new THREE.MeshPhongMaterial({
+    var mat = new THREE.MeshBasicMaterial({
         color:0x009999,
-        shininess:0,
-        specular:0xffffff,
+        //shininess:0,
+        //specular:0xffffff,
         flatShading:true
     });
     this.mesh = new THREE.Mesh(geom,mat);
@@ -178,12 +180,14 @@ Explosion.prototype.update = function() {
 }
 
 function Sun(){
-    this.mesh = new THREE.Object3D
+
+    //create a mesh to group sun and sunlight
+    this.mesh = new THREE.Object3D()
 
     this.size = 20
     var geom = new THREE.SphereGeometry(this.size, 3, 3) //radius, hSegments, wSegments
     // create a material; a simple white material will do the trick
-	var mat = new THREE.MeshPhongMaterial({
+	var mat = new THREE.MeshBasicMaterial({
 		color:Colors.white,
         flatShading:true, 
 	});
@@ -207,7 +211,7 @@ function Cloud(){
     var geom = new THREE.SphereGeometry(this.size)
 	
 	// create a material; a simple white material will do the trick
-	var mat = new THREE.MeshPhongMaterial({
+	var mat = new THREE.MeshLambertMaterial({
 		color:Colors.red,  
 	});
 	
@@ -249,16 +253,13 @@ function Sky(){
 	    this.sun.mesh.position.x = Math.cos(this.angle)*SKY_RADIUS;
         this.sun.mesh.rotation.z = this.angle
 
+        //clouds drift up and down
         this.clouds.forEach((cloud) => {
-            //cloud.mesh.scale.y += Math.cos(this.angle+i/3)*.25;
-            //cloud.mesh.scale.x += Math.cos(this.angle+i/3)*.25;
             cloud.mesh.position.z += Math.cos(this.angle)*0.05;
-            //cloud.mesh.position.x += Math.cos(this.angle)*Math.random()*0.1;
-            //cloud.mesh.position.y += Math.cos(this.angle+i/3)*Math.random();
         })
     }
 
-    this.angle = Math.PI / 2
+    this.angle = 0
 
 	// Create an empty container
 	this.mesh = new THREE.Object3D();
@@ -323,7 +324,7 @@ function Trash(){
 	// create a cube geometry;
 	var geom = new THREE.BoxGeometry(size,size,size);
 	
-	var mat = new THREE.MeshPhongMaterial({
+	var mat = new THREE.MeshBasicMaterial({
 		color:Colors.white,  
         flatShading:true,
 	});
@@ -388,7 +389,7 @@ function Ground(){
 
     // Create the heightfield
     var shape = new CANNON.Heightfield(matrix, {
-        elementSize: 300 / sizeX
+        elementSize: ARENA_RADIUS * 2 / sizeX
     });
 
     var body = new CANNON.Body({ mass: 0 });
@@ -405,7 +406,7 @@ function Ground(){
     var geometry = new THREE.Geometry();
 
     // create the material 
-	var material = new THREE.MeshPhongMaterial({
+	var material = new THREE.MeshLambertMaterial({
 		color:Colors.blue,
 		transparent:true,
 		opacity:.6,
@@ -450,8 +451,7 @@ function Tail(){
     var he = size / 2
 
     var geometry = new THREE.BoxGeometry( size / 3, size / 3, size / 3);
-    var material = new THREE.MeshPhongMaterial({
-        shininess: 50,
+    var material = new THREE.MeshLambertMaterial({
         color: Colors.red,
         flatShading:true,
         });
@@ -507,8 +507,7 @@ function Robot(){
     geometry.vertices[7].y += size / 6;
     geometry.vertices[7].z -= size / 6;
 
-    var material = new THREE.MeshPhongMaterial({
-        shininess: 50,
+    var material = new THREE.MeshLambertMaterial({
         color: Colors.white,
         flatShading:true,
         });
@@ -520,8 +519,7 @@ function Robot(){
 
     //head
     var geometry = new THREE.BoxGeometry( size / 2, size / 2, size / 2);
-    var material = new THREE.MeshPhongMaterial({
-        shininess: 50,
+    var material = new THREE.MeshLambertMaterial({
         color: Colors.red,
         flatShading:true,
         });
@@ -534,8 +532,7 @@ function Robot(){
 
     //feet
     var geometry = new THREE.BoxGeometry( size / 2, size, size / 3);
-    var material = new THREE.MeshPhongMaterial({
-        shininess: 50,
+    var material = new THREE.MeshBasicMaterial({
         color: Colors.brownDark,
         flatShading:true,
         });
@@ -560,7 +557,7 @@ function Robot(){
     geomPropeller.vertices[6].z+=size/12;
     geomPropeller.vertices[7].y+=size/12;
     geomPropeller.vertices[7].z-=size/12;
-    var matPropeller = new THREE.MeshPhongMaterial({color:Colors.red, flatShading:true});
+    var matPropeller = new THREE.MeshLambertMaterial({color:Colors.red, flatShading:true});
     this.propeller = new THREE.Mesh(geomPropeller, matPropeller);
     this.propeller.position.set(0,size/2,0);
     this.mesh.add(this.propeller);
@@ -572,7 +569,7 @@ function Robot(){
     this.blade = new THREE.Object3D()
 
     var geomBlade = new THREE.BoxGeometry(size/20,size/8,size/4);
-    var matBlade = new THREE.MeshPhongMaterial({color:Colors.brownDark, flatShading:true});
+    var matBlade = new THREE.MeshLambertMaterial({color:Colors.brownDark, flatShading:true});
     var blade1 = new THREE.Mesh(geomBlade, matBlade);
 
     blade1.castShadow = true;
@@ -617,6 +614,10 @@ export default class CannonScene{
         this.createLights()
         this.createGround()
         this.createSky()
+        this.createBillboards()
+
+        //debug renderer displays wireframe of cannon bodies
+        //it gets updated in step function
         this.CannonDebugRenderer = new CannonDebugRenderer( this.scene, this.world );
     }
 
@@ -627,6 +628,7 @@ export default class CannonScene{
         //this.CannonDebugRenderer.update();
     }
 
+    //checkpoints are created with an update function that returns true when complete
     updateCheckpoints() {
         for(const checkpoint of this.checkpoints) {
             if(checkpoint.update)
@@ -655,7 +657,57 @@ export default class CannonScene{
         }
     }
 
-    async createText(){
+    updatePhysics() {
+        var timeStep = 1 / FREQUENCY;
+        this.world.step(timeStep)
+    }
+
+    addObject(obj) {
+        this.objects.push(obj)
+        if(obj.mesh)
+            this.scene.add(obj.mesh)
+        
+        if(obj.body)
+            this.world.addBody(obj.body)
+    }
+
+    addCheckpoint(checkpoint) {
+        this.checkpoints.push(checkpoint)
+    }
+
+    createScene(){
+        var scene = this.scene = new THREE.Scene()
+        scene.fog = new THREE.Fog(Colors.pink, 0, 500)
+    }
+
+    createWorld(){
+        var world = this.world = new CANNON.World()
+        world.gravity.set(0,0,-9.8)
+        world.broadphase = new CANNON.NaiveBroadphase();
+        world.solver.iterations = 10;
+
+        world.defaultContactMaterial.contactEquationStiffness = 1e9;
+        world.defaultContactMaterial.contactEquationRelaxation = 4;
+        world.defaultContactMaterial.friction = 0
+    }
+
+    //todo move all billboards to single landscape element function
+    createBillboards(){
+        var billboard = new Billboard()
+        billboard.body.position.x = ARENA_RADIUS / 2
+        billboard.body.position.y = ARENA_RADIUS / 2
+        billboard.body.position.z = billboard.size - billboard.size / 4
+        billboard.mesh.up.set(0,0,1)
+        billboard.mesh.lookAt(this.scene.position)
+        billboard.mesh.rotation.y += Math.PI / 2
+        //billboard.mesh.rotation.z += Math.PI / 6 + Math.PI / 2
+        var quat = billboard.mesh.quaternion
+        billboard.body.quaternion.set(quat.x,quat.y,quat.z,quat.w)
+        this.addObject(billboard)
+    }
+
+    //todo clean this up.. use helper functions
+    createText(){
         fontLoader.load('/fonts/helvetiker_regular.typeface.json', ( font ) => {
 
             var words
@@ -678,7 +730,6 @@ export default class CannonScene{
             }
 
             var checkpointFunc = () => {
-                console.log('check', this.controlBody.position.x)
                 if(Math.abs(this.controlBody.position.x) > 1 || Math.abs(this.controlBody.position.y) > 1)
                     return true
                 
@@ -705,24 +756,6 @@ export default class CannonScene{
         }
         this.explosion = new Explosion();
         this.addObject(this.explosion)
-    }
-
-    updatePhysics() {
-        var timeStep = 1 / FREQUENCY;
-        this.world.step(timeStep)
-    }
-
-    addObject(obj) {
-        this.objects.push(obj)
-        if(obj.mesh)
-            this.scene.add(obj.mesh)
-        
-        if(obj.body)
-            this.world.addBody(obj.body)
-    }
-
-    addCheckpoint(checkpoint) {
-        this.checkpoints.push(checkpoint)
     }
 
     createTrash(){
@@ -765,7 +798,7 @@ export default class CannonScene{
         this.addObject(character)
         this.addObject(tail)
 
-        //var c1 = new CANNON.PointToPointConstraint(character.body,new CANNON.Vec3(0,0,0),tail.body,new CANNON.Vec3(-5,0,0));
+        //attach tail to body with constraint to allow physics
         var c1 = new CANNON.ConeTwistConstraint(character.body, tail.body, {
             pivotA: new CANNON.Vec3(-5, 0, 0),
             pivotB: new CANNON.Vec3(-1, 0, 0),
@@ -782,8 +815,6 @@ export default class CannonScene{
 
     createSky(){
         var sky = new Sky();
-        //sky.mesh.position.z = 100;
-        //this.scene.add(this.sky.mesh);
         this.addObject(sky)
     }
 
@@ -792,26 +823,9 @@ export default class CannonScene{
         this.addObject(ground)
     }
 
-    createScene(){
-        var scene = this.scene = new THREE.Scene()
-        scene.fog = new THREE.Fog(Colors.pink, 0, 500)
-    }
-
-    createWorld(){
-        var world = this.world = new CANNON.World()
-        world.gravity.set(0,0,-9.8)
-        world.broadphase = new CANNON.NaiveBroadphase();
-        world.solver.iterations = 10;
-
-        world.defaultContactMaterial.contactEquationStiffness = 1e9;
-        world.defaultContactMaterial.contactEquationRelaxation = 4;
-        world.defaultContactMaterial.friction = 0
-    }
-
     createLights(){
-
         var hemisphereLight = new THREE.HemisphereLight(Colors.white,Colors.darkBrown, 0.9)
-        hemisphereLight.position.set(0,0,1) //set to up
+        hemisphereLight.position.set(0,0,1) //set z coord up
         this.scene.add(hemisphereLight)
 
         var ambient = new THREE.AmbientLight( 0xffffff );

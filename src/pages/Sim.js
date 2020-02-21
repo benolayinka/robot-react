@@ -1,16 +1,8 @@
 import React from 'react'
 import Div100vh from 'react-div-100vh'
-import {Container, Row, Col, Button, Form} from 'react-bootstrap'
 import FollowCameraRenderer from '../components/FollowCameraRenderer'
-//import CannonScene from '../3d/CannonScene'
-import StreamGamepad from '../components/StreamView/StreamGamepad'
-import images from '../images'
-import * as THREE from 'three'
-import * as CANNON from 'cannon'
-import Colors from '../scripts/colors'
 import CannonScene from '../3d/CannonScene'
 import Gamepad from '../components/Gamepad'
-
 
 export default class Sim extends React.Component{
     constructor(props) {

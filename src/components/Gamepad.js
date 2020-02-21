@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import ReactNipple from 'react-nipple'
-import {Row, Col, Button} from 'react-bootstrap'
 
 function px(int){
     return int.toString() + 'px'

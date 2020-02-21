@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import React from 'react'
 
-const NEAR = 0.1, FAR = 1000, FOV = 40, ASPECT = 16/9;
+const NEAR = 0.1, FAR = 1000, FOV = 40
 
 class CameraRenderer extends React.Component {
     constructor(props) {

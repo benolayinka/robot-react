@@ -1,10 +1,6 @@
 import * as THREE from 'three'
 import * as CANNON from 'cannon'
 
-const PI_2 = Math.PI / 2
-const eyeYPos = 2
-const velocityFactor = 0.2
-
 export default class GamepadControls{
 
     constructor(cannonBody, controlObject){
@@ -96,31 +92,5 @@ export default class GamepadControls{
         //apply rotation to look object (relative to body)
         this.lookObject.rotation.y = -lookY * 0.010;
         this.lookObject.rotation.z = -lookX * 0.010;
-
-        // //button 2 is look
-        // if(gamepadData.buttonsPressed[2]){
-        //     //joystick is look
-        //     var lookX = gamepadData.joystickData.x
-        //     var lookY = gamepadData.joystickData.y
-        //     this.lookObject.rotation.y = -lookY * 0.010;
-        //     this.lookObject.rotation.z = -lookX * 0.010;
-        // } else {
-        //     //joystick is move
-        //     var moveX = gamepadData.joystickData.x
-        //     var moveY = gamepadData.joystickData.y
-
-        //     var delta = 0.1
-        //     this.inputVelocity.set(0,0,0)
-
-        //     this.inputVelocity.x = moveY * delta * 0.2 //movement fwd back
-
-        //     this.lookObject.getWorldQuaternion( this.quat )
-        //     this.inputVelocity.applyQuaternion( this.quat )
-        //     this.cannonBody.velocity.x += this.inputVelocity.x
-        //     this.cannonBody.velocity.y += this.inputVelocity.y
-
-        //     //apply rotation
-        //     this.cannonBody.angularVelocity.z += -moveX * delta * 0.2 * 0.05
-        // }
     }
 }
