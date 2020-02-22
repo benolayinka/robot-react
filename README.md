@@ -11,7 +11,7 @@ If you're editing via ssh, sometimes the number of file listeners exceeds the sy
 
 ### todo
 ## sim things to fix
-set character upright on fall< br />
-create a nicer looking billboard< br />
-create a more interesting level< br />
-add points system and HUD< br />
+set character upright on fall<br />
+create a nicer looking billboard<br />
+create a more interesting level<br />
+add points system and HUD<br />
