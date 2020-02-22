@@ -712,7 +712,8 @@ export default class CannonScene{
         this.updatePhysics()
         this.updateCheckpoints()
         this.updateControls()
-        if(document.location.href.includes('dev')) {
+        var loc = document.location.href
+        if(loc.includes('dev') || loc.includes('localhost')) {
             this.CannonDebugRenderer.update();
         }
     }

@@ -55,7 +55,8 @@ class CameraRenderer extends React.Component {
         canvas.addEventListener("touchend",    function(event) {event.preventDefault()}, { passive: false })
         canvas.addEventListener("touchcancel", function(event) {event.preventDefault()}, { passive: false })
 
-        if(document.location.href.includes('dev')) {
+        var loc = document.location.href
+        if(loc.includes('dev') || loc.includes('localhost')) {
             var stats = this.stats = new Stats();
             stats.showPanel( 0 );
             document.body.appendChild( stats.domElement );
