@@ -27,7 +27,7 @@ Checkpoint.prototype.update = function(){
     if(this.conditionFunc()){
         this.completed = true
         this.update = null
-    }   
+    }
 }
 
 function Billboard(image1, image2) {
@@ -240,7 +240,7 @@ function Sun(){
     // create a material; a simple white material will do the trick
 	var mat = new THREE.MeshBasicMaterial({
 		color:Colors.white,
-        //flatShading:true, 
+        //flatShading:true,
 	});
 
     var sun = new THREE.Mesh(geom, mat)
@@ -265,42 +265,42 @@ function Cloud(){
 	this.mesh = new THREE.Object3D();
 
     this.size = 10
-	
+
 	// create a cube geometry;
 	// this shape will be duplicated to create the cloud
 	//var geom = new THREE.BoxGeometry(this.size,this.size,this.size);
     var geom = new THREE.SphereGeometry(this.size)
-	
+
 	// create a material; a simple white material will do the trick
 	var mat = new THREE.MeshLambertMaterial({
-		color:Colors.red,  
+		color:Colors.red,
 	});
-	
+
 	// duplicate the geometry a random number of times
 	var nBlocs = 3+Math.floor(Math.random()*3);
 	for (var i=0; i<nBlocs; i++ ){
-		
+
 		// create the mesh by cloning the geometry
-		var m = new THREE.Mesh(geom, mat); 
-		
+		var m = new THREE.Mesh(geom, mat);
+
 		// set the position and the rotation of each cube randomly
 		m.position.x = i*15;
 		m.position.y = Math.random()*10;
 		m.position.z = Math.random()*10;
 		m.rotation.z = Math.random()*Math.PI*2;
 		m.rotation.y = Math.random()*Math.PI*2;
-		
+
 		// set the size of the cube randomly
 		var s = .1 + Math.random()*.9;
 		m.scale.set(s,s,s);
-		
+
 		// allow each cube to cast and to receive shadows
 		m.castShadow = true;
 		m.receiveShadow = true;
-		
+
 		// add the cube to the container we first created
 		this.mesh.add(m);
-	} 
+	}
 }
 
 // Define a Sky Object
@@ -328,32 +328,32 @@ function Sky(){
     // add the sun
     this.sun = new Sun()
     this.sun.mesh.position.z = Math.sin(this.angle)*SKY_RADIUS;
-	this.sun.mesh.position.x = Math.cos(this.angle)*SKY_RADIUS; 
+	this.sun.mesh.position.x = Math.cos(this.angle)*SKY_RADIUS;
     this.mesh.add(this.sun.mesh)
 
     // Store clouds to move them in the sky
     this.clouds = []
-	
+
 	// choose a number of clouds to be scattered in the sky
 	this.nClouds = 40;
-	
+
 	// To distribute the clouds consistently,
 	// we need to place them according to a uniform angle
 	var stepAngle = Math.PI / this.nClouds;
-	
+
 	// create the clouds
 	for(var i=0; i<this.nClouds; i++){
 		var c = new Cloud();
 
         this.clouds.push(c)
-	 
+
 		// set the rotation and the position of each cloud;
 		// for that we use a bit of trigonometry
 		var a = stepAngle*i; // this is the final angle of the cloud
 		var h = SKY_RADIUS //+ Math.random()*10; // this is the distance between the center of the axis and the cloud itself
 
 		// Trigonometry!!! I hope you remember what you've learned in Math :)
-		// in case you don't: 
+		// in case you don't:
 		// we are simply converting polar coordinates (angle, distance) into Cartesian coordinates (x, y)
 		c.mesh.position.z = Math.sin(a)*h;
 		c.mesh.position.x = Math.cos(a)*h;
@@ -361,7 +361,7 @@ function Sky(){
 		// rotate the cloud according to its position
 		c.mesh.rotation.z = a + Math.PI/2;
 
-		// for a better result, we position the clouds 
+		// for a better result, we position the clouds
 		// at random horizontal depths inside of the scene
 		c.mesh.position.y = 200-Math.random()*400;
 
@@ -370,8 +370,8 @@ function Sky(){
 		c.mesh.scale.set(s,s,s);
 
 		// do not forget to add the mesh of each cloud in the scene
-		this.mesh.add(c.mesh);  
-	}  
+		this.mesh.add(c.mesh);
+	}
 }
 
 function Trash(){
@@ -381,44 +381,44 @@ function Trash(){
     var he = size / 2
 
     this.mass = 0.001
-	
+
 	// create a cube geometry;
 	var geom = new THREE.BoxGeometry(size,size,size);
-	
+
 	var mat = new THREE.MeshBasicMaterial({
-		color:Colors.white,  
+		color:Colors.white,
         //flatshading:true,
 	});
-        
+
     this.body = new CANNON.Body({
         mass: this.mass,
          });
 
     this.body.linearDamping = 0.9;
     this.body.angularDamping = 0.9
-	
+
 	// duplicate the geometry a random number of times
 	var nBlocs = 3;
 	for (var i=0; i<nBlocs; i++ ){
 
 		// create the mesh by cloning the geometry
-		var m = new THREE.Mesh(geom, mat); 
-		
+		var m = new THREE.Mesh(geom, mat);
+
 		// set the position and the rotation of each cube randomly
 		m.position.x = i;
 		//m.position.y = Math.random()*10;
 		//m.position.z = Math.random()*10;
 		m.rotation.z = Math.random()*Math.PI*2;
 		m.rotation.y = Math.random()*Math.PI*2;
-		
+
 		// set the size of the cube randomly
 		var s = .1 + Math.random()*.9;
 		m.scale.set(s,s,s);
-		
+
 		// allow each cube to cast and to receive shadows
 		m.castShadow = true;
 		m.receiveShadow = true;
-		
+
 		// add the cube to the container we first created
 		this.mesh.add(m);
 
@@ -430,7 +430,7 @@ function Trash(){
         var mVec = new CANNON.Vec3(m.position.x,m.position.y,m.position.z)
         var mQuat = new CANNON.Quaternion(m.quaternion.x, m.quaternion.y, m.quaternion.z, m.quaternion.w)
         this.body.addShape(boxShape, mVec, mQuat)
-	} 
+	}
 }
 
 function Ground(){
@@ -466,7 +466,7 @@ function Ground(){
 
     var geometry = new THREE.Geometry();
 
-    // create the material 
+    // create the material
 	var material = new THREE.MeshLambertMaterial({
 		color:Colors.blue,
 		transparent:true,
@@ -504,7 +504,7 @@ function Ground(){
     this.mesh = new THREE.Mesh(geometry, material)
 
     // Allow the grounds to receive shadows
-	this.mesh.receiveShadow = true; 
+	this.mesh.receiveShadow = true;
 }
 
 function Tail(){
@@ -673,11 +673,50 @@ Robot.prototype.update = function(){
     //monitor robot orientation and fix if tipping over
     this.vectorUp.set(0,0,1)
     this.vectorUp.applyQuaternion( this.mesh.quaternion )
-
-    if(this.vectorUp.dot(up) < 0.5){
-        //console.log('im falling over!')
-        //apply some force to this.body to fix robot tipping over
+    if(this.vectorUp.dot(up) < 0.5){ // TODO: also check if y == 0 to allow some airtime tricks
+        console.log('im falling over!')
+        this.body.quaternion.set(0, 0, 0, 1)
+        // this.respawn()
     }
+
+    // monitor robot out of bounds
+    if (Math.abs(this.body.position.x) > ARENA_RADIUS || Math.abs(this.body.position.y) > ARENA_RADIUS) {
+      console.log('im out of bounds!')
+      this.respawn('random')
+    }
+}
+
+Robot.prototype.respawn = function(position = 'random', looseTail = true){
+  // respawns the robot
+  // args:
+  // - bool position: 'random', 'center' or 'keep'
+  // - bool looseTail: loose your tail or not when you respawn
+
+  let z = 10 // spawn from the air
+  let x, y
+
+  if (position === 'random') {
+    x = Math.random(0, ARENA_RADIUS - 10)
+    y = Math.random(0, ARENA_RADIUS - 10)
+  }
+
+  if (position === 'center') {
+    x = ARENA_RADIUS / 2
+    y = ARENA_RADIUS / 2
+  }
+
+  if (position === 'keep') {
+    x = this.body.position.x
+    y = this.body.position.y
+  }
+
+  if (looseTail) {
+    // TODO
+  }
+
+  this.body.quaternion.set(0, 0, 0, 1)
+  this.body.position.set(x, y, z)
+  console.log('respawn')
 }
 
 export default class CannonScene{
@@ -765,7 +804,7 @@ export default class CannonScene{
         if(obj.mesh){
             this.scene.add(obj.mesh)
         }
-        
+
         if(obj.body)
             this.world.addBody(obj.body)
     }
@@ -841,7 +880,7 @@ export default class CannonScene{
             var checkpointFunc = () => {
                 if(Math.abs(this.controlBody.position.x) > 1 || Math.abs(this.controlBody.position.y) > 1)
                     return true
-                
+
                 return false
             }
 
@@ -855,7 +894,7 @@ export default class CannonScene{
             textDiana.mesh.position.set(0, 0, 25)
             this.addObject(textDiana)
         } )
-        
+
     }
 
     createExplosion(){
@@ -903,7 +942,7 @@ export default class CannonScene{
     createCharacter(){
         var character = new Robot()
         var tail = new Tail()
- 
+
         this.addObject(character)
         this.addObject(tail)
 
