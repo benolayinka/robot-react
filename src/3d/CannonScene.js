@@ -673,10 +673,37 @@ Robot.prototype.update = function(){
     //monitor robot orientation and fix if tipping over
     this.vectorUp.set(0,0,1)
     this.vectorUp.applyQuaternion( this.mesh.quaternion )
-    if(this.vectorUp.dot(up) < 0.5){ // TODO: also check if y == 0 to allow some airtime tricks
+    if(this.vectorUp.dot(up) < 0.5){ // TODO: also check if we are on the ground to allow some airtime tricks
         console.log('im falling over!')
-        this.body.quaternion.set(0, 0, 0, 1)
-        // this.respawn()
+
+        // Approach 1. This kind of works but you can still get stuck in weird positions
+        // let av = this.body.angularVelocity
+        // let factor = -0.9
+        // this.body.angularVelocity.set(av.x * factor, av.y * factor, av.z * factor)
+        // console.log(this.body.angularVelocity)
+
+
+        // Approach 2. This works but is a bit awkward
+        this.body.quaternion.set(0, 0, 0, 1) // force upright
+
+
+        // Approach 3. Bounce back. This probably would work but I don't know physics
+        // TODO: bounce back
+        // let f = this.body.force
+        // let quaternion = this.body.quaternion
+        // let q = new CANNON.Vec3(quaternion.x, quaternion.y, quaternion.z)
+        // let q_up = new CANNON.Vec3(0, 0, 0)
+        //
+        // // calculate worldPoint such that q moves in the direction of q_up
+        // let worldPoint = new CANNON.Vec3(0, 0, 0)
+        // console.log(f)
+        //
+        // // calculate
+        // let f_apply = q.scale(-0.5);
+        //
+        // console.log('apply', f_apply)
+        //
+        // this.body.applyForce(f_apply, worldPoint)
     }
 
     // monitor robot out of bounds
@@ -689,25 +716,28 @@ Robot.prototype.update = function(){
 Robot.prototype.respawn = function(position = 'random', looseTail = true){
   // respawns the robot
   // args:
-  // - bool position: 'random', 'center' or 'keep'
+  // - position: 'random', 'center', 'keep' or an object like {x: 10, y: 10, z: 10}
   // - bool looseTail: loose your tail or not when you respawn
 
   let z = 10 // spawn from the air
   let x, y
 
-  if (position === 'random') {
-    x = Math.random(0, ARENA_RADIUS - 10)
-    y = Math.random(0, ARENA_RADIUS - 10)
-  }
-
   if (position === 'center') {
-    x = ARENA_RADIUS / 2
-    y = ARENA_RADIUS / 2
+    x = 0
+    y = 0
   }
-
-  if (position === 'keep') {
+  else if (position === 'keep') {
     x = this.body.position.x
     y = this.body.position.y
+  }
+  else if (typeof(position) === 'object') {
+    x = position.x
+    y = position.y
+    z = position.z ? position.z : z
+  }
+  else { // position is 'random' or undefined
+    x = Math.random(-1 * (ARENA_RADIUS - 10), ARENA_RADIUS - 10)
+    y = Math.random(-1 * (ARENA_RADIUS - 10), ARENA_RADIUS - 10)
   }
 
   if (looseTail) {
@@ -716,7 +746,7 @@ Robot.prototype.respawn = function(position = 'random', looseTail = true){
 
   this.body.quaternion.set(0, 0, 0, 1)
   this.body.position.set(x, y, z)
-  console.log('respawn')
+  console.log('respawn at ', x, y, z)
 }
 
 export default class CannonScene{
