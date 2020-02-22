@@ -1,7 +1,8 @@
 import * as THREE from 'three'
 import React from 'react'
+import Stats from 'three/examples/jsm/libs/stats.module.js'
 
-const NEAR = 0.1, FAR = 1000, FOV = 40
+const NEAR = 0.1, FAR = 600, FOV = 40
 
 class CameraRenderer extends React.Component {
     constructor(props) {
@@ -20,8 +21,8 @@ class CameraRenderer extends React.Component {
         this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, canvas: this.refs.canvas });
 
         this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setClearColor( this.scene.fog.color, 1 );
-        this.renderer.shadowMap.enabled = true;
+        this.renderer.setClearColor( this.scene.background.color, 1 );
+        this.renderer.shadowMap.enabled = false;
 
         var width = this.refs.canvas.clientWidth;
         var height = this.refs.canvas.clientHeight;
@@ -53,6 +54,12 @@ class CameraRenderer extends React.Component {
         canvas.addEventListener("touchmove",   function(event) {event.preventDefault()}, { passive: false })
         canvas.addEventListener("touchend",    function(event) {event.preventDefault()}, { passive: false })
         canvas.addEventListener("touchcancel", function(event) {event.preventDefault()}, { passive: false })
+
+        if(document.location.href.includes('dev')) {
+            var stats = this.stats = new Stats();
+            stats.showPanel( 0 );
+            document.body.appendChild( stats.domElement );
+        }
     }
 
     componentWillUnmount() {
@@ -78,6 +85,9 @@ class CameraRenderer extends React.Component {
 
     step() {
         this.raf = requestAnimationFrame(this.step)
+
+        if(this.stats)
+            this.stats.begin()
         
         this.renderer.render(
             this.scene,
@@ -85,6 +95,9 @@ class CameraRenderer extends React.Component {
         );
 
         this.cannonScene.step()
+
+        if(this.stats)
+            this.stats.end()
     }
 
     onClick = () => {

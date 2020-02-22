@@ -1,7 +1,6 @@
 import * as THREE from 'three'
 
 import CameraRenderer from './CameraRenderer'
-import GamepadControls from '../scripts/GamepadControls'
 
 const DEFAULT_FOLLOW_DIST = 45;
 const FOLLOW_HEIGHT = 15;
@@ -21,9 +20,7 @@ class FollowCameraRenderer extends CameraRenderer {
     constructor(props) {
         super(props)
 
-        this.gamepadControls = new GamepadControls(this.cannonScene.controlBody, this.cannonScene.controlObject)
-
-        this.followObject = this.gamepadControls.getLookObject()
+        this.followObject = this.cannonScene.followObject
         this.followDistance = this.followObject.followDistance || DEFAULT_FOLLOW_DIST;
 
         this.angularVelHistory = [];
@@ -63,8 +60,6 @@ class FollowCameraRenderer extends CameraRenderer {
                 break;
             }
         
-        this.gamepadControls.update(Date.now() - this.time, this.props.gamepadData)
-        this.time = Date.now();
         super.step();
     }
 

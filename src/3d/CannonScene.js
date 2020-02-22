@@ -2,6 +2,7 @@ import * as CANNON from 'cannon'
 import * as THREE from 'three'
 import Colors from '../scripts/colors'
 import CannonDebugRenderer from '../scripts/cannonDebugRenderer'
+import GamepadControls from '../scripts/GamepadControls'
 import images from '../images'
 
 var textureLoader = new THREE.TextureLoader()
@@ -15,6 +16,8 @@ const SKY_RADIUS = 400
 var particlesPool = []
 var particlesInUse = []
 
+var up = new THREE.Vector3(0,0,1)
+
 function Checkpoint(conditionFunc){
     this.completed = false
     this.conditionFunc = conditionFunc
@@ -27,19 +30,23 @@ Checkpoint.prototype.update = function(){
     }   
 }
 
-function Billboard() {
+function Billboard(image1, image2) {
+
+    this.mesh = new THREE.Object3D()
+
+    this.angle = 0
 
     var size = this.size = 20
     var he = size / 2
     this.mass = 0
 
+    var heightOffset = size / 10
+
 	var cubeGeometry = new THREE.BoxGeometry(size,size,size);
 
-    var imageText = images['slide1-text.png']
-    var textureText = textureLoader.load( imageText );
+    var textureText = textureLoader.load( image1 );
 
-    var imagePic = images['slide1-pic.jpg']
-    var texturePic = textureLoader.load( imagePic );
+    var texturePic = textureLoader.load( image2 );
 
     var blankMaterial = new THREE.MeshBasicMaterial({color: Colors.white})
 
@@ -52,7 +59,12 @@ function Billboard() {
         new THREE.MeshLambertMaterial({map: textureText}), // Back side
     ];
 
-    this.mesh = new THREE.Mesh(cubeGeometry,cubeMaterials);
+    var board = new THREE.Mesh(cubeGeometry,cubeMaterials);
+    board.position.set(0, 0, heightOffset * 2)
+    board.rotation.set(Math.PI/2, Math.PI/4, 0)
+
+    this.board = board //save the sub object so we can rotate it later
+    this.mesh.add(board)
 
     //create a shape equal to the geometry
     var vec = new CANNON.Vec3(he,he,he);
@@ -60,8 +72,47 @@ function Billboard() {
 
     this.body = new CANNON.Body({
         mass: this.mass,
-        shape: boxShape
     });
+
+    //position the box at a 45 degree angle, and raised above the ground
+    var offsetVec = new CANNON.Vec3(board.position.x, board.position.y, board.position.z)
+    var offsetQuat = new CANNON.Quaternion(board.quaternion.x, board.quaternion.y, board.quaternion.z, board.quaternion.w)
+    this.body.addShape(boxShape, offsetVec, offsetQuat)
+
+    //posts
+    var cylinderMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        })
+
+    var faces = 12
+    var cylinderGeom = new THREE.CylinderGeometry(this.size / 6, this.size / 6, this.size + heightOffset, faces)
+    var cylinderMeshR = new THREE.Mesh(cylinderGeom, cylinderMaterial)
+    cylinderMeshR.rotation.set(Math.PI/2, 0, 0)
+    var cylinderMeshL = cylinderMeshR.clone()
+    cylinderMeshR.position.set(size, 0, 0)
+    this.mesh.add(cylinderMeshR)
+    cylinderMeshL.position.set(-size, 0, 0)
+    this.mesh.add(cylinderMeshL)
+
+    var cylinderShape = new CANNON.Cylinder(this.size / 6, this.size / 6, this.size + heightOffset, faces)
+    var m = cylinderMeshR
+    offsetVec.set(m.position.x, m.position.y, m.position.z)
+    //there's a bug here - are cannon and threejs rotation systems different?
+    offsetQuat.setFromEuler(m.rotation.x + Math.PI/2, m.rotation.y, m.rotation.z)
+    this.body.addShape(cylinderShape, offsetVec, offsetQuat)
+    offsetVec.set(-m.position.x, m.position.y, m.position.z)
+    this.body.addShape(cylinderShape, offsetVec, offsetQuat)
+}
+
+Billboard.prototype.update = function(){
+
+    //rotate board mesh within object
+    this.board.rotation.y += 0.001
+
+    //copy board mesh to body
+    var q = this.board.quaternion
+    this.body.shapeOrientations[0].set(q.x, q.y, q.z, q.w)
+    this.angle += .001
 }
 
 function Text(words, color, size, loadedFont) {
@@ -86,7 +137,7 @@ function Text(words, color, size, loadedFont) {
     this.centerOffsetX = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
     this.centerOffsetY = - 0.5 * ( geometry.boundingBox.max.y - geometry.boundingBox.min.y );
 
-    var mat = new THREE.MeshBasicMaterial({
+    var mat = new THREE.MeshLambertMaterial({
         color:color,
     });
 
@@ -110,7 +161,7 @@ function ExplosionParticle(){
         color:0x009999,
         //shininess:0,
         //specular:0xffffff,
-        flatShading:true
+        //flatShading:true
     });
     this.mesh = new THREE.Mesh(geom,mat);
 }
@@ -189,13 +240,23 @@ function Sun(){
     // create a material; a simple white material will do the trick
 	var mat = new THREE.MeshBasicMaterial({
 		color:Colors.white,
-        flatShading:true, 
+        //flatShading:true, 
 	});
 
     var sun = new THREE.Mesh(geom, mat)
     this.mesh.add(sun)
 
     var sunlight = new THREE.DirectionalLight(Colors.white, 0.5)
+    sunlight.position.set(-SKY_RADIUS/4, -SKY_RADIUS/4, SKY_RADIUS/4)
+    // sunlight.castShadow = true;
+    // sunlight.shadow.camera.left = -10
+    // sunlight.shadow.camera.right = 10
+    // sunlight.shadow.camera.top = 10
+    // sunlight.shadow.camera.bottom = -10
+    // sunlight.shadow.camera.near = 1;
+    // sunlight.shadow.camera.far = SKY_RADIUS
+    // sunlight.shadow.mapSize.width = 8192/4;
+    // sunlight.shadow.mapSize.height = 8192/4;
     this.mesh.add(sunlight)
 }
 
@@ -249,8 +310,8 @@ function Sky(){
         this.angle += 0.005
 
         //move the sun in the sky
-        this.sun.mesh.position.z = Math.sin(this.angle)*SKY_RADIUS;
-	    this.sun.mesh.position.x = Math.cos(this.angle)*SKY_RADIUS;
+        this.sun.mesh.position.z = Math.sin(this.angle)*SKY_RADIUS - 50;
+	    this.sun.mesh.position.x = Math.cos(this.angle)*SKY_RADIUS - 50;
         this.sun.mesh.rotation.z = this.angle
 
         //clouds drift up and down
@@ -326,7 +387,7 @@ function Trash(){
 	
 	var mat = new THREE.MeshBasicMaterial({
 		color:Colors.white,  
-        flatShading:true,
+        //flatshading:true,
 	});
         
     this.body = new CANNON.Body({
@@ -410,7 +471,7 @@ function Ground(){
 		color:Colors.blue,
 		transparent:true,
 		opacity:.6,
-		flatShading:true,
+		//flatShading:true,
 	});
 
     var v0 = new CANNON.Vec3();
@@ -453,7 +514,7 @@ function Tail(){
     var geometry = new THREE.BoxGeometry( size / 3, size / 3, size / 3);
     var material = new THREE.MeshLambertMaterial({
         color: Colors.red,
-        flatShading:true,
+        //flatshading:true,
         });
 
     this.mesh = new THREE.Mesh(geometry, material)
@@ -477,7 +538,7 @@ function Robot(){
     var halfExtent = size / 2
     //create character box
     var boxBody = new CANNON.Body({
-        mass: 1,
+        mass: 100,
         position: new CANNON.Vec3(0, 0, 10),
         shape: new CANNON.Box(new CANNON.Vec3(halfExtent, halfExtent, halfExtent))
     });
@@ -509,7 +570,7 @@ function Robot(){
 
     var material = new THREE.MeshLambertMaterial({
         color: Colors.white,
-        flatShading:true,
+        //flatshading:true,
         });
 
     var box = new THREE.Mesh( geometry, material );
@@ -521,7 +582,7 @@ function Robot(){
     var geometry = new THREE.BoxGeometry( size / 2, size / 2, size / 2);
     var material = new THREE.MeshLambertMaterial({
         color: Colors.red,
-        flatShading:true,
+        //flatshading:true,
         });
     var head = new THREE.Mesh( geometry, material )
     head.position.set(size/2,0,size/2)
@@ -532,9 +593,9 @@ function Robot(){
 
     //feet
     var geometry = new THREE.BoxGeometry( size / 2, size, size / 3);
-    var material = new THREE.MeshBasicMaterial({
+    var material = new THREE.MeshLambertMaterial({
         color: Colors.brownDark,
-        flatShading:true,
+        //flatshading:true,
         });
     var footL = new THREE.Mesh( geometry, material )
     footL.position.set(0,size/2,-size/3)
@@ -557,7 +618,10 @@ function Robot(){
     geomPropeller.vertices[6].z+=size/12;
     geomPropeller.vertices[7].y+=size/12;
     geomPropeller.vertices[7].z-=size/12;
-    var matPropeller = new THREE.MeshLambertMaterial({color:Colors.red, flatShading:true});
+    var matPropeller = new THREE.MeshLambertMaterial({
+        color:Colors.red,
+        //flatShading:true
+    });
     this.propeller = new THREE.Mesh(geomPropeller, matPropeller);
     this.propeller.position.set(0,size/2,0);
     this.mesh.add(this.propeller);
@@ -569,7 +633,10 @@ function Robot(){
     this.blade = new THREE.Object3D()
 
     var geomBlade = new THREE.BoxGeometry(size/20,size/8,size/4);
-    var matBlade = new THREE.MeshLambertMaterial({color:Colors.brownDark, flatShading:true});
+    var matBlade = new THREE.MeshLambertMaterial({
+        color:Colors.brownDark,
+        //flatShading:true
+    });
     var blade1 = new THREE.Mesh(geomBlade, matBlade);
 
     blade1.castShadow = true;
@@ -592,17 +659,35 @@ function Robot(){
     this.mesh.receiveShadow = true;
 
     this.angle = 0
+
+    this.vectorUp = new THREE.Vector3()
 }
 
 Robot.prototype.update = function(){
+
+    //rotate mesh elements on the robot for animation
     this.angle += 0.02
     this.blade.rotation.y = this.angle
     this.propeller.rotation.y = -this.angle
+
+    //monitor robot orientation and fix if tipping over
+    this.vectorUp.set(0,0,1)
+    this.vectorUp.applyQuaternion( this.mesh.quaternion )
+
+    if(this.vectorUp.dot(up) < 0.5){
+        //console.log('im falling over!')
+        //apply some force to this.body to fix robot tipping over
+    }
 }
 
 export default class CannonScene{
 
-    constructor(){
+    constructor(gamepadData){
+
+        //stuff for controls
+        this.gamepadData = gamepadData
+        this.time = Date.now()
+
         this.objects = []
         this.checkpoints = []
         this.createScene()
@@ -615,6 +700,7 @@ export default class CannonScene{
         this.createGround()
         this.createSky()
         this.createBillboards()
+        this.createControls() //controls depend on some objects, create last
 
         //debug renderer displays wireframe of cannon bodies
         //it gets updated in step function
@@ -625,7 +711,10 @@ export default class CannonScene{
         this.updateVisuals()
         this.updatePhysics()
         this.updateCheckpoints()
-        //this.CannonDebugRenderer.update();
+        this.updateControls()
+        if(document.location.href.includes('dev')) {
+            this.CannonDebugRenderer.update();
+        }
     }
 
     //checkpoints are created with an update function that returns true when complete
@@ -662,10 +751,19 @@ export default class CannonScene{
         this.world.step(timeStep)
     }
 
+    updateControls() {
+        if(!this.gamepadControls)
+            return
+
+        this.gamepadControls.update(Date.now() - this.time, this.gamepadData)
+        this.time = Date.now();
+    }
+
     addObject(obj) {
         this.objects.push(obj)
-        if(obj.mesh)
+        if(obj.mesh){
             this.scene.add(obj.mesh)
+        }
         
         if(obj.body)
             this.world.addBody(obj.body)
@@ -675,9 +773,15 @@ export default class CannonScene{
         this.checkpoints.push(checkpoint)
     }
 
+    createControls(){
+        this.gamepadControls = new GamepadControls(this.controlBody, this.controlObject)
+        this.followObject = this.gamepadControls.getLookObject()
+    }
+
     createScene(){
         var scene = this.scene = new THREE.Scene()
-        scene.fog = new THREE.Fog(Colors.pink, 0, 500)
+        scene.background = new THREE.Color(Colors.pink)
+        scene.fog = new THREE.Fog(Colors.pink, ARENA_RADIUS, SKY_RADIUS + 100)
     }
 
     createWorld(){
@@ -693,17 +797,21 @@ export default class CannonScene{
 
     //todo move all billboards to single landscape element function
     createBillboards(){
-        var billboard = new Billboard()
+        var imageText = images['slide1-text.png']
+        var imagePic = images['slide1-pic.jpg']
+        var billboard = new Billboard(imageText, imagePic)
         billboard.body.position.x = ARENA_RADIUS / 2
-        billboard.body.position.y = ARENA_RADIUS / 2
+        //billboard.body.position.y = ARENA_RADIUS / 2
         billboard.body.position.z = billboard.size - billboard.size / 4
-        billboard.mesh.up.set(0,0,1)
-        billboard.mesh.lookAt(this.scene.position)
-        billboard.mesh.rotation.y += Math.PI / 2
-        //billboard.mesh.rotation.z += Math.PI / 6 + Math.PI / 2
-        var quat = billboard.mesh.quaternion
-        billboard.body.quaternion.set(quat.x,quat.y,quat.z,quat.w)
         this.addObject(billboard)
+
+        var imageText = images['slide2-text.png']
+        var imagePic = images['slide2-pic.png']
+        var billboard2 = new Billboard(imageText, imagePic)
+        billboard2.body.position.x = -ARENA_RADIUS / 2
+        //billboard.body.position.y = ARENA_RADIUS / 2
+        billboard2.body.position.z = billboard2.size - billboard2.size / 4
+        this.addObject(billboard2)
     }
 
     //todo clean this up.. use helper functions
@@ -712,7 +820,7 @@ export default class CannonScene{
 
             var words
             if('ontouchstart' in document.documentElement)
-                words = 'use\ncontrols to\nmove around!'
+                words = 'use\ncontrols to\nmove around!\nvv'
             else
                 words = 'use\nW,A,S,D to\nmove around!'
 
@@ -824,11 +932,11 @@ export default class CannonScene{
     }
 
     createLights(){
-        var hemisphereLight = new THREE.HemisphereLight(Colors.white,Colors.darkBrown, 0.9)
+        var hemisphereLight = new THREE.HemisphereLight(Colors.white,Colors.brownDark, 0.9)
         hemisphereLight.position.set(0,0,1) //set z coord up
-        this.scene.add(hemisphereLight)
+        //this.scene.add(hemisphereLight)
 
-        var ambient = new THREE.AmbientLight( 0xffffff );
-        //this.scene.add( ambient );
+        var ambient = new THREE.AmbientLight( Colors.white );
+        this.scene.add( ambient );
     }
 }

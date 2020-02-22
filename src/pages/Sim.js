@@ -17,7 +17,7 @@ export default class Sim extends React.Component{
             width: null
         }
 
-        this.cannonScene = new CannonScene()
+        this.cannonScene = new CannonScene(this.gamepadData)
     
     }
 
@@ -58,7 +58,7 @@ export default class Sim extends React.Component{
                 <div ref='container' style={containerStyle}>
                     {this.state.width &&
                     <Gamepad onEvent={this.onGamepadEvent} nippleSize={this.state.width/6} buttonSize={this.state.width/15}>
-                        <FollowCameraRenderer cannonScene={this.cannonScene} gamepadData={this.gamepadData}/>
+                        <FollowCameraRenderer cannonScene={this.cannonScene}/>
                     </Gamepad>
                     }
                 </div>

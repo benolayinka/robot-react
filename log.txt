@@ -9941,3 +9941,9 @@
 {"message":"user connected: b uuid: a8fca380-50ea-11ea-9dbe-455f12ead1a5","level":"info","timestamp":"2020-02-16T20:18:53.464Z"}
 {"message":"user connected: b uuid: a8fca380-50ea-11ea-9dbe-455f12ead1a5","level":"info","timestamp":"2020-02-16T20:23:03.686Z"}
 {"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-02-16T20:28:14.748Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-02-21T17:59:16.815Z"}
+{"message":"user connected: Rob uuid: 13167420-54d4-11ea-9e3d-17c541560bb7","level":"info","timestamp":"2020-02-21T18:00:42.039Z"}
+{"message":"user connected: b uuid: 3f3a5990-54d4-11ea-b1cb-057c582ebfbe","level":"info","timestamp":"2020-02-21T18:01:57.745Z"}
+{"message":"user connected: Rob uuid: 61dd8990-54d4-11ea-816b-933cd894d8a8","level":"info","timestamp":"2020-02-21T18:02:54.080Z"}
+{"message":"user connected: Rob uuid: 61dd8990-54d4-11ea-816b-933cd894d8a8","level":"info","timestamp":"2020-02-21T18:09:33.341Z"}
+{"message":"user connected: Rob uuid: 61dd8990-54d4-11ea-816b-933cd894d8a8","level":"info","timestamp":"2020-02-21T18:11:27.384Z"}
