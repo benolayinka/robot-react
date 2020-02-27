@@ -3,6 +3,7 @@ import Div100vh from 'react-div-100vh'
 import FollowCameraRenderer from '../components/FollowCameraRenderer'
 import CannonScene from '../3d/CannonScene'
 import Gamepad from '../components/Gamepad'
+import ScoreBoard from '../components/ScoreBoard'
 
 export default class Sim extends React.Component{
     constructor(props) {
@@ -55,6 +56,7 @@ export default class Sim extends React.Component{
 
         return (
             <Div100vh className='Sim' >
+                <ScoreBoard></ScoreBoard>
                 <div ref='container' style={containerStyle}>
                     {this.state.width &&
                     <Gamepad onEvent={this.onGamepadEvent} nippleSize={this.state.width/6} buttonSize={this.state.width/15}>
