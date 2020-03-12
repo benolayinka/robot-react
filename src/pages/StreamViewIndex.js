@@ -1,12 +1,6 @@
 import React from 'react'
-import ReactJanusController from '../components/Janus/ReactJanusController';
-import StreamItem from '../components/StreamConfig/StreamItem'
-import {
-    Switch,
-    Route,
-    Redirect,
-    withRouter,
-  } from "react-router-dom";
+import ReactJanusController from '../components/ReactJanusController';
+import StreamItem from '../components/StreamItem'
 
 class StreamViewIndex extends React.Component{
 

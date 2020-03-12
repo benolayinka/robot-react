@@ -1,0 +1,37 @@
+body {
+  font-size: 4vw;
+}
+
+.btn-naked {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Buttons styles start */
+button {
+  display: inline-block;
+  /* font-weight: 400; */
+  /* color: #212529; */
+  text-align: center;
+  vertical-align: middle;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  
+  background-color: transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s; 
+
+  border: none;
+  background: transparent;
+  
+}

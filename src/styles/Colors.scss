@@ -1,0 +1,25 @@
+//colors
+$red:#f25346;
+$white:#d8d0d1;
+$whiteTrue:#ffffff;
+$brown:#59332e;
+$pink:#F5986E;
+$brownDark:#23190f;
+$blue:#68c3c0;
+$green: #137A63;
+$shadow: #533d4a;
+
+// the :export directive is the magic sauce for webpack
+:export {
+    red:$red;
+    white:$white;
+    whiteTrue:$whiteTrue;
+    brown:$brown;
+    pink:$pink;
+    brownDark:$brownDark;
+    blue:$blue;
+    green:$green;
+    shadow:$shadow;
+    primaryColor:$pink;
+    secondaryColor:$green;
+}

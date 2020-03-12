@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss'
 import React from 'react';
 import { hot } from 'react-hot-loader/root'
 import {
@@ -15,8 +16,7 @@ window.server = '/janusbase/janus'
 function App() {
 
   return (
-    <Router>  
-      <div>
+    <Router> 
         <Switch>
           <Route exact path="/">
             <Redirect to="/view/1" />
@@ -24,11 +24,9 @@ function App() {
           <Route path="/nav" component={Pages.Nav} />
           <Route path="/sim" component={Pages.Sim} />
           <Route path="/config" component={Pages.StreamConfig} />
-          <Route path="/view/debug" render={() => <Pages.StreamView debug={true}/>} />
-          <Route path="/view/:id" component={Pages.StreamView} />
+          <Route path="/view/:id" component={Pages.View} />
           <Route path="/view" component={Pages.StreamViewIndex} />
         </Switch>
-      </div>
     </Router> 
   );
 }

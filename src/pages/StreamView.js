@@ -1,6 +1,6 @@
 import React from 'react'
-import ReactJanusController from '../components/Janus/ReactJanusController'
-import StreamController from '../components/StreamView/StreamController'
+import ReactJanusController from '../components/ReactJanusController'
+import StreamController from '../components/StreamController'
 import {Container, Row, Col, Button, Form} from 'react-bootstrap'
 
 class StreamView extends React.Component{
