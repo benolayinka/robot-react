@@ -7,6 +7,7 @@ import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 import { GeometryUtils } from 'three/examples/jsm/utils/GeometryUtils.js';
 import {BufferGeometryUtils} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import GamepadControls from '../scripts/GamepadControls'
+import ScoreBoard from '../components/ScoreBoard'
 import {TweenMax, Linear} from 'gsap'
 import Colors from '../styles/Colors.scss'
 import {Appear, Vanish} from './MeshAnimations'
@@ -962,6 +963,9 @@ export default class CannonScene{
         //stuff for controls
         this.gamepadData = gamepadData
         this.time = Date.now()
+      
+        //score
+        this.score = 0
 
         this.init()
     }
@@ -1041,6 +1045,19 @@ export default class CannonScene{
                 object.update()
             }
         }
+    } 
+
+    updateScore() {
+        var score = document.getElementById("score");
+        var cap = parseInt(document.getElementById("capacity").innerHTML);
+        if (this.score < cap) {
+            this.score += 1;
+            score.innerHTML = this.score; //not ideal
+        } 
+
+        if (this.score == cap) {
+            alert("bot has reached trash holding capacity!");
+        } 
     }
 
     updatePhysics() {
@@ -1078,7 +1095,7 @@ export default class CannonScene{
         scene.fog = new THREE.Fog(Colors.pink, ARENA_RADIUS, SKY_RADIUS + 100)
     }
 
-    createWorld(){
+    createWorld() {
         var world = this.world = new CANNON.World()
         world.gravity.set(0,0,-9.8)
         world.broadphase = new CANNON.NaiveBroadphase();
@@ -1257,8 +1274,9 @@ export default class CannonScene{
 
                     let c1 = new CANNON.PointToPointConstraint(this.lastObject.body,new CANNON.Vec3(0,0,0),e.target, new CANNON.Vec3(-5,0,0));
                     this.world.addConstraint(c1);
-
                     this.lastObject = e.target.object;
+                    this.updateScore(); 
+                    //TODO: side effects not ideal, need to implement redux global state
                 }
             }
 

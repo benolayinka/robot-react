@@ -3,6 +3,7 @@ import Div100vh from 'react-div-100vh'
 import FollowCameraRenderer from '../components/FollowCameraRenderer'
 import CannonScene from '../3d/CannonScene'
 import Gamepad from '../components/Gamepad'
+import ScoreBoard from '../components/ScoreBoard'
 import Loading from "../components/Loading"
 import Colors from '../styles/Colors.scss'
 
@@ -66,6 +67,7 @@ export default class Sim extends React.Component{
 
         return (
             <Div100vh className='Sim' >
+                <ScoreBoard></ScoreBoard>
                 <div ref='container' style={containerStyle}>
                     <Loading loaded={this.state.sceneLoaded} timeout={1200}/>
                     {this.state.width &&
