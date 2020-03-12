@@ -1,8 +1,10 @@
 import * as THREE from 'three'
 import React from 'react'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
+import {getQuery} from '../scripts/utils'
+import CannonDebugRenderer from '../scripts/cannonDebugRenderer'
 
-const NEAR = 0.1, FAR = 600, FOV = 40
+const NEAR = 0.1, FAR = 600, FOV = 40, ASPECT = 16/9
 
 class CameraRenderer extends React.Component {
     constructor(props) {
@@ -30,15 +32,14 @@ class CameraRenderer extends React.Component {
         // Camera
         this.camera = new THREE.PerspectiveCamera(
             FOV, //Field of view
-            width / height, //Aspect ratio
+            ASPECT,
             NEAR, //Near plane
             FAR, //Far plane
         );
 
         //Default birds-eye view
         this.camera.up.set(0,0,1);
-        const { position } = this.props;
-        this.camera.position.set( position[0], position[1], position[2] );
+        this.camera.position.copy( this.props.position );
         this.camera.lookAt( this.scene.position );
 
         this.resizeCanvasToDisplaySize()
@@ -46,7 +47,8 @@ class CameraRenderer extends React.Component {
         //prevent canvas scrolling
         var canvas = this.renderer.domElement
 
-        canvas.addEventListener( 'resize', this.resizeCanvasToDisplaySize );
+        //resize is handled in parent component
+        window.addEventListener( 'resize', this.resizeCanvasToDisplaySize );
         this.step = this.step.bind(this);
         this.step();
 
@@ -55,17 +57,22 @@ class CameraRenderer extends React.Component {
         canvas.addEventListener("touchend",    function(event) {event.preventDefault()}, { passive: false })
         canvas.addEventListener("touchcancel", function(event) {event.preventDefault()}, { passive: false })
 
-        var loc = document.location.href
-        if(loc.includes('dev') || loc.includes('localhost')) {
+        //display stats if query parameter includes ?debug=true
+        const query = getQuery();
+        this.debug = 'debug' in query
+        if(this.debug) {
             var stats = this.stats = new Stats();
             stats.showPanel( 0 );
             document.body.appendChild( stats.domElement );
+
+            //debug renderer displays wireframe of cannon bodies
+            //it gets updated in step function
+            this.CannonDebugRenderer = new CannonDebugRenderer( this.cannonScene.scene, this.cannonScene.world );
         }
     }
 
     componentWillUnmount() {
-        var canvas = this.renderer.domElement
-        canvas.removeEventListener( 'resize', this.resizeCanvasToDisplaySize );
+        window.removeEventListener( 'resize', this.resizeCanvasToDisplaySize );
         cancelAnimationFrame(this.raf)
     }
 
@@ -85,10 +92,11 @@ class CameraRenderer extends React.Component {
     }
 
     step() {
-        this.raf = requestAnimationFrame(this.step)
-
-        if(this.stats)
+        if(this.debug){
+            this.stats.end()
             this.stats.begin()
+            this.CannonDebugRenderer.update()
+        }
         
         this.renderer.render(
             this.scene,
@@ -97,8 +105,7 @@ class CameraRenderer extends React.Component {
 
         this.cannonScene.step()
 
-        if(this.stats)
-            this.stats.end()
+        this.raf = requestAnimationFrame(this.step)
     }
 
     onClick = () => {
@@ -109,6 +116,7 @@ class CameraRenderer extends React.Component {
         let canvasStyle = {
             width:'100%',
             height:'100%',
+            position: 'absolute',
         }
         
         return (
@@ -118,7 +126,7 @@ class CameraRenderer extends React.Component {
 }
 
 CameraRenderer.defaultProps = {
-  position: [180, 100, 10],
+  position: new THREE.Vector3(180, 100, 10),
 };
 
 export default CameraRenderer;

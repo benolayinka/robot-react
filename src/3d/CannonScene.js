@@ -1,38 +1,296 @@
 import * as CANNON from 'cannon'
 import * as THREE from 'three'
-import Colors from '../scripts/colors'
-import CannonDebugRenderer from '../scripts/cannonDebugRenderer'
+import CheckpointHolder from './CheckpointHolder'
+import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
+import { GeometryUtils } from 'three/examples/jsm/utils/GeometryUtils.js';
+import {BufferGeometryUtils} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import GamepadControls from '../scripts/GamepadControls'
 import ScoreBoard from '../components/ScoreBoard'
-import images from '../images'
+import {TweenMax, Linear} from 'gsap'
+import Colors from '../styles/Colors.scss'
+import {Appear, Vanish} from './MeshAnimations'
+var RoundedBoxGeometry = require('three-rounded-box')(THREE)
 
-var textureLoader = new THREE.TextureLoader()
-var fontLoader = new THREE.FontLoader()
+const texturePromiseLoader = promisifyLoader(new THREE.TextureLoader())
+const fontPromiseLoader = promisifyLoader(new THREE.FontLoader())
+
+const NEAR = 0.1, FAR = 600, FOV = 40, ASPECT = 16/9
 
 const FREQUENCY = 60
 
 const ARENA_RADIUS = 300
 const SKY_RADIUS = 400
 
+const FOLLOW_DISTANCE = 45
+const FOLLOW_ANGLE = Math.PI / 8
+
 var particlesPool = []
 var particlesInUse = []
 
 var up = new THREE.Vector3(0,0,1)
 
-function Checkpoint(conditionFunc){
-    this.completed = false
-    this.conditionFunc = conditionFunc
-}
+var groundMaterial = new CANNON.Material("groundMaterial");
+var frictionMaterial = new CANNON.Material("frictionMaterial")
 
-Checkpoint.prototype.update = function(){
-    if(this.conditionFunc()){
-        this.completed = true
-        this.update = null
+//set a follow distance and angle and get height, minimum visible dist
+//this should be a class function for CSObjects
+function calculateFollowParams(followObj){
+        if(!followObj.followParams || !followObj.followParams.distance || !followObj.followParams.angle) {
+            console.error('follow params not set')
+            return
+        }
+        const params = followObj.followParams
+        const dist = params.distance
+        const angle = params.angle
+        let height = params.height = Math.tan(angle) * dist
+
+        //get angle to highest, furthest point of object
+        let a = height - followObj.size.height / 2
+        let b = dist + followObj.size.depth / 2
+        let viewAngle = Math.atan(a/b)
+
+        let bigHeight = height + followObj.size.height / 2
+        let bigD = bigHeight / Math.tan(viewAngle)
+
+        //min view distance is where object stops blocking ground in front
+        params.minViewDistance = bigD - dist
+    }
+
+function calculateSizeFromGeometry(geometry){
+    geometry.computeBoundingBox()
+    return {
+        width: geometry.boundingBox.max.x - geometry.boundingBox.min.x,
+        height: geometry.boundingBox.max.y - geometry.boundingBox.min.y,
+        depth: geometry.boundingBox.max.z - geometry.boundingBox.min.z
     }
 }
 
-function Billboard(image1, image2) {
+function promisifyLoader ( loader, onProgress ) {
+  function promiseLoader ( url ) {
+    return new Promise( ( resolve, reject ) => {
+      loader.load( url, resolve, onProgress, reject );
+    } );
+  }
 
+  return {
+    originalLoader: loader,
+    load: promiseLoader,
+  };
+}
+
+function Platform() {
+    const length = 50
+    const width = length
+    const depth = 5
+    var geometry = new RoundedBoxGeometry( width, length, depth , 2 , 5 )
+    var material = new THREE.MeshLambertMaterial( { color: Colors.pink } );
+    this.mesh = new THREE.Mesh(geometry, material)
+
+    this.body = new CANNON.Body({
+        mass: 0,
+        shape: new CANNON.Box(new CANNON.Vec3(width/2, length/2, depth/2)),
+        material: groundMaterial,
+    })
+
+}
+
+function Hippo() {
+    var torsoSize = 5
+    var torsoHe = torsoSize / 2
+    var torsoMass = 10
+
+    this.mesh = new THREE.Object3D()
+
+    const geoms = []
+    var material = new THREE.MeshLambertMaterial({color: Colors.blue})
+    const eyeWhiteMaterial = new THREE.MeshLambertMaterial({color: Colors.white})
+    const eyeBrownMaterial = new THREE.MeshLambertMaterial({color: Colors.brownDark})
+
+    //shape translation vec
+    const mVec = new CANNON.Vec3()
+
+    //torso
+    var shape = new CANNON.Box(new CANNON.Vec3(torsoHe, torsoHe, torsoHe))
+    var torsoBody = this.body = new CANNON.Body({
+        mass: torsoMass,
+        shape: shape,
+        //linearDamping: 0.5,
+        //angularDamping: 0.5,
+        material: frictionMaterial,
+    })
+
+    var torsoGeometry = new THREE.BoxBufferGeometry(torsoSize, torsoSize, torsoSize)
+    geoms.push(torsoGeometry)
+    
+    //legs
+    const numLegs = 4
+    const legSize = torsoSize/5
+    const legHe = legSize / 2
+    const legShape = new CANNON.Box(new CANNON.Vec3(legHe, legHe, legHe))
+
+    const legGeom = new THREE.BoxBufferGeometry(legSize)
+
+    for (var i=0; i<numLegs; i++){
+        const x = i % 2 === 0 ? -torsoHe + legHe : torsoHe - legHe
+        const y = i < numLegs/2 ? -torsoHe + legHe : torsoHe - legHe
+        mVec.set(x, y, - torsoHe - legHe)
+        this.body.addShape(legShape, mVec)
+
+        var geom = legGeom.clone()
+        geom.translate(mVec.x, mVec.y, mVec.z)
+
+        geoms.push(geom)
+    }
+
+    //lower jaw
+    const lowerJawGeom = new THREE.BoxBufferGeometry(torsoSize, torsoSize, 1/8 * torsoSize)
+    const ly = torsoSize
+    let lz = -torsoSize / 3
+
+    const lowerJawShape = new CANNON.Box(new CANNON.Vec3(torsoHe, torsoHe, 1/8 * torsoHe))
+    mVec.set(0, ly, lz)
+    this.body.addShape(lowerJawShape, mVec)
+
+    lowerJawGeom.translate(mVec.x, mVec.y, mVec.z)
+    geoms.push(lowerJawGeom)
+
+    //upper jaw
+    const upperJawGeom = new THREE.BoxBufferGeometry(torsoSize, torsoSize, 3/4 * torsoSize)
+    let y = torsoSize
+    let z = torsoSize / 3
+
+    const upperJawShape = new CANNON.Box(new CANNON.Vec3(torsoHe, torsoHe, 3/4 * torsoHe))
+    mVec.set(0, y, z)
+    this.body.addShape(upperJawShape, mVec)
+
+    upperJawGeom.translate(mVec.x, mVec.y, mVec.z)
+    geoms.push(upperJawGeom)
+
+    //nostrils
+    const numNose = 2
+    const noseSize = legSize
+    const noseHe = noseSize/2
+
+    const noseGeom = new THREE.BoxBufferGeometry(noseSize, noseSize, noseSize)
+    const noseShape = new CANNON.Box(new CANNON.Vec3(noseHe, noseHe, noseHe))
+
+    for (var i=0; i<numNose; i++){
+        const x = i % 2 === 0 ? -torsoHe + noseHe : torsoHe - noseHe
+        const y = torsoSize + torsoSize / 2 - noseSize/2
+        const z = torsoSize / 3 + (3/4 * torsoSize) / 2 + noseSize / 2
+        mVec.set(x, y, z)
+        this.body.addShape(legShape, mVec)
+
+        var geom = legGeom.clone()
+        geom.translate(mVec.x, mVec.y, mVec.z)
+
+        geoms.push(geom)
+    }
+
+    //head
+    const headSize = torsoSize/2
+    const headHe = headSize/2
+
+    const headShape = new CANNON.Box(new CANNON.Vec3(torsoHe, headHe, headHe))
+    mVec.set(0, headSize, torsoSize/2 + headSize/2)
+    this.body.addShape(headShape, mVec)
+
+    const headGeom = new THREE.BoxBufferGeometry(torsoSize, headSize, headSize)
+    headGeom.translate(mVec.x, mVec.y, mVec.z)
+    geoms.push(headGeom)
+
+    //eyes
+    const numEyes = 2
+    const eyeSize = legSize * 1.5
+    const eyeHe = eyeSize/2
+
+    const eye = new THREE.Object3D()
+    const eyeGeom = new THREE.CircleBufferGeometry(eyeHe)
+    eyeGeom.rotateX(Math.PI + Math.PI/2).translate(0,0.01, 0) //z fighting
+    const eyeOuter = new THREE.Mesh(eyeGeom, eyeWhiteMaterial)
+    const innerGeom = eyeGeom.clone().scale(0.5,1,1).translate(0,0.1,0)
+    const eyeInner = new THREE.Mesh(innerGeom, eyeBrownMaterial)
+    eye.add(eyeOuter)
+    eye.add(eyeInner)
+    for (var i=0; i<numEyes; i++){
+        const x = i % 2 === 0 ? -eyeSize : eyeSize
+        const y = torsoSize/2 + headSize/2
+        const z = torsoSize/2 + headSize/2
+        var eyeMesh = eye.clone()
+        eyeMesh.position.set(x,y,z)
+        this.mesh.add(eyeMesh)
+    }
+
+    //ears
+    const numEars = 2
+    const earSize = legSize
+    const earHe = eyeSize/2
+
+    const earGeom = new THREE.BoxBufferGeometry(earSize, earSize, earSize)
+    const earShape = new CANNON.Box(new CANNON.Vec3(earHe, earHe, earHe))
+
+    for (var i=0; i<numEars; i++){
+        const x = i % 2 === 0 ? -earSize : earSize
+        mVec.set(x, headSize, torsoSize/2 + headSize + earSize/2) //use head position
+        this.body.addShape(legShape, mVec)
+
+        var geom = legGeom.clone()
+        geom.translate(mVec.x, mVec.y, mVec.z)
+
+        geoms.push(geom)
+    }
+
+    //merge all geoms and create mesh
+
+    const mergedGeometry = BufferGeometryUtils.mergeBufferGeometries(
+      geoms, false);
+    
+    const mesh = new THREE.Mesh(mergedGeometry, material)
+    this.mesh.add(mesh)
+
+}
+
+function Line(to, from){
+
+    // Position and THREE.Color Data
+
+    var positions = [];
+    var colors = [];
+
+    for(var i = 0; i<100; i++) {
+        positions.push(i, Math.cos(i), 0)
+    }
+
+    // positions.push(from.x, from.y, from.z)
+    // positions.push(to.x, to.y, to.z)
+    // positions.push(to.x * 2, to.y*2, to.z*2)
+
+    // Line2 ( LineGeometry, LineMaterial )
+
+    var geometry = this.geometry = new LineGeometry();
+    geometry.setPositions( positions );
+
+    geometry.maxInstancedCount = 0
+
+    var matLine = new LineMaterial( {
+
+        color: Colors.white,
+        linewidth: 5, // in pixels
+        resolution:  new THREE.Vector2(window.innerWidth, window.innerHeight),// to be set by renderer, eventually
+        dashed: true,
+
+    } );
+
+    var line = new Line2( geometry, matLine );
+    line.computeLineDistances();
+    line.scale.set( 1, 1, 1 );
+
+    this.mesh = line
+}
+
+function Billboard(words) {
     this.mesh = new THREE.Object3D()
 
     this.angle = 0
@@ -41,119 +299,97 @@ function Billboard(image1, image2) {
     var he = size / 2
     this.mass = 0
 
-    var heightOffset = size / 10
+    var heightOffset = this.size / 6
 
-	var cubeGeometry = new THREE.BoxGeometry(size,size,size);
+    var geometry = new RoundedBoxGeometry( size, size, size , 2 , 5 )
+    
+    //basic material
+    var material = new THREE.MeshLambertMaterial( { color: Colors.pink } );
 
-    var textureText = textureLoader.load( image1 );
-
-    var texturePic = textureLoader.load( image2 );
-
-    var blankMaterial = new THREE.MeshBasicMaterial({color: Colors.white})
-
-    var cubeMaterials = [
-        new THREE.MeshLambertMaterial({map: texturePic}),  // Left side
-        new THREE.MeshLambertMaterial({map: texturePic}), // Right side
-        blankMaterial, // Top side
-        blankMaterial,  // Bottom side
-        new THREE.MeshLambertMaterial({map: textureText}), // Front side
-        new THREE.MeshLambertMaterial({map: textureText}), // Back side
-    ];
-
-    var board = new THREE.Mesh(cubeGeometry,cubeMaterials);
-    board.position.set(0, 0, heightOffset * 2)
-    board.rotation.set(Math.PI/2, Math.PI/4, 0)
+    var board = new THREE.Mesh( geometry, material ) ;
 
     this.board = board //save the sub object so we can rotate it later
+    this.board.position.z = heightOffset
     this.mesh.add(board)
 
-    //create a shape equal to the geometry
-    var vec = new CANNON.Vec3(he,he,he);
-    var boxShape = new CANNON.Box(vec);
+    if(!words)
+        return
 
-    this.body = new CANNON.Body({
-        mass: this.mass,
-    });
+    fontPromiseLoader.load('/fonts/roboto_mono_bold.typeface.json')
+    .then( ( font ) => {
 
-    //position the box at a 45 degree angle, and raised above the ground
-    var offsetVec = new CANNON.Vec3(board.position.x, board.position.y, board.position.z)
-    var offsetQuat = new CANNON.Quaternion(board.quaternion.x, board.quaternion.y, board.quaternion.z, board.quaternion.w)
-    this.body.addShape(boxShape, offsetVec, offsetQuat)
-
-    //posts
-    var cylinderMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
+        var options = ({
+            size: 1,
+            height: 2,
+            color: Colors.white,
         })
 
-    var faces = 12
-    var cylinderGeom = new THREE.CylinderGeometry(this.size / 6, this.size / 6, this.size + heightOffset, faces)
-    var cylinderMeshR = new THREE.Mesh(cylinderGeom, cylinderMaterial)
-    cylinderMeshR.rotation.set(Math.PI/2, 0, 0)
-    var cylinderMeshL = cylinderMeshR.clone()
-    cylinderMeshR.position.set(size, 0, 0)
-    this.mesh.add(cylinderMeshR)
-    cylinderMeshL.position.set(-size, 0, 0)
-    this.mesh.add(cylinderMeshL)
+        var text = new Text(words, font, options) //words, color, size, font
 
-    var cylinderShape = new CANNON.Cylinder(this.size / 6, this.size / 6, this.size + heightOffset, faces)
-    var m = cylinderMeshR
-    offsetVec.set(m.position.x, m.position.y, m.position.z)
-    //there's a bug here - are cannon and threejs rotation systems different?
-    offsetQuat.setFromEuler(m.rotation.x + Math.PI/2, m.rotation.y, m.rotation.z)
-    this.body.addShape(cylinderShape, offsetVec, offsetQuat)
-    offsetVec.set(-m.position.x, m.position.y, m.position.z)
-    this.body.addShape(cylinderShape, offsetVec, offsetQuat)
+        text.mesh.rotation.x = Math.PI/2
+        text.mesh.rotation.y = -Math.PI/2
+
+        text.mesh.position.x = -this.size / 2
+        text.mesh.position.z = heightOffset
+        this.mesh.add(text.mesh)
+
+    })
 }
 
 Billboard.prototype.update = function(){
-
-    //rotate board mesh within object
-    this.board.rotation.y += 0.001
-
-    //copy board mesh to body
-    var q = this.board.quaternion
-    this.body.shapeOrientations[0].set(q.x, q.y, q.z, q.w)
-    this.angle += .001
+    //rotate board mesh
+    this.mesh.rotation.z += 0.001
 }
 
-function Text(words, color, size, loadedFont) {
+function IntroText(font){
+    var words
+    if('ontouchstart' in document.documentElement)
+        words = 'use\ncontrols to\nmove around!\nvv'
+    else
+        words = 'use\nW,A,S,D keys to\nmove around!'
 
-    this.mesh = new THREE.Object3D() //create parent object to center mesh
+    var options = ({
+        size: 2,
+        height: 2,
+        color: Colors.white,
+    })
 
-    var geometry = new THREE.TextGeometry( words, {
-        font: loadedFont,
-        size: size,
-        height: 3,
-        curveSegments: 12,
-        //bevelEnabled: true,
-        //bevelThickness: 1,
-        //bevelSize: 1,
-        //bevelOffset: 0,
-        //bevelSegments: 5
-    } );
+    return new Text(words, font, options) //words, color, size, font
+}
 
+function HippoText(font){
+    const words = 'Humans litter\n32 million\ntons of\nplastic per\nyear.\nThats 12.8M\nHippos!'
+    var options = ({
+        size: 2,
+        height: 2,
+        color: Colors.white,
+    })
+    return new Text(words, font, options) //words, color, size, font
+}
+
+function Text(words, loadedFont, options) {
+
+    options	= options || {
+        color: Colors.white,
+		size		: 3,
+		height		: 0.4,
+	}
+
+    //must specify font
+    options.font = loadedFont
+
+	// create the geometry
+	var geometry = new THREE.TextGeometry(words, options)
+
+	// center the geometry
     geometry.computeBoundingBox();
-    geometry.computeVertexNormals();
+	geometry.center()
 
-    this.centerOffsetX = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-    this.centerOffsetY = - 0.5 * ( geometry.boundingBox.max.y - geometry.boundingBox.min.y );
+    this.size = calculateSizeFromGeometry(geometry)
 
-    var mat = new THREE.MeshLambertMaterial({
-        color:color,
-    });
-
-    this.textMesh = new THREE.Mesh(geometry, mat)
-    this.textMesh.position.x = (this.centerOffsetX)
-    this.textMesh.position.y = (this.centerOffsetY)
-    this.mesh.add(this.textMesh)
-}
-
-Text.prototype.addAnimation = function(animationFunc, checkpoint){
-    this.update = () => {
-        if(checkpoint.completed){
-            this.update = animationFunc
-        }
-    }
+	// create a mesh with it
+	var material	= new THREE.MeshLambertMaterial({color:options.color})
+	this.mesh	= new THREE.Mesh(geometry, material)
 }
 
 function ExplosionParticle(){
@@ -238,7 +474,7 @@ function Sun(){
 
     this.size = 20
     var geom = new THREE.SphereGeometry(this.size, 3, 3) //radius, hSegments, wSegments
-    // create a material; a simple white material will do the trick
+
 	var mat = new THREE.MeshBasicMaterial({
 		color:Colors.white,
         //flatShading:true,
@@ -262,66 +498,46 @@ function Sun(){
 }
 
 function Cloud(){
-	// Create an empty container that will hold the different parts of the cloud
-	this.mesh = new THREE.Object3D();
-
     this.size = 10
 
-	// create a cube geometry;
-	// this shape will be duplicated to create the cloud
-	//var geom = new THREE.BoxGeometry(this.size,this.size,this.size);
-    var geom = new THREE.SphereGeometry(this.size)
-
-	// create a material; a simple white material will do the trick
-	var mat = new THREE.MeshLambertMaterial({
-		color:Colors.red,
-	});
+    //create a merged geometry to reduce the number of meshes drawn
+    var geoms = []
 
 	// duplicate the geometry a random number of times
 	var nBlocs = 3+Math.floor(Math.random()*3);
 	for (var i=0; i<nBlocs; i++ ){
 
-		// create the mesh by cloning the geometry
-		var m = new THREE.Mesh(geom, mat);
+        // create a cube geometry;
+        // this shape will be duplicated to create the cloud
+        //var geom = new THREE.BoxGeometry(this.size,this.size,this.size);
+        var geom = new THREE.SphereBufferGeometry(this.size)
+        geom.translate(i*15, Math.random()*10, Math.random()*10)
 
-		// set the position and the rotation of each cube randomly
-		m.position.x = i*15;
-		m.position.y = Math.random()*10;
-		m.position.z = Math.random()*10;
-		m.rotation.z = Math.random()*Math.PI*2;
-		m.rotation.y = Math.random()*Math.PI*2;
+        //rotation doesn't matter for sphere
+        //geom.rotateX(Math.random()*Math.PI*2)
 
-		// set the size of the cube randomly
-		var s = .1 + Math.random()*.9;
-		m.scale.set(s,s,s);
+        //scale randomly
+        var s = .1 + Math.random()*.9;
+        geom.scale(s,s,s);
 
-		// allow each cube to cast and to receive shadows
-		m.castShadow = true;
-		m.receiveShadow = true;
-
-		// add the cube to the container we first created
-		this.mesh.add(m);
+        geoms.push(geom)
 	}
+
+    const mergedGeometry = BufferGeometryUtils.mergeBufferGeometries(
+      geoms, false);
+
+	var mat = new THREE.MeshLambertMaterial({
+		color:Colors.red,
+	});
+
+    this.mesh = new THREE.Mesh(mergedGeometry, mat)
+
 }
 
 // Define a Sky Object
 function Sky(){
 
-    this.update = () => {
-        this.angle += 0.005
-
-        //move the sun in the sky
-        this.sun.mesh.position.z = Math.sin(this.angle)*SKY_RADIUS - 50;
-	    this.sun.mesh.position.x = Math.cos(this.angle)*SKY_RADIUS - 50;
-        this.sun.mesh.rotation.z = this.angle
-
-        //clouds drift up and down
-        this.clouds.forEach((cloud) => {
-            cloud.mesh.position.z += Math.cos(this.angle)*0.05;
-        })
-    }
-
-    this.angle = 0
+    this.angle = Math.PI/2 + Math.PI/4 //sun starting pos
 
 	// Create an empty container
 	this.mesh = new THREE.Object3D();
@@ -348,14 +564,9 @@ function Sky(){
 
         this.clouds.push(c)
 
-		// set the rotation and the position of each cloud;
-		// for that we use a bit of trigonometry
 		var a = stepAngle*i; // this is the final angle of the cloud
-		var h = SKY_RADIUS //+ Math.random()*10; // this is the distance between the center of the axis and the cloud itself
+		var h = SKY_RADIUS // this is the distance between the center of the axis and the cloud itself
 
-		// Trigonometry!!! I hope you remember what you've learned in Math :)
-		// in case you don't:
-		// we are simply converting polar coordinates (angle, distance) into Cartesian coordinates (x, y)
 		c.mesh.position.z = Math.sin(a)*h;
 		c.mesh.position.x = Math.cos(a)*h;
 
@@ -375,6 +586,21 @@ function Sky(){
 	}
 }
 
+Sky.prototype.update = function(){
+    this.angle += 0.005
+
+    //move the sun in the sky
+    //this.sun.mesh.position.z = Math.sin(this.angle)*SKY_RADIUS - 50;
+    //this.sun.mesh.position.x = Math.cos(this.angle)*SKY_RADIUS - 50;
+    this.sun.mesh.position.z += Math.cos(this.angle)*0.1
+    this.sun.mesh.rotation.z = this.angle
+
+    //clouds drift up and down
+    this.clouds.forEach((cloud) => {
+        cloud.mesh.position.z += Math.cos(this.angle)*0.05;
+    })
+}
+
 function Trash(){
     this.mesh = new THREE.Object3D();
 
@@ -388,7 +614,6 @@ function Trash(){
 
 	var mat = new THREE.MeshBasicMaterial({
 		color:Colors.white,
-        //flatshading:true,
 	});
 
     this.body = new CANNON.Body({
@@ -398,7 +623,7 @@ function Trash(){
     this.body.linearDamping = 0.9;
     this.body.angularDamping = 0.9
 
-	// duplicate the geometry a random number of times
+	// duplicate the geometry
 	var nBlocs = 3;
 	for (var i=0; i<nBlocs; i++ ){
 
@@ -415,10 +640,6 @@ function Trash(){
 		// set the size of the cube randomly
 		var s = .1 + Math.random()*.9;
 		m.scale.set(s,s,s);
-
-		// allow each cube to cast and to receive shadows
-		m.castShadow = true;
-		m.receiveShadow = true;
 
 		// add the cube to the container we first created
 		this.mesh.add(m);
@@ -442,7 +663,9 @@ function Ground(){
     for (var i = 0; i < sizeX; i++) {
         matrix.push([]);
         for (var j = 0; j < sizeY; j++) {
-            var height = Math.cos(i/sizeX * Math.PI * 4) * Math.cos(j/sizeY * Math.PI * 4) * 2 + 4;
+            //var height = Math.cos(i/sizeX * Math.PI * 4) * Math.cos(j/sizeY * Math.PI * 4) * 2 + 4;
+            //a bumpy floor causes occasional weirdness between box and surface
+            var height = 0
             if(i===0 || i === sizeX-1 || j===0 || j === sizeY-1)
                 height = 20; //make walls tall
             matrix[i].push(height);
@@ -454,7 +677,7 @@ function Ground(){
         elementSize: ARENA_RADIUS * 2 / sizeX
     });
 
-    var body = new CANNON.Body({ mass: 0 });
+    var body = new CANNON.Body({ mass: 0, material: groundMaterial });
 
     body.addShape(shape);
     body.position.set(-sizeX * shape.elementSize / 2, sizeY * shape.elementSize / 2, 0);
@@ -503,9 +726,6 @@ function Ground(){
     geometry.computeFaceNormals();
 
     this.mesh = new THREE.Mesh(geometry, material)
-
-    // Allow the grounds to receive shadows
-	this.mesh.receiveShadow = true;
 }
 
 function Tail(){
@@ -535,7 +755,7 @@ function Robot(){
     //create group
     this.mesh = new THREE.Object3D()
 
-    var size = 5
+    var size = this.size = 5
     var halfExtent = size / 2
     //create character box
     var boxBody = new CANNON.Body({
@@ -552,6 +772,8 @@ function Robot(){
 
     //body
     var geometry = new THREE.BoxGeometry( size, size, size );
+
+    this.size = calculateSizeFromGeometry(geometry)
 
     //bottom left, looking at rear
     geometry.vertices[4].y -= size / 6;
@@ -574,9 +796,7 @@ function Robot(){
         //flatshading:true,
         });
 
-    var box = new THREE.Mesh( geometry, material );
-    box.castShadow = true;
-    box.receiveShadow = true;
+    var box = new THREE.Mesh( geometry, material )
     this.mesh.add(box)
 
     //head
@@ -588,8 +808,6 @@ function Robot(){
     var head = new THREE.Mesh( geometry, material )
     head.position.set(size/2,0,size/2)
     head.rotation.y = (Math.PI / 6)
-    head.castShadow = true;
-    head.receiveShadow = true;
     this.mesh.add(head)
 
     //feet
@@ -599,15 +817,13 @@ function Robot(){
         //flatshading:true,
         });
     var footL = new THREE.Mesh( geometry, material )
-    footL.position.set(0,size/2,-size/3)
+    footL.position.set(0,size/2,-size/3 -0.001) //offset z to prevent z fighting
     footL.rotation.z = (Math.PI / 2 + Math.PI / 12)
     this.mesh.add(footL)
-    var footR = new THREE.Mesh( geometry, material )
-    footR.position.set(0,-size/2,-size/3)
+    var footR = footL.clone()
+    footR.position.set(0,-size/2,-size/3-0.001)
     footR.rotation.z = (Math.PI / 2 - Math.PI / 12)
     this.mesh.add(footR)
-    footL.castShadow = footR.castShadow = true;
-    footL.receiveShadow = footR.receiveShadow = true;
 
     //pointy spinner
     var geomPropeller = new THREE.BoxGeometry(size/6, size/6, size/6);
@@ -627,9 +843,6 @@ function Robot(){
     this.propeller.position.set(0,size/2,0);
     this.mesh.add(this.propeller);
 
-    this.propeller.castShadow = true;
-    this.propeller.receiveShadow = true;
-
     //cross spinner
     this.blade = new THREE.Object3D()
 
@@ -640,24 +853,14 @@ function Robot(){
     });
     var blade1 = new THREE.Mesh(geomBlade, matBlade);
 
-    blade1.castShadow = true;
-    blade1.receiveShadow = true;
-
     var blade2 = blade1.clone();
     blade2.rotation.x = Math.PI/2;
-
-    blade2.castShadow = true;
-    blade2.receiveShadow = true;
 
     this.blade.add(blade1);
     this.blade.add(blade2);
     this.blade.rotation.z = (Math.PI/2)
     this.blade.position.set(0,-size/2,0);
     this.mesh.add(this.blade)
-
-    //cast and receive shadows
-    this.mesh.castShadow = true;
-    this.mesh.receiveShadow = true;
 
     this.angle = 0
 
@@ -752,18 +955,56 @@ Robot.prototype.respawn = function(position = 'random', looseTail = true){
 
 export default class CannonScene{
 
-    constructor(gamepadData){
+    constructor(gamepadData, onLoaded){
+
+        //callback when scene is loaded
+        this.onLoaded = onLoaded || function(){}
 
         //stuff for controls
         this.gamepadData = gamepadData
         this.time = Date.now()
+      
+        //score
         this.score = 0
+
+        this.init()
+    }
+
+    init() {
+        THREE.Object3D.DefaultUp = up
+
+        THREE.DefaultLoadingManager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+            console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+        };
+
+        THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+            console.log( 'Loaded file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+        };
+
+        THREE.DefaultLoadingManager.onError = function ( url ) {
+            console.log( 'There was an error loading ' + url );
+        };
+
+        //trigger onLoaded callback when all assets are loaded
+        THREE.DefaultLoadingManager.onLoad = () => {
+            console.log( 'Done loading ');
+            this.onLoaded()
+        };
+
+        this.cameraProps = {
+            near: NEAR,
+            far: FAR,
+            fov: FOV,
+        }
+
         this.objects = []
-        this.checkpoints = []
         this.createScene()
         this.createWorld()
+        this.createCheckpoints()
         this.createCharacter()
+        this.createHippoPlatform()
         this.createText()
+        //this.createLine()
         this.createExplosion()
         this.createTrash()
         this.createLights()
@@ -771,29 +1012,18 @@ export default class CannonScene{
         this.createSky()
         this.createBillboards()
         this.createControls() //controls depend on some objects, create last
-
-        //debug renderer displays wireframe of cannon bodies
-        //it gets updated in step function
-        this.CannonDebugRenderer = new CannonDebugRenderer( this.scene, this.world );
     }
 
     step() {
-        this.updateVisuals()
         this.updatePhysics()
+        this.updateVisuals()
         this.updateCheckpoints()
         this.updateControls()
-        var loc = document.location.href
-        if(loc.includes('dev') || loc.includes('localhost')) {
-            this.CannonDebugRenderer.update();
-        }
     }
 
     //checkpoints are created with an update function that returns true when complete
     updateCheckpoints() {
-        for(const checkpoint of this.checkpoints) {
-            if(checkpoint.update)
-                checkpoint.update()
-        }
+        this.checkpointHolder.update()
     }
 
     updateVisuals() {
@@ -853,13 +1083,10 @@ export default class CannonScene{
             this.world.addBody(obj.body)
     }
 
-    addCheckpoint(checkpoint) {
-        this.checkpoints.push(checkpoint)
-    }
-
     createControls(){
         this.gamepadControls = new GamepadControls(this.controlBody, this.controlObject)
         this.followObject = this.gamepadControls.getLookObject()
+        this.followObject.followParams = this.character.followParams
     }
 
     createScene(){
@@ -877,68 +1104,143 @@ export default class CannonScene{
         world.defaultContactMaterial.contactEquationStiffness = 1e9;
         world.defaultContactMaterial.contactEquationRelaxation = 4;
         world.defaultContactMaterial.friction = 0
+
+        // Adjust constraint equation parameters for ground/ground contact
+        var ground_ground_cm = new CANNON.ContactMaterial(groundMaterial, groundMaterial, {
+            friction: 0.4,
+            restitution: 0.3,
+            contactEquationStiffness: 1e8,
+            contactEquationRelaxation: 3,
+            frictionEquationStiffness: 1e8,
+            frictionEquationRegularizationTime: 3,
+        });
+
+        // Add contact material to the world
+        world.addContactMaterial(ground_ground_cm);
+
+        var ground_friction_cm = new CANNON.ContactMaterial(groundMaterial, frictionMaterial, {
+            friction: 0.4,
+            restitution: 0.01,
+            contactEquationStiffness: 1e8,
+            contactEquationRelaxation: 3,
+            frictionEquationStiffness: 1e8,
+            frictionEquationRegularizationTime: 3,
+        });
+        world.addContactMaterial(ground_friction_cm)
     }
 
     //todo move all billboards to single landscape element function
     createBillboards(){
-        var imageText = images['slide1-text.png']
-        var imagePic = images['slide1-pic.jpg']
-        var billboard = new Billboard(imageText, imagePic)
-        billboard.body.position.x = ARENA_RADIUS / 2
-        //billboard.body.position.y = ARENA_RADIUS / 2
-        billboard.body.position.z = billboard.size - billboard.size / 4
-        this.addObject(billboard)
-
-        var imageText = images['slide2-text.png']
-        var imagePic = images['slide2-pic.png']
-        var billboard2 = new Billboard(imageText, imagePic)
-        billboard2.body.position.x = -ARENA_RADIUS / 2
-        //billboard.body.position.y = ARENA_RADIUS / 2
-        billboard2.body.position.z = billboard2.size - billboard2.size / 4
-        this.addObject(billboard2)
+            var nBillboards = 4
+            const offsetAngle = Math.PI/10
+            var stepAngle = 2 * Math.PI / nBillboards
+            for(var i = 0; i<nBillboards; i++){
+                var billboard = new Billboard('the\nworld\nhas\na\nplastic\nproblem')
+                var angle = i * stepAngle + offsetAngle
+                billboard.mesh.position.x = ARENA_RADIUS / 2 * Math.sin(angle)
+                billboard.mesh.position.y = ARENA_RADIUS / 2 * Math.cos(angle)
+                billboard.mesh.position.z = billboard.size - billboard.size / 4
+                this.addObject(billboard)
+            }
     }
 
-    //todo clean this up.. use helper functions
-    createText(){
-        fontLoader.load('/fonts/helvetiker_regular.typeface.json', ( font ) => {
+    createHippoPlatform(){
 
-            var words
-            if('ontouchstart' in document.documentElement)
-                words = 'use\ncontrols to\nmove around!\nvv'
-            else
-                words = 'use\nW,A,S,D to\nmove around!'
+        const xPos = ARENA_RADIUS / 2
+        const yPos = ARENA_RADIUS / 10
+        const zPos = 5
 
-            var textDiana = new Text(words, Colors.white, 2, font) //words, color, size, font
+        const platform = new Platform()
+        platform.body.position.x = xPos
+        platform.body.position.y = yPos
+        platform.body.position.z = zPos
+        this.addObject(platform)
 
-            textDiana.animationFunc = function() {
-                if(this.mesh.position.z > 100) {
-                    this.mesh.parent.remove(this.mesh)
-                    this.mesh.visible = false
-                    this.update = null
-                    return
+        const numHippos = 20
+        const hippoBerth = 10 //radius approximation
+        const zMax = numHippos * hippoBerth
+        const step = Math.PI * 2 / numHippos
+        var angle = 0
+
+        //create a downward spiraling cone of hippos
+        //x = cos * z, y=sin*z, z = z
+        for(var i = 0; i<numHippos; i++){
+            const hippo = new Hippo()
+            const z = zMax - i * hippoBerth + zPos
+            const x = Math.cos(angle) * hippoBerth + xPos
+            const y = Math.sin(angle) * hippoBerth + yPos
+            hippo.body.position.set(x, y, z)
+            this.addObject(hippo)
+            angle += step
+        }
+    }
+
+    createCheckpoints(){
+        const checkpoints =
+            {
+            'landed': ()=>{
+                    return (Math.abs(this.controlBody.position.z) <= this.character.size.height )
+                },
+            'moved': ()=>{
+                    return (this.controlBody.position.x >= 1 || this.controlBody.position.x >= 1)
                 }
-                this.mesh.position.z += 0.1
-                this.mesh.rotation.z += 0.001
             }
 
-            var checkpointFunc = () => {
-                if(Math.abs(this.controlBody.position.x) > 1 || Math.abs(this.controlBody.position.y) > 1)
-                    return true
+        this.checkpointHolder = new CheckpointHolder(checkpoints) 
+    }
 
-                return false
-            }
+    //todo clean this up..
+    createText(){
+        fontPromiseLoader.load('/fonts/roboto_mono_bold.typeface.json')
+        .then( ( font ) => {
 
-            var checkpoint = new Checkpoint(checkpointFunc)
-            this.addCheckpoint(checkpoint)
+            const introText = IntroText(font)
+            const hippoText = HippoText(font)
 
-            textDiana.addAnimation(textDiana.animationFunc, checkpoint)
+            const small = 0.001
 
-            textDiana.mesh.rotation.x = Math.PI/2
-            textDiana.mesh.rotation.y = -Math.PI/2
-            textDiana.mesh.position.set(0, 0, 25)
-            this.addObject(textDiana)
+            //set text upright
+            //introText.mesh.rotation.x = hippoText.mesh.rotation.x = Math.PI/2
+            //introText.mesh.rotation.y = hippoText.mesh.rotation.y =  -Math.PI/2
+
+            //make text tiny and invisible
+            introText.mesh.visible = hippoText.mesh.visible = false
+            introText.mesh.scale.set(small,small,small)
+            hippoText.mesh.scale.set(small,small,small)
+
+            const corner = this.character.followParams.minViewDistance
+            
+            introText.mesh.position.set(corner,corner/2,introText.size.height / 2)
+            introText.mesh.lookAt(0,0,introText.size.height / 2)
+            this.addObject(introText)
+
+            this.checkpointHolder.addActionFuncByName('landed', Appear.bind(this, introText.mesh))
+
+            this.checkpointHolder.addActionFuncByName('moved', Vanish.bind(this, introText.mesh))
+
+            const xPos = ARENA_RADIUS / 2
+            const yPos = ARENA_RADIUS / 10
+            const zPos = 5
+
+            hippoText.mesh.position.set(xPos - 30, yPos, hippoText.size.height / 2)
+            hippoText.mesh.lookAt(0,0,hippoText.size.height / 2)
+            this.addObject(hippoText)
+
+            this.checkpointHolder.addActionFuncByName('moved', Appear.bind(this, hippoText.mesh))
+            // this.checkpointHolder.addActionFuncByName('moved', ()=>{
+            //     setTimeout(
+            //         ()=>{Appear.bind(this, hippoText.mesh)}
+            //         ,1000)
+            // })
         } )
+    }
 
+    createLine(){
+        const from = {x:0, y:0, z:0.5}
+        const to = {x:100, y:0, z:0.5}
+        const line = new Line(from, to)
+        this.addObject(line)
+        TweenMax.to(line.geometry, 10, {ease: Linear, maxInstancedCount:99})
     }
 
     createExplosion(){
@@ -1000,6 +1302,11 @@ export default class CannonScene{
         this.world.addConstraint(c1);
 
         //set scene objects for follower
+        this.character = character
+        var p = this.character.followParams = {}
+        p.distance = FOLLOW_DISTANCE
+        p.angle = FOLLOW_ANGLE
+        calculateFollowParams(this.character)
         this.controlObject = character.mesh
         this.controlBody = character.body
 

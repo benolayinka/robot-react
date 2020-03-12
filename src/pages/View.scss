@@ -1,0 +1,57 @@
+.video-container {
+    position: absolute;
+    width: 100vw; 
+    height: 56.25vw; /* height:width ratio = 9/16 = .5625  */
+    max-height: 100vh;
+    max-width: 177.8vh; /* 16/9 = 1.778 */
+    margin: auto;
+    position: absolute;
+    top:0;bottom:0; /* vertical center */
+    left:0;right:0; /* horizontal center */
+    overflow: visible;
+  }
+  
+.video-container-inner{
+  /* width and height must be equal to preserve ratio */
+  width: 100%;
+  height: 100%;
+  
+  /* Center the video */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  /* Bring to front */
+  z-index: 1;
+}
+
+.video-container-deco{
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  overflow:visible;
+}
+
+video {
+  /* ratio is handled in container */
+  width:100%;
+  height:100%;
+
+  border-radius: 25px;
+}
+
+.video-label {
+  position: absolute;
+  
+  font-size: 4vw;
+
+  &.top {
+    right: 12%;
+    top: -12%;
+  }
+  &.bottom {
+    left: 12%;
+    bottom: -10%;
+  }
+}

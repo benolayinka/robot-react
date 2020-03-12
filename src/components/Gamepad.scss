@@ -1,0 +1,47 @@
+@mixin no-select() {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@mixin btn-shadow() {
+    @include no-select();
+    border-radius: 10px;
+    border: 2px solid white;
+    box-shadow: 0 0 2px 0 white;
+    text-shadow: 0 0 2px 0 white;
+    color: white;
+}
+
+.gamepad{
+    position:absolute;
+    height:100%;
+    width:100%;
+    outline: none;
+  }
+
+.btn-outer {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon {
+    @include no-select();
+    color: white;
+}
+
+.front {
+    @include btn-shadow();
+    opacity: 1;
+}
+
+.back {
+    @include btn-shadow();
+    opacity: 0.5;
+}
+
+.btn-shadow{
+    @include btn-shadow();
+}

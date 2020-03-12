@@ -68,14 +68,10 @@ export default class GamepadControls{
         if(gamepadData.keysPressed['76'])
             lookX += range
 
-        if(gamepadData.buttonsPressed[2]){
-            //joystick is look
-            lookX += gamepadData.joystickData.x
-            lookY += gamepadData.joystickData.y
-        } else {
-            moveX += gamepadData.joystickData.x
-            moveY += gamepadData.joystickData.y
-        }
+        lookX += gamepadData.lookJoystickData.x
+        lookY += gamepadData.lookJoystickData.y
+        moveX += gamepadData.driveJoystickData.x
+        moveY += gamepadData.driveJoystickData.y
 
         this.inputVelocity.set(0,0,0)
 

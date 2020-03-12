@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import CameraRenderer from './CameraRenderer'
 
 const DEFAULT_FOLLOW_DIST = 45;
-const FOLLOW_HEIGHT = 15;
+const DEFAULT_FOLLOW_HEIGHT = 15;
 const LOOK_HEIGHT = 8;
 
 const CAMERA_MODES = {
@@ -21,7 +21,8 @@ class FollowCameraRenderer extends CameraRenderer {
         super(props)
 
         this.followObject = this.cannonScene.followObject
-        this.followDistance = this.followObject.followDistance || DEFAULT_FOLLOW_DIST;
+        this.followDistance = this.followObject.followParams.distance || DEFAULT_FOLLOW_DIST;
+        this.followHeight = this.followObject.followParams.height || DEFAULT_FOLLOW_HEIGHT;
 
         this.angularVelHistory = [];
 
@@ -32,7 +33,7 @@ class FollowCameraRenderer extends CameraRenderer {
 
     stepFollowFixed() {
         this.followObject.updateMatrixWorld()
-        const targetPosition = this.followObject.localToWorld(new THREE.Vector3(-this.followDistance, 0, FOLLOW_HEIGHT))
+        const targetPosition = this.followObject.localToWorld(new THREE.Vector3(-this.followDistance, 0, this.followHeight))
         this.camera.position.copy(targetPosition)
 
         const lookPosition = this.followObject.localToWorld(new THREE.Vector3(0, 0, LOOK_HEIGHT))
@@ -42,7 +43,7 @@ class FollowCameraRenderer extends CameraRenderer {
 
     stepFollowSmooth() {
         this.followObject.updateMatrixWorld()
-        const targetPosition = this.followObject.localToWorld(new THREE.Vector3(-this.followDistance, 0, FOLLOW_HEIGHT))
+        const targetPosition = this.followObject.localToWorld(new THREE.Vector3(-this.followDistance, 0, this.followHeight))
         this.camera.position.lerp(targetPosition, 0.2);
 
         const lookPosition = this.followObject.localToWorld(new THREE.Vector3(0, 0, LOOK_HEIGHT))

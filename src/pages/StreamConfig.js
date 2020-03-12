@@ -1,7 +1,7 @@
 import React from 'react'
-import StreamItem from '../components/StreamConfig/StreamItem.jsx'
-import ReactJanusController from '../components/Janus/ReactJanusController';
-import CreateStreamForm from '../components/StreamConfig/CreateStreamForm.jsx';
+import StreamItem from '../components/StreamItem.jsx'
+import ReactJanusController from '../components/ReactJanusController';
+import CreateStreamForm from '../components/CreateStreamForm.jsx';
 import {Modal, Form, Button, ListGroup} from 'react-bootstrap'
 
 class StreamConfig extends React.Component{
