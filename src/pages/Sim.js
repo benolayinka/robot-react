@@ -51,7 +51,7 @@ export default class Sim extends React.Component{
             this.gamepadData.buttonsPressed[data.button] = data.pressed
         }
         else if(evt === 'mouse'){
-
+            //placeholder
         }
         else if(evt === 'key'){
             this.gamepadData.keysPressed[data.key] = data.pressed
@@ -67,11 +67,11 @@ export default class Sim extends React.Component{
 
         return (
             <Div100vh className='Sim' >
-                <ScoreBoard></ScoreBoard>
                 <div ref='container' style={containerStyle}>
                     <Loading loaded={this.state.sceneLoaded} timeout={1200}/>
                     {this.state.width &&
                     <div className = 'width' style={containerStyle}>
+                        <ScoreBoard/>
                         <FollowCameraRenderer cannonScene={this.cannonScene} position={this.cannonScene.controlBody.position}/>
                         <Gamepad onEvent={this.onGamepadEvent} nippleSize={Math.max(this.state.width/6, 100)} buttonSize={Math.max(this.state.width/15, 40)}/>
                     </div>

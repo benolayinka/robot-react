@@ -1,18 +1,9 @@
 import React from 'react';
-
-const scoreBoardStyle = {
-    marginLeft: '50%'
-}
-
+import {Container, Row, Col} from 'react-bootstrap'
 
 class ScoreBoard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      score: 0,
-      cap: 3 //should depend on the vehicule , 
-      //maybe something like an unloading station would be cool
-    };
   }
 
   //this will be relevant when the redux paradigm is implemented
@@ -21,15 +12,23 @@ class ScoreBoard extends React.Component {
   }*/ 
 
   render(props) {
-    return (<h3 id="scoreboard" style={scoreBoardStyle}> Trash picked up: 
-    		<span id="score">{this.state.score}</span>
-    		&nbsp; 
-    		&nbsp; 
-    		Cap: <span id="capacity">{this.state.cap}</span>
-    	</h3> );
+    return (
+    <div className='w-100 h-100 position-absolute'>
+      <Container className='p-3' fluid>
+        <h3 id="scoreboard" className="threeD text-center">
+            <span>Trash picked up: </span>
+            <span id="score">{this.props.score}</span>
+        </h3>
+      </Container>
+    </div>
+    );
   }
 }
 
+ScoreBoard.defaultProps = {
+  score: 0,
+  cap: 0,
+}
 
 export default ScoreBoard
 

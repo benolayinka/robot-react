@@ -7,9 +7,6 @@ function px(int){
     return int.toString() + 'px'
 }
 
-const bottomPadding = 5
-const sidePadding = 20
-
 function GamepadButton(props) {
 
     const [pressed, setPressed] = useState(false);
@@ -19,7 +16,7 @@ function GamepadButton(props) {
     const margin = 1.2
 
     const buttonOuterHeight = props.buttonSize*margin
-    const buttonOuterWidth = props.buttonSize*margin + bottomPadding
+    const buttonOuterWidth = props.buttonSize*margin
 
     const buttonInnerHeight = props.buttonSize
     const buttonInnerWidth = buttonInnerHeight
@@ -29,8 +26,8 @@ function GamepadButton(props) {
             position: 'absolute',
             height: px(buttonOuterHeight),
             width: px(buttonOuterWidth),
-            bottom: px(bottomPadding + buttonOuterHeight * indexFromBottom),
-            right: px(sidePadding),
+            bottom: px(buttonOuterHeight * indexFromBottom),
+            right: 0,
         }
     }
 
@@ -145,36 +142,6 @@ function Gamepad(props) {
         fadeTime: 0,
     }
 
-    const nippleDivStyle = {
-        position: 'absolute',
-        bottom: px((props.nippleSize / 2) + bottomPadding),
-        left: px((props.nippleSize / 2) + sidePadding),
-        MozUserSelect:'none', /* Old versions of Firefox */
-        WebkitUserSelect:'none', /* Safari */
-        msUserSelect:'none', /* Internet Explorer/Edge */
-        WebkitTouchCallout:'none', /* iOS Safari */
-        userSelect:'none',
-        zIndex:10,
-    }
-
-    const gamepadDivStyle = {
-        height: '100%',
-        width: '100%',
-        outline: 'none', //otherwise selected domelement is highlighted
-        position: 'absolute',
-        MozUserSelect:'none', /* Old versions of Firefox */
-        WebkitUserSelect:'none', /* Safari */
-        msUserSelect:'none', /* Internet Explorer/Edge */
-        WebkitTouchCallout:'none', /* iOS Safari */
-        userSelect:'none',
-    }
-
-    const lookNippleStyle = {
-        height: '100%',
-        width: '100%',
-        zIndex: 9,
-    }
-
     const lookNippleOptions = {
         mode: 'dynamic',
         size: props.nippleSize,
@@ -183,34 +150,33 @@ function Gamepad(props) {
     }
 
     return (
-        <div className = {cx('gamepad', props.className)} >
+        <div className = {cx('gamepad', 'h-100', 'w-100', 'p-4', 'position-absolute', props.className)} >
+            {/* inner container respects padding */}
+            <div className = 'container-inner position-relative h-100 w-100'>
             <ReactNipple
-                className='LookJoystick'
+                className='LookJoystick h-100 w-100'
                 options={lookNippleOptions}
-                style={lookNippleStyle}
+                style={{zIndex: 0}}
                 onMove={handleLookJoystick}
                 onEnd={handleLookJoystick}
             />
             <ReactNipple
                 options={options}
-
-                //options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
-                className='DriveJoystick'
-
-                //'style' passed to container element
-                style={nippleDivStyle}
-
+                className='DriveJoystick position-absolute'
+                style={{bottom: px((props.nippleSize / 2)),
+                        left: px((props.nippleSize / 2)),
+                        zIndex:10,
+                        }}
                 onMove={handleDriveJoystick}
                 onEnd={handleDriveJoystick}
-            >
-            &nbsp;
-            </ReactNipple>
+            />
             <GamepadButton onEvent={handleButton} buttonSize={props.buttonSize} indexFromBottom={1}>
                 ▲
             </GamepadButton>
             <GamepadButton onEvent={handleButton} buttonSize={props.buttonSize} indexFromBottom={0}>
                 ▼
             </GamepadButton>
+            </div>
         </div>
     )
 }
