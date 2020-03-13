@@ -113,7 +113,7 @@ export default class Controller {
 		this.socket.on('users by rooms', (usersByRooms) => this.updateUsersByRooms(usersByRooms))
 
 		this.socket.on('message', (message)=> {
-			console.log('message received', message)
+			//console.log('message received', message)
 			switch(message.type) {
 				case 'request ack':
 					this.handleRequestAck(message)

@@ -27,7 +27,9 @@ class ViewIntro extends React.Component {
             return (
                 <>
                 <h1>{string}</h1>
-                <div className='clicker' onClick={this.onClick}/>
+                <div className='clicker d-flex flex-column justify-content-end' onClick={this.onClick}>
+                    <h4 className='p-4 bottom-0'>click to continue</h4>
+                </div>
                 </>
             )
         }
@@ -114,7 +116,7 @@ class ViewIntro extends React.Component {
             >
                 {state => (
                     <div
-                    className="loader full"
+                    className="loader overflow-hidden position-absolute h-100 w-100"
                     style={{
                         zIndex: this.props.zIndex,
                         ...defaultStyle,

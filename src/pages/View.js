@@ -19,8 +19,6 @@ export default class View extends React.Component{
         const query = getQuery();
         this.debug = 'debug' in query
 
-        console.log(props.match.params.id)
-
         this.remoteStream = null
 
         this.gamepadData = {
@@ -181,12 +179,11 @@ export default class View extends React.Component{
 
     render() {
         return (
-            /*<Div100vh className='View full'>*/
-            <div className='View full'>
+            <div className='View overflow-hidden position-absolute h-100 w-100'>
                 {!this.debug && <Loading
                                     loadingElement={'connecting'}
                                     failedElement={'whoops! cant connect'}
-                                    loaded={this.state.haveRemoteStream === true}
+                                    loaded={this.state.remoteStreamPlaying === true}
                                     failed={this.state.haveRemoteStream === false}
                                     timeout={1200}
                                     zIndex={9999}
@@ -214,7 +211,6 @@ export default class View extends React.Component{
                     </div>
                 </div>
             </div>
-            /*</Div100vh>*/
         )
     }
 }

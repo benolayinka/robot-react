@@ -358,7 +358,7 @@ function IntroText(font){
 }
 
 function HippoText(font){
-    const words = 'Humans litter\n32 million\ntons of\nplastic per\nyear.\nThats 12.8M\nHippos!'
+    const words = 'Humans litter\n32 million\ntons of\nplastic per\nyear.\nThats like\n12.8 million hippos!'
     var options = ({
         size: 2,
         height: 2,
@@ -1056,7 +1056,7 @@ export default class CannonScene{
         } 
 
         if (this.score == cap) {
-            alert("bot has reached trash holding capacity!");
+            //
         } 
     }
 

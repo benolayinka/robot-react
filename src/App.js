@@ -19,13 +19,14 @@ function App() {
     <Router> 
         <Switch>
           <Route exact path="/">
-            <Redirect to="/view/1" />
+            <Redirect to="/hello" />
           </Route>
           <Route path="/nav" component={Pages.Nav} />
           <Route path="/sim" component={Pages.Sim} />
           <Route path="/config" component={Pages.StreamConfig} />
           <Route path="/view/:id" component={Pages.View} />
           <Route path="/view" component={Pages.StreamViewIndex} />
+          <Route path="/hello" component={Pages.Hello} />
         </Switch>
     </Router> 
   );

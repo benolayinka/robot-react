@@ -18,6 +18,7 @@ class ScoreBoard extends React.Component {
         <h3 id="scoreboard" className="threeD text-center">
             <span>Trash picked up: </span>
             <span id="score">{this.props.score}</span>
+            <span id="capacity" style={{visible: false}}>{this.props.score}</span>
         </h3>
       </Container>
     </div>
