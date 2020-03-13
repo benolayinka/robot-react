@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from "react";
 import ReactNipple from 'react-nipple'
+import ReactTooltip from 'react-tooltip'
 import cx from 'classnames'
 import './Gamepad.scss'
 
 function px(int){
     return int.toString() + 'px'
 }
+
+const bottomPadding = 5
+const sidePadding = 20
 
 function GamepadButton(props) {
 
@@ -16,18 +20,19 @@ function GamepadButton(props) {
     const margin = 1.2
 
     const buttonOuterHeight = props.buttonSize*margin
-    const buttonOuterWidth = props.buttonSize*margin
+    const buttonOuterWidth = props.buttonSize*margin + bottomPadding
 
     const buttonInnerHeight = props.buttonSize
     const buttonInnerWidth = buttonInnerHeight
+
 
     const buttonOuterDivStyle = (indexFromBottom) => { 
         return {
             position: 'absolute',
             height: px(buttonOuterHeight),
             width: px(buttonOuterWidth),
-            bottom: px(buttonOuterHeight * indexFromBottom),
-            right: 0,
+            bottom: px(bottomPadding + buttonOuterHeight * indexFromBottom),
+            right: px(sidePadding),
         }
     }
 
@@ -142,6 +147,36 @@ function Gamepad(props) {
         fadeTime: 0,
     }
 
+    const nippleDivStyle = {
+        position: 'absolute',
+        bottom: px((props.nippleSize / 2) + bottomPadding),
+        left: px((props.nippleSize / 2) + sidePadding),
+        MozUserSelect:'none', /* Old versions of Firefox */
+        WebkitUserSelect:'none', /* Safari */
+        msUserSelect:'none', /* Internet Explorer/Edge */
+        WebkitTouchCallout:'none', /* iOS Safari */
+        userSelect:'none',
+        zIndex:10,
+    }
+
+    const gamepadDivStyle = {
+        height: '100%',
+        width: '100%',
+        outline: 'none', //otherwise selected domelement is highlighted
+        position: 'absolute',
+        MozUserSelect:'none', /* Old versions of Firefox */
+        WebkitUserSelect:'none', /* Safari */
+        msUserSelect:'none', /* Internet Explorer/Edge */
+        WebkitTouchCallout:'none', /* iOS Safari */
+        userSelect:'none',
+    }
+
+    const lookNippleStyle = {
+        height: '100%',
+        width: '100%',
+        zIndex: 9,
+    }
+
     const lookNippleOptions = {
         mode: 'dynamic',
         size: props.nippleSize,
@@ -150,33 +185,61 @@ function Gamepad(props) {
     }
 
     return (
-        <div className = {cx('gamepad', 'h-100', 'w-100', 'p-4', 'position-absolute', props.className)} >
-            {/* inner container respects padding */}
-            <div className = 'container-inner position-relative h-100 w-100'>
-            <ReactNipple
-                className='LookJoystick h-100 w-100'
-                options={lookNippleOptions}
-                style={{zIndex: 0}}
-                onMove={handleLookJoystick}
-                onEnd={handleLookJoystick}
-            />
+        <div className = {cx('gamepad', props.className)} >
+            <dev data-tip data-for='look-joystick'>
+                <ReactNipple
+                    className='LookJoystick'
+                    options={lookNippleOptions}
+                    style={lookNippleStyle}
+                    onMove={handleLookJoystick}
+                    onEnd={handleLookJoystick}
+                />
+            </dev>   
+            <ReactTooltip id='look-joystick' type="error">
+                <span> Drag joystick to look! </span>
+            </ReactTooltip>
+            
+            <dev data-tip data-for='drive-joystick'>
             <ReactNipple
                 options={options}
-                className='DriveJoystick position-absolute'
-                style={{bottom: px((props.nippleSize / 2)),
-                        left: px((props.nippleSize / 2)),
-                        zIndex:10,
-                        }}
+
+                //options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
+                className='DriveJoystick'
+
+                //'style' passed to container element
+                style={nippleDivStyle}
+
                 onMove={handleDriveJoystick}
                 onEnd={handleDriveJoystick}
-            />
-            <GamepadButton onEvent={handleButton} buttonSize={props.buttonSize} indexFromBottom={1}>
+            /> 
+            </dev>
+            <ReactTooltip id='drive-joystick' type="error">
+                <span> Drag joystick to drive! </span>
+            </ReactTooltip>
+            <dev data-tip data-for='drive-forwards-button'>
+            <GamepadButton 
+                onEvent={handleButton} 
+                buttonSize={props.buttonSize} 
+                indexFromBottom={1}
+            >
                 ▲
             </GamepadButton>
-            <GamepadButton onEvent={handleButton} buttonSize={props.buttonSize} indexFromBottom={0}>
+            </dev>
+            <ReactTooltip id='drive-forwards-button' type="error">
+                <span> Click to go forwards! </span>
+            </ReactTooltip>
+            <dev data-tip data-for='drive-backwards-button'>
+            <GamepadButton 
+                onEvent={handleButton} 
+                buttonSize={props.buttonSize} 
+                indexFromBottom={0}
+            >
                 ▼
             </GamepadButton>
-            </div>
+            </dev>
+            <ReactTooltip id='drive-backwards-button' type="error">
+                <span> Click to go backwards! </span>
+            </ReactTooltip>
         </div>
     )
 }
