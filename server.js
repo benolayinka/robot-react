@@ -60,13 +60,13 @@ io.on('connection', function (socket) {
   })
 
   socket.on('robot connected', function(robot) {
-    winston.info('robot connected: ' + robot.robot + ' port: ' + robot.port)
+    winston.info('robot connected: ' + robot.robot + ' video_port: ' + robot.video_port)
     socket.type = socketTypes.ROBOT
     socket.robot = robot
   })
 
   socket.on('join', function(room, fn){
-
+    winston.info('room joined: ' + room)
     //ack
     fn('joined room: ' + room)
 

@@ -73,7 +73,7 @@ export default class Sim extends React.Component{
                     <div className = 'width' style={containerStyle}>
                         <ScoreBoard/>
                         <FollowCameraRenderer cannonScene={this.cannonScene} position={this.cannonScene.controlBody.position}/>
-                        <Gamepad onEvent={this.onGamepadEvent} nippleSize={Math.max(this.state.width/6, 100)} buttonSize={Math.max(this.state.width/15, 40)}/>
+                        <Gamepad showTooltips={false} onEvent={this.onGamepadEvent} nippleSize={Math.max(this.state.width/6, 100)} buttonSize={Math.max(this.state.width/15, 40)}/>
                     </div>
                     }
                 </div>

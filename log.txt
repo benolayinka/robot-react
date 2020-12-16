@@ -10363,3 +10363,726 @@
 {"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T11:17:45.474Z"}
 {"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T11:18:50.278Z"}
 {"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T11:19:07.054Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T11:31:48.420Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T11:33:09.083Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-03-13T11:34:44.772Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T11:35:10.823Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T11:42:15.544Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T11:55:58.356Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T11:59:05.749Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:01:08.335Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:02:07.610Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:09:35.335Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:10:46.128Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:11:04.061Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:11:27.527Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-03-13T12:11:55.292Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:12:11.007Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:12:49.101Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:13:24.480Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:14:16.824Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:15:45.480Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:18:08.965Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:21:06.847Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:21:59.702Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:23:24.759Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:25:03.986Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:25:12.604Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:25:35.694Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:27:55.152Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:28:24.530Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:28:42.526Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:31:43.057Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:32:08.878Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:34:41.916Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:37:05.189Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:38:08.478Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:38:46.809Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:39:17.596Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:39:45.170Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T12:40:06.382Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T13:45:24.720Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T13:55:08.396Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T13:58:59.845Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T13:59:44.375Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:01:49.011Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:02:20.029Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:03:49.220Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:37:57.213Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:40:12.267Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:40:33.371Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:40:43.733Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:40:58.871Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:43:31.739Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:43:53.186Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:47:02.640Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:51:17.220Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:55:46.503Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:56:40.391Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T14:57:14.162Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:03:05.159Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:03:53.020Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:04:17.383Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:07:29.462Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:09:18.095Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:11:45.349Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:13:34.562Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:15:27.321Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:15:50.983Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:17:24.680Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:18:08.611Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:18:43.690Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:22:59.169Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:25:01.225Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:26:17.994Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:26:49.846Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:27:53.193Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:28:10.305Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:28:36.066Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:28:45.805Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:29:04.900Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:29:19.727Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:29:56.203Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:30:40.567Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:33:43.444Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:34:18.179Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:34:27.992Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:38:45.831Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:39:36.995Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:45:44.714Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:45:57.421Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:55:19.774Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-03-13T15:56:22.815Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:57:39.779Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T15:57:58.747Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T16:00:30.791Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T16:02:50.327Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T16:05:37.126Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T16:05:40.740Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T16:06:13.489Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T16:06:42.194Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T16:16:41.319Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T16:16:47.474Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T16:26:21.234Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T16:27:20.623Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T16:50:12.372Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T17:01:41.497Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T17:08:28.374Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T17:08:49.361Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T17:45:53.076Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T18:00:03.052Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T19:19:45.834Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T20:46:07.312Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-13T20:48:42.896Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-14T01:33:57.153Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-14T07:01:16.871Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-15T19:18:41.837Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-25T11:57:48.966Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-25T14:13:00.511Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-25T19:44:06.402Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-25T19:44:08.747Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-25T19:44:10.815Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-27T19:57:00.771Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-31T06:40:50.786Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-31T09:07:20.758Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-03-31T11:54:55.052Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-31T11:56:55.359Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-03-31T12:02:05.049Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-31T12:20:00.099Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-31T13:09:28.291Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-03-31T13:10:48.202Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-31T13:11:51.737Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-31T13:12:40.987Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-31T13:13:04.144Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-03-31T14:12:23.355Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-03-31T19:31:14.348Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-04-01T00:22:39.778Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-01T13:37:32.760Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-02T11:15:47.376Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-02T11:16:35.239Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-04-03T05:52:27.314Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-03T13:38:35.469Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-04-04T00:16:50.643Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-04-04T17:41:02.929Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-04-05T00:14:56.230Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-04-05T00:15:01.350Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-08T15:08:53.010Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-08T15:10:03.516Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-08T15:28:05.375Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-18T20:05:46.620Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-18T20:11:44.913Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-18T20:14:51.306Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-21T06:37:07.053Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-21T06:37:14.901Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-21T06:37:23.262Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-27T20:17:24.720Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-04-27T20:20:18.523Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-05-02T18:25:14.266Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-05-06T11:48:57.455Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-05-10T12:43:57.700Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-05-13T18:47:53.369Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-05-13T18:47:55.777Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-05-13T18:50:36.326Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-05-13T23:20:10.210Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-05-26T12:32:25.041Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-05-26T12:32:52.047Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-03T15:24:16.782Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:06:48.397Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-08T10:07:09.818Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:07:52.191Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:09:22.608Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:09:50.476Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:11:09.595Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:15:58.836Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:21:11.828Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:22:31.065Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:23:10.151Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:23:19.685Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:23:48.539Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:29:52.274Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:33:36.469Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:36:43.181Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T10:42:24.088Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T14:00:34.018Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T17:28:22.387Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-08T17:29:11.072Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-26T11:11:22.438Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-26T11:11:33.610Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T11:53:47.496Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T11:53:47.506Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T11:54:16.320Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T11:54:16.323Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T11:56:24.469Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T11:58:16.748Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T11:59:23.391Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:00:33.128Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:01:13.426Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:02:44.731Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:02:59.515Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:06:47.945Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:08:21.090Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:09:11.074Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:09:49.140Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:10:17.437Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:10:36.163Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:11:54.048Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:12:33.025Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:14:19.798Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:16:48.988Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:17:24.303Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:17:40.689Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:22:00.717Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:22:13.387Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:22:24.075Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:23:04.418Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:23:14.655Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:24:55.686Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:26:38.065Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:26:48.735Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:30:03.384Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:33:24.891Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T12:38:36.445Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T13:09:51.521Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T13:36:44.537Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-26T14:13:09.029Z"}
+{"message":"user connected: undefined uuid: undefined","level":"info","timestamp":"2020-06-26T14:13:45.219Z"}
+{"message":"user connected: undefined uuid: debug","level":"info","timestamp":"2020-06-26T14:20:30.667Z"}
+{"message":"user connected: undefined uuid: debug","level":"info","timestamp":"2020-06-26T14:21:43.835Z"}
+{"message":"user connected: undefined uuid: debug","level":"info","timestamp":"2020-06-26T14:22:22.921Z"}
+{"message":"user connected: undefined uuid: 86732520-b7b8-11ea-94dc-b9be259ed97a","level":"info","timestamp":"2020-06-26T14:22:55.408Z"}
+{"message":"user connected: debug uuid: dfe89a90-b7b8-11ea-9574-0bd715bb54ae","level":"info","timestamp":"2020-06-26T14:25:25.268Z"}
+{"message":"user connected: debug uuid: 46936900-b7b9-11ea-b057-bfe9c53f0601","level":"info","timestamp":"2020-06-26T14:28:17.891Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-26T14:30:12.306Z"}
+{"message":"user connected: ben uuid: 26026fd0-b7bc-11ea-ab11-35244dc3b668","level":"info","timestamp":"2020-06-26T14:49:03.096Z"}
+{"message":"user connected: fred uuid: 4bf259d0-b7bc-11ea-a1e9-c150cb64c6f1","level":"info","timestamp":"2020-06-26T14:50:04.103Z"}
+{"message":"user connected: ben uuid: 11e8e8c0-b7bd-11ea-ba8e-01929572110e","level":"info","timestamp":"2020-06-26T14:55:36.869Z"}
+{"message":"user connected: ben uuid: 23cd23d0-b7bd-11ea-817a-171411abdac8","level":"info","timestamp":"2020-06-26T14:56:15.826Z"}
+{"message":"user connected: ben uuid: 51d70750-b7bd-11ea-b21d-5744e8d10f4e","level":"info","timestamp":"2020-06-26T14:57:23.531Z"}
+{"message":"user connected: ben uuid: 65883a30-b7bd-11ea-b4f9-a972423405c6","level":"info","timestamp":"2020-06-26T14:57:56.311Z"}
+{"message":"user connected: ben uuid: 80444080-b7bd-11ea-bcc2-1325cf546fdc","level":"info","timestamp":"2020-06-26T14:58:42.644Z"}
+{"message":"user connected: ben uuid: d8691a10-b7bd-11ea-8ce6-e1ac42d6fdf5","level":"info","timestamp":"2020-06-26T15:01:11.073Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-26T15:05:20.349Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-26T15:05:50.046Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-26T15:06:16.836Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-26T15:14:31.113Z"}
+{"message":"user connected: ben uuid: cfefb090-b7bf-11ea-8c20-bf967727e270","level":"info","timestamp":"2020-06-26T15:15:23.100Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-26T15:18:36.792Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-27T08:10:53.239Z"}
+{"message":"user connected: ben uuid: c26912c0-b84d-11ea-af41-91bc44bc8eed","level":"info","timestamp":"2020-06-27T08:11:23.539Z"}
+{"message":"user connected: ben uuid: de937620-b84d-11ea-a145-5b982fdbfd5c","level":"info","timestamp":"2020-06-27T08:12:20.881Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-27T08:17:40.952Z"}
+{"message":"user connected: ben uuid: dfbca1f0-b84f-11ea-9c24-f137c9f9390b","level":"info","timestamp":"2020-06-27T08:26:27.726Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-27T08:28:47.397Z"}
+{"message":"user connected: ben uuid: 6f6cd7c0-b850-11ea-b1c5-bb6bad51c678","level":"info","timestamp":"2020-06-27T08:30:30.121Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-27T08:31:47.332Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-27T08:32:37.668Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-27T08:33:26.457Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-27T08:34:54.222Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-27T08:35:17.857Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-27T08:35:36.275Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-27T08:38:05.397Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-27T08:42:40.757Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-27T08:43:18.061Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-27T08:43:25.783Z"}
+{"message":"user connected: ben uuid: 0fe0f9a0-b853-11ea-b056-892f42016549","level":"info","timestamp":"2020-06-27T08:49:19.958Z"}
+{"message":"user connected: ben uuid: 8b710e20-b853-11ea-854b-0998dc4fb6ff","level":"info","timestamp":"2020-06-27T08:53:20.654Z"}
+{"message":"user connected: ben uuid: ca160ae0-b853-11ea-bee9-9b15c8379183","level":"info","timestamp":"2020-06-27T08:54:29.573Z"}
+{"message":"user connected: ben uuid: 8097b110-b854-11ea-870e-87631ac2c2c6","level":"info","timestamp":"2020-06-27T08:59:36.957Z"}
+{"message":"user connected: ben uuid: b181d450-b858-11ea-91d7-c70e7a6e5837","level":"info","timestamp":"2020-06-27T09:29:36.180Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-06-27T09:31:56.621Z"}
+{"message":"user connected: ben uuid: 93fa3570-b859-11ea-974d-dd8d98020a00","level":"info","timestamp":"2020-06-27T09:36:01.294Z"}
+{"message":"user connected: Benipad uuid: ddadb390-b859-11ea-aa67-f91877ce3be0","level":"info","timestamp":"2020-06-27T09:38:05.650Z"}
+{"message":"user connected: ben uuid: 89ae7260-b85a-11ea-b1e2-f1206ed3a16a","level":"info","timestamp":"2020-06-27T09:43:06.452Z"}
+{"message":"user connected: Arca uuid: 94b5c7d0-b85a-11ea-a238-b9bee9f942bc","level":"info","timestamp":"2020-06-27T09:43:17.044Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-06-27T10:15:29.582Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-01T12:45:19.111Z"}
+{"message":"user connected: ben uuid: 466233a0-bb9a-11ea-b360-cbdca2518d43","level":"info","timestamp":"2020-07-01T12:56:39.587Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-01T12:59:00.899Z"}
+{"message":"user connected: zouheir uuid: 8347d7b0-bb9b-11ea-b0f7-2fcf1684289f","level":"info","timestamp":"2020-07-01T13:05:35.920Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-01T13:07:22.494Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-01T13:14:27.016Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-01T14:39:10.454Z"}
+{"message":"user connected: ben uuid: a9deeb40-bba8-11ea-82bf-d53cf07a9cd0","level":"info","timestamp":"2020-07-01T14:39:35.734Z"}
+{"message":"user connected: zouheir uuid: 8347d7b0-bb9b-11ea-b0f7-2fcf1684289f","level":"info","timestamp":"2020-07-01T14:42:49.796Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-01T14:47:27.124Z"}
+{"message":"user connected: zouheir uuid: 8347d7b0-bb9b-11ea-b0f7-2fcf1684289f","level":"info","timestamp":"2020-07-01T14:47:45.439Z"}
+{"message":"user connected: zouheir uuid: 8347d7b0-bb9b-11ea-b0f7-2fcf1684289f","level":"info","timestamp":"2020-07-01T15:26:34.397Z"}
+{"message":"user connected: zouheir uuid: 8347d7b0-bb9b-11ea-b0f7-2fcf1684289f","level":"info","timestamp":"2020-07-01T17:06:28.676Z"}
+{"message":"user connected: zouheir uuid: 8347d7b0-bb9b-11ea-b0f7-2fcf1684289f","level":"info","timestamp":"2020-07-01T17:08:05.661Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-07T17:01:16.405Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-07T17:02:20.966Z"}
+{"message":"user connected: ben uuid: 91434b60-c073-11ea-a0ba-ff3456a6c3ba","level":"info","timestamp":"2020-07-07T17:02:53.126Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-07T17:10:49.541Z"}
+{"message":"user connected: diana uuid: 267394f0-c07f-11ea-b4c2-ebfd672fcaf3","level":"info","timestamp":"2020-07-07T18:25:06.882Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-07T18:25:43.794Z"}
+{"message":"user connected: ben uuid: 44b93730-c07f-11ea-8203-f15fbd15cbbb","level":"info","timestamp":"2020-07-07T18:25:53.401Z"}
+{"message":"user connected: martin uuid: 94513bc0-c080-11ea-9c1a-fdc4c2498f4c","level":"info","timestamp":"2020-07-07T18:35:26.779Z"}
+{"message":"user connected: amal uuid: a74f2430-c080-11ea-9060-cdaaba69606b","level":"info","timestamp":"2020-07-07T18:35:57.750Z"}
+{"message":"user connected: thanos uuid: a3d3b910-c080-11ea-9080-ab2372e7cb51","level":"info","timestamp":"2020-07-07T18:36:10.197Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-07T18:36:33.302Z"}
+{"message":"user connected: apple uuid: ebb53650-c080-11ea-b04d-3133d0343ae8","level":"info","timestamp":"2020-07-07T18:37:50.993Z"}
+{"message":"user connected: Dev uuid: f4e75690-c080-11ea-b58e-65a1e7b69488","level":"info","timestamp":"2020-07-07T18:38:09.646Z"}
+{"message":"user connected: martin uuid: 94513bc0-c080-11ea-9c1a-fdc4c2498f4c","level":"info","timestamp":"2020-07-07T18:38:41.126Z"}
+{"message":"user connected: martin uuid: 94513bc0-c080-11ea-9c1a-fdc4c2498f4c","level":"info","timestamp":"2020-07-07T18:39:23.093Z"}
+{"message":"user connected: martin uuid: 94513bc0-c080-11ea-9c1a-fdc4c2498f4c","level":"info","timestamp":"2020-07-07T18:40:12.320Z"}
+{"message":"user connected: tj uuid: 4de8ad70-c081-11ea-b827-2dc016e3def4","level":"info","timestamp":"2020-07-07T18:40:38.490Z"}
+{"message":"user connected: martin uuid: 94513bc0-c080-11ea-9c1a-fdc4c2498f4c","level":"info","timestamp":"2020-07-07T18:43:08.390Z"}
+{"message":"user connected: martin uuid: 94513bc0-c080-11ea-9c1a-fdc4c2498f4c","level":"info","timestamp":"2020-07-07T18:44:22.794Z"}
+{"message":"user connected: Stefano uuid: 9df2d4c0-c082-11ea-af0f-190754a112ab","level":"info","timestamp":"2020-07-07T18:51:16.291Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-07T19:43:15.697Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-07T19:43:36.915Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-10T11:14:45.572Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-10T11:15:59.444Z"}
+{"message":"user connected: ben uuid: cb6e3480-c29e-11ea-8afb-4d749d5c3aa9","level":"info","timestamp":"2020-07-10T11:16:34.315Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-10T11:17:15.864Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-10T11:18:09.597Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-10T11:20:22.774Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-10T11:21:02.265Z"}
+{"message":"user connected: Lukasz uuid: f226d040-c29f-11ea-a67a-c3d79cee5804","level":"info","timestamp":"2020-07-10T11:25:02.264Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-10T11:31:04.875Z"}
+{"message":"user connected: ben uuid: cb6e3480-c29e-11ea-8afb-4d749d5c3aa9","level":"info","timestamp":"2020-07-10T12:33:07.037Z"}
+{"message":"user connected: ben uuid: cb6e3480-c29e-11ea-8afb-4d749d5c3aa9","level":"info","timestamp":"2020-07-10T12:35:15.768Z"}
+{"message":"user connected: ben uuid: cb6e3480-c29e-11ea-8afb-4d749d5c3aa9","level":"info","timestamp":"2020-07-10T12:35:52.715Z"}
+{"message":"user connected: ben uuid: cb6e3480-c29e-11ea-8afb-4d749d5c3aa9","level":"info","timestamp":"2020-07-10T12:38:00.982Z"}
+{"message":"user connected: ben uuid: cb6e3480-c29e-11ea-8afb-4d749d5c3aa9","level":"info","timestamp":"2020-07-10T13:08:37.857Z"}
+{"message":"user connected: ben uuid: cb6e3480-c29e-11ea-8afb-4d749d5c3aa9","level":"info","timestamp":"2020-07-10T14:16:56.119Z"}
+{"message":"user connected: ben uuid: cb6e3480-c29e-11ea-8afb-4d749d5c3aa9","level":"info","timestamp":"2020-07-10T15:19:39.421Z"}
+{"message":"user connected: ben uuid: cb6e3480-c29e-11ea-8afb-4d749d5c3aa9","level":"info","timestamp":"2020-07-10T19:20:02.855Z"}
+{"message":"user connected: ben uuid: cb6e3480-c29e-11ea-8afb-4d749d5c3aa9","level":"info","timestamp":"2020-07-10T21:20:10.168Z"}
+{"message":"user connected: ben uuid: cb6e3480-c29e-11ea-8afb-4d749d5c3aa9","level":"info","timestamp":"2020-07-10T21:42:19.901Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-19T11:09:07.853Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-07-19T11:09:46.193Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-19T11:10:54.457Z"}
+{"message":"user connected: ben uuid: a3608420-c9b0-11ea-9c3c-a3f54194bbd7","level":"info","timestamp":"2020-07-19T11:12:10.380Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-19T11:13:34.866Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-19T11:13:50.436Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-19T11:15:09.764Z"}
+{"message":"user connected: robert uuid: 12e12200-c9b1-11ea-b44c-d32d900fbeaf","level":"info","timestamp":"2020-07-19T11:15:11.120Z"}
+{"message":"user connected: Laura uuid: 06dd4420-c9b1-11ea-bee8-d59eb465e39f","level":"info","timestamp":"2020-07-19T11:15:38.346Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-19T11:15:53.612Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-19T11:16:29.245Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-19T11:19:58.521Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-07-19T11:24:53.492Z"}
+{"message":"user connected: robert uuid: 12e12200-c9b1-11ea-b44c-d32d900fbeaf","level":"info","timestamp":"2020-07-19T11:28:45.972Z"}
+{"message":"user connected: robert uuid: 12e12200-c9b1-11ea-b44c-d32d900fbeaf","level":"info","timestamp":"2020-07-19T11:29:57.855Z"}
+{"message":"user connected: robert uuid: 9b3e6590-c9b6-11ea-b76e-c96d24554c8c","level":"info","timestamp":"2020-07-19T11:54:42.145Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-10-09T13:55:21.448Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-10-09T14:02:02.834Z"}
+{"message":"robot connected: zumo port: undefined","level":"info","timestamp":"2020-10-09T14:02:04.772Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-10-09T14:02:13.835Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-10-09T14:03:33.379Z"}
+{"message":"robot connected: zumo port: undefined","level":"info","timestamp":"2020-10-09T14:03:35.299Z"}
+{"message":"robot connected: mars port: undefined","level":"info","timestamp":"2020-10-09T14:08:16.100Z"}
+{"message":"robot connected: zumo port: undefined","level":"info","timestamp":"2020-10-09T14:10:34.987Z"}
+{"message":"robot connected: zumo port: undefined","level":"info","timestamp":"2020-10-09T14:17:31.280Z"}
+{"message":"robot connected: zumo port: undefined","level":"info","timestamp":"2020-10-09T14:18:56.358Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-10-09T14:19:52.801Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-10-09T14:21:57.571Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-09T14:22:24.182Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-10-09T14:23:04.728Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-10-09T14:23:44.369Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-09T14:27:09.151Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-10-09T14:27:09.300Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-10-09T14:27:09.337Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-09T14:27:09.370Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-10-09T14:37:36.103Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-10-09T14:37:36.267Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-09T16:48:23.577Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-10-09T16:48:24.264Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-09T16:55:01.787Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-10-09T16:55:05.524Z"}
+{"message":"user connected: ben uuid: 27d3de70-0a50-11eb-ab3f-29d883eb54b6","level":"info","timestamp":"2020-10-09T16:55:12.402Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-09T16:55:12.471Z"}
+{"message":"user connected: ben uuid: 688f42a0-0a51-11eb-8952-7bcbed844b2c","level":"info","timestamp":"2020-10-09T17:04:06.284Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-09T17:04:06.327Z"}
+{"message":"user connected: ben uuid: 60b41f80-0a54-11eb-a41a-6faf9730babd","level":"info","timestamp":"2020-10-09T17:25:30.761Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-09T17:25:30.802Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-09T17:58:59.734Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-10-09T17:59:01.915Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-10-09T18:25:03.227Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-09T18:25:03.499Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-10-10T13:38:07.397Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-10-10T13:38:07.439Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-10-10T13:38:12.155Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-10T13:38:12.376Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-10T13:39:52.252Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-10-10T13:39:52.462Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-10T14:16:45.146Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-10-10T14:16:45.419Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-10T14:18:48.777Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-10-10T14:18:49.046Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-10T14:31:39.593Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-10-10T14:31:39.858Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-10T14:36:20.732Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-10-10T14:36:20.996Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-10T14:38:26.011Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-10-10T14:38:26.312Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-10-10T14:40:31.108Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-10-10T14:40:31.147Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-10-24T15:27:44.631Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-10-24T15:27:44.949Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-10-24T15:32:16.608Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-24T15:32:16.832Z"}
+{"message":"user connected: ben uuid: 14e5a680-160e-11eb-8ca7-d14e173d51ca","level":"info","timestamp":"2020-10-24T15:32:21.288Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-24T15:32:21.331Z"}
+{"message":"user connected: Helena uuid: 2b2c5be0-160f-11eb-acc6-f5c725d633bb","level":"info","timestamp":"2020-10-24T15:40:17.034Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-24T15:40:17.143Z"}
+{"message":"user connected: Helena uuid: 2b2c5be0-160f-11eb-acc6-f5c725d633bb","level":"info","timestamp":"2020-10-24T15:43:28.002Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-24T15:43:28.089Z"}
+{"message":"user connected: Helena  uuid: b62a2d30-160f-11eb-921e-27ebc82e79a4","level":"info","timestamp":"2020-10-24T15:44:16.325Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-24T15:44:16.394Z"}
+{"message":"user connected: Helena  uuid: b62a2d30-160f-11eb-921e-27ebc82e79a4","level":"info","timestamp":"2020-10-24T15:58:12.234Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-10-24T15:58:12.409Z"}
+{"message":"user connected: Helena  uuid: b62a2d30-160f-11eb-921e-27ebc82e79a4","level":"info","timestamp":"2020-10-24T15:59:27.214Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-06T14:52:46.067Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-06T14:53:00.767Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-06T14:53:23.597Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-06T14:53:38.306Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-06T15:02:17.170Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-06T15:02:17.601Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-06T15:13:56.453Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-06T15:13:56.765Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-06T15:14:35.932Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-06T15:14:43.200Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-06T15:16:38.551Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-06T15:17:05.286Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-06T15:17:17.789Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-06T15:17:26.497Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-06T15:19:19.334Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-06T15:19:21.295Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-06T15:58:45.295Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-06T15:58:45.850Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-07T13:52:12.969Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-07T13:52:13.362Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-07T14:02:12.086Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-07T14:02:12.520Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-07T14:12:08.850Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-07T14:12:09.279Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-07T14:13:09.939Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-07T14:13:10.289Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-07T15:09:07.781Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-07T15:09:07.932Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:17:02.973Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T15:17:03.178Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T15:17:18.727Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T15:17:18.770Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:18:19.627Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T15:18:19.819Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:22:36.156Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T15:22:36.369Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:24:30.971Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T15:24:31.171Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:27:05.205Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T15:27:05.540Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:29:51.042Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T15:29:51.246Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:32:05.647Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T15:32:05.850Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:33:09.474Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T15:33:09.700Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:33:51.228Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:36:50.883Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:38:25.048Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T15:38:32.004Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T15:45:26.234Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T15:45:26.276Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:48:14.980Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T15:48:15.271Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T15:53:31.630Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T15:53:31.680Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T15:58:50.900Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T15:58:51.101Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T16:03:27.022Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T16:03:27.068Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:04:33.223Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:04:33.516Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T16:09:17.849Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T16:09:17.896Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:12:42.405Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:12:42.910Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:19:23.504Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:19:23.740Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:31:01.736Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:31:02.047Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T16:33:56.520Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T16:33:56.563Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:33:56.611Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:33:56.831Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:35:27.911Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:35:28.142Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:36:16.939Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:36:17.187Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:38:36.996Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:38:37.230Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T16:41:29.336Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T16:41:29.414Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:41:32.301Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:41:32.510Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:42:29.118Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:42:29.329Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:47:50.457Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:47:50.667Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:50:20.453Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:50:20.664Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:56:12.909Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:56:13.107Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:58:16.571Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:58:16.857Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T16:59:32.503Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T16:59:32.548Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T16:59:36.166Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T16:59:36.399Z"}
+{"message":"robot connected: pca video_port: 8003","level":"info","timestamp":"2020-11-07T17:00:43.169Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-07T17:00:43.442Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T18:17:09.832Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T18:17:09.905Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T18:22:48.769Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T18:22:48.851Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T18:28:02.454Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T18:28:02.531Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T18:38:13.583Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T18:38:13.678Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T20:39:06.878Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T20:39:06.967Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-07T22:39:15.101Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-07T22:39:15.179Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-08T00:40:04.535Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-08T00:40:04.609Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-08T02:40:55.985Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-08T02:40:56.058Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-08T02:46:07.231Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-08T02:46:07.305Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-08T04:13:46.497Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-08T04:13:46.571Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-08T05:46:03.706Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-08T05:46:03.832Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-08T07:08:50.696Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-08T07:08:50.810Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-08T07:36:31.006Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-08T07:36:31.115Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-08T07:53:38.749Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-08T07:53:38.887Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-26T13:41:11.524Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-26T13:41:11.549Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-26T13:45:12.567Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-26T13:45:12.598Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-26T15:08:40.945Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-26T15:08:41.255Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-26T15:09:10.732Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-26T15:09:10.930Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-26T15:09:56.361Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-26T15:09:56.650Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-26T15:40:16.876Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-26T15:40:17.210Z"}
+{"message":"robot connected: mars video_port: 8003","level":"info","timestamp":"2020-11-26T15:44:39.704Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-26T15:44:39.892Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-26T15:46:07.260Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-26T15:46:07.299Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-11-26T15:55:31.415Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-26T15:55:31.573Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-11-26T16:01:05.966Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-26T16:01:06.107Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-11-26T16:06:39.447Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-26T16:06:39.632Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-11-26T16:13:37.645Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-26T16:13:37.891Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-11-26T16:13:48.211Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-26T16:13:48.427Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-26T16:17:41.991Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-26T16:17:42.035Z"}
+{"message":"user connected: ben uuid: ec748860-3002-11eb-a85a-413124f4931d","level":"info","timestamp":"2020-11-26T16:17:57.955Z"}
+{"message":"room joined: mars","level":"info","timestamp":"2020-11-26T16:17:58.027Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-26T16:18:58.793Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-26T16:18:58.836Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-26T16:19:37.840Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-26T16:19:37.880Z"}
+{"message":"user connected: ben uuid: 7d55f5c0-3004-11eb-908c-530f9e30c9b1","level":"info","timestamp":"2020-11-26T16:29:11.404Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-26T16:29:11.450Z"}
+{"message":"user connected: ben uuid: cb5611b0-3004-11eb-bc89-e5e0e5ec764c","level":"info","timestamp":"2020-11-26T16:31:21.480Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-26T16:31:21.526Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-26T16:32:55.373Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-26T16:32:55.422Z"}
+{"message":"user connected: ben uuid: 0ca12830-3005-11eb-b709-6b8589b335bd","level":"info","timestamp":"2020-11-26T16:33:27.349Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-26T16:33:27.394Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-26T16:33:59.238Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-26T16:33:59.448Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-11-27T09:08:36.109Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-27T09:08:36.296Z"}
+{"message":"user connected: ben uuid: 164a8b20-3090-11eb-9195-4b665030150c","level":"info","timestamp":"2020-11-27T09:08:39.507Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-27T09:08:39.549Z"}
+{"message":"user connected: Valentin uuid: d160fce0-30aa-11eb-a3e3-0fc6cdd87577","level":"info","timestamp":"2020-11-27T12:19:58.316Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-27T12:19:58.376Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-11-27T16:20:43.560Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-27T16:20:43.919Z"}
+{"message":"user connected: ben uuid: f2ae4160-30cc-11eb-9053-371b78c283b9","level":"info","timestamp":"2020-11-27T16:24:12.650Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-27T16:24:12.694Z"}
+{"message":"user connected: ben uuid: f2ae4160-30cc-11eb-9053-371b78c283b9","level":"info","timestamp":"2020-11-27T16:24:12.822Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-27T16:24:12.980Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T16:26:18.933Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T16:26:19.134Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-27T16:27:01.840Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-27T16:27:01.888Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T16:31:56.967Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T16:31:57.214Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T16:42:37.299Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T16:42:37.547Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-11-27T16:51:38.425Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-27T16:51:38.623Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-11-27T16:52:35.966Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-27T16:52:36.317Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T16:54:06.671Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T16:54:06.921Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T16:55:29.923Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T16:55:30.163Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T16:56:41.548Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T16:56:41.841Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T16:57:26.094Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T16:57:26.362Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T17:10:18.344Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T17:10:18.607Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-27T17:11:22.517Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-27T17:11:22.568Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T17:11:24.856Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T17:11:25.190Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-27T17:15:30.810Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-27T17:15:30.942Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T17:15:32.549Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T17:15:32.830Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T17:47:30.968Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T17:47:31.180Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-27T17:48:38.812Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-27T17:48:38.872Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T17:48:56.160Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T17:48:56.460Z"}
+{"message":"robot connected: pca video_port: 8010","level":"info","timestamp":"2020-11-27T17:49:27.801Z"}
+{"message":"room joined: pca","level":"info","timestamp":"2020-11-27T17:49:32.190Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-11-28T16:46:23.003Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-28T16:46:23.220Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-11-28T16:46:54.974Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-28T16:46:56.055Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-11-28T16:47:13.541Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-11-28T16:47:13.717Z"}
+{"message":"user connected: ben uuid: 35572400-319a-11eb-9c99-c591e551ad06","level":"info","timestamp":"2020-11-28T16:53:23.835Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-28T16:53:23.878Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-28T17:57:01.298Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-28T17:57:01.342Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-11-28T18:47:13.836Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-28T18:47:14.063Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-28T18:49:45.106Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-28T18:49:45.185Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-28T19:00:38.460Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-28T19:00:39.626Z"}
+{"message":"user connected: ben uuid: e46b2200-31b5-11eb-838a-475654c4facf","level":"info","timestamp":"2020-11-28T20:11:40.344Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-28T20:11:40.406Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-28T21:01:32.548Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-28T21:01:32.943Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-28T23:01:41.606Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-28T23:01:41.681Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-29T01:02:34.167Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-29T01:02:34.419Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-29T02:07:22.252Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-29T02:07:22.329Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-29T03:30:09.710Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-29T03:30:09.818Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-29T04:57:45.761Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-29T04:57:46.222Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-29T06:29:40.658Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-29T06:29:40.771Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-29T07:57:46.002Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-29T07:57:46.080Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-29T08:15:31.810Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-29T08:15:32.364Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-29T08:44:29.569Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-29T08:44:29.680Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-29T08:59:14.041Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-29T08:59:14.119Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-29T10:17:41.985Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-29T10:17:42.058Z"}
+{"message":"user connected: ben uuid: 17eb9f00-31a3-11eb-afe2-3b60824a35e0","level":"info","timestamp":"2020-11-29T10:57:37.390Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-11-29T10:57:38.478Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-03T20:21:30.942Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-03T20:21:30.989Z"}
+{"message":"user connected: ben uuid: 3cc0b3f0-35a5-11eb-836f-ab29839f7598","level":"info","timestamp":"2020-12-03T20:22:31.716Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-03T20:22:31.763Z"}
+{"message":"user connected: joppe uuid: 2f1b1780-35a6-11eb-afe0-e503d5206e0e","level":"info","timestamp":"2020-12-03T20:29:33.095Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-03T20:29:33.156Z"}
+{"message":"user connected: ben uuid: 60bc0f00-35a7-11eb-b888-794132dc024b","level":"info","timestamp":"2020-12-03T20:38:00.146Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-03T20:38:00.193Z"}
+{"message":"user connected: jjoana uuid: 8b97bd00-35a7-11eb-87ff-93dbdbb1d70d","level":"info","timestamp":"2020-12-03T20:39:04.134Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-03T20:39:04.188Z"}
+{"message":"user connected: ben uuid: b4ff8fb0-35a7-11eb-9261-855374bb543c","level":"info","timestamp":"2020-12-03T20:40:15.670Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-03T20:40:15.717Z"}
+{"message":"user connected: Nele uuid: beeca610-35a8-11eb-811d-87220b932823","level":"info","timestamp":"2020-12-03T20:47:39.461Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-03T20:47:39.509Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-04T19:14:03.030Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-04T19:14:03.334Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-04T19:16:27.993Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-04T19:16:28.233Z"}
+{"message":"user connected: ben uuid: 33ff53a0-3665-11eb-a58c-17679d43600b","level":"info","timestamp":"2020-12-04T19:16:33.916Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-04T19:16:33.958Z"}
+{"message":"user connected: Elio  uuid: 51470de0-3665-11eb-8cca-0f187247f860","level":"info","timestamp":"2020-12-04T19:17:34.559Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-04T19:17:34.717Z"}
+{"message":"user connected: Elio uuid: a57a13d0-3665-11eb-bfec-3fe6b36d8529","level":"info","timestamp":"2020-12-04T19:19:54.735Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-04T19:19:54.936Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-15T16:58:20.077Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-15T16:58:20.363Z"}
+{"message":"user connected: ben uuid: cc5806d0-3ef6-11eb-8658-f167d74cad46","level":"info","timestamp":"2020-12-15T16:58:57.915Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-15T16:58:57.957Z"}
+{"message":"user connected: Joppe&Fred uuid: 3ba6c9d0-3ef8-11eb-afc2-9bb9958af319","level":"info","timestamp":"2020-12-15T17:09:28.003Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-15T17:09:28.098Z"}
+{"message":"user connected: Joppe&Fred uuid: 3ba6c9d0-3ef8-11eb-afc2-9bb9958af319","level":"info","timestamp":"2020-12-15T17:27:28.431Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-15T17:27:28.492Z"}
+{"message":"user connected: Joppe&Fred uuid: 3ba6c9d0-3ef8-11eb-afc2-9bb9958af319","level":"info","timestamp":"2020-12-15T17:27:38.525Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-15T17:27:38.589Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-16T09:13:43.693Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T09:13:43.918Z"}
+{"message":"user connected: ben uuid: 76e24870-3f8a-11eb-a53f-53da0d419fb6","level":"info","timestamp":"2020-12-16T10:36:06.846Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T10:36:06.896Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-16T10:36:08.609Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T10:36:08.770Z"}
+{"message":"user connected: Marco uuid: 825e7fc0-3f8a-11eb-8d37-4dd37db8c9fe","level":"info","timestamp":"2020-12-16T10:36:28.646Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T10:36:28.738Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-16T10:40:27.036Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T10:40:27.199Z"}
+{"message":"user connected: ben uuid: 9b1d8820-3f8b-11eb-aecc-ed47d6b2830a","level":"info","timestamp":"2020-12-16T10:44:09.503Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T10:44:09.527Z"}

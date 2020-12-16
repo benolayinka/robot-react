@@ -1,4 +1,5 @@
 import React from 'react'
+import {Modal, Button} from 'react-bootstrap'
 import './View.scss'
 import ViewIntro from '../components/ViewIntro'
 import Gamepad from '../components/Gamepad'
@@ -10,30 +11,49 @@ import Colors from '../styles/Colors.scss'
 import Div100vh from 'react-div-100vh'
 import {getQuery} from '../scripts/utils'
 import Loading from '../components/Loading'
+import io from 'socket.io-client'
+import StreamControllerUserList from '../components/StreamControllerUserList.js'
+const uuidv1 = require('uuid/v1'); 
+
+const controlStates = {
+    AVAILABLE: 'available',
+    REQUESTING: 'requesting',
+    UNAVAILABLE: 'unavailable',
+    HAVE: 'have' 
+}
+
+const controlTexts = {
+    AVAILABLE: 'touch me to drive!',
+    REQUESTING: 'requesting',
+    UNAVAILABLE: 'unavailable',
+	HAVE: 'ok!', 
+}
+
+const hudText = (user, state, timeLeft) => {
+    var name
+    if(user) name = user.name
+    else name = 'nobody'
+
+    switch(state) {
+        case controlStates.AVAILABLE:
+            return 'nobody is driving'
+            break;
+        case controlStates.REQUESTING:
+            return 'requesting...'
+            break;
+        case controlStates.UNAVAILABLE:
+        case controlStates.HAVE:
+            return name + ' is driving. ' + timeLeft + ' seconds left.'
+            break;
+        default:
+            return 'nobody is driving'
+            break;
+    }
+}
 
 export default class View extends React.Component{
     constructor(props) {
         super(props);
-
-        //if query parameter includes ?debug=true
-        const query = getQuery();
-        this.debug = 'debug' in query
-
-        this.remoteStream = null
-
-        this.gamepadData = {
-            driveJoystickData: {x:0, y:0},
-            lookJoystickData: {x:0, y:0},
-            buttonsPressed: {0:false, 1:false, 2:false},
-            keysPressed: {},
-        }
-
-        this.controller = new Controller({
-            debug: true,
-            name: 'debug',
-            rover: 'debug',
-            gamepadData: this.gamepadData,
-        })
 
         this.state = {
             width: null,
@@ -43,7 +63,38 @@ export default class View extends React.Component{
             remoteStreamPlaying: false,
             remoteStreamDisconnected: false,
             haveRover: false,
+            controlState:controlStates.AVAILABLE,
+			controlText:controlTexts.AVAILABLE,
+			usersInRoom: null,
+			activeUserInRoom: null,
+            showModal: false,
+            timeLeft: null,
         };
+
+        //if query parameter includes ?debug=true
+        const query = getQuery();
+        this.debug = 'debug' in query
+
+        if(this.debug){
+			this.uuid = 'debug'
+            this.name = "debug"
+            this.rover = "debug"
+            this.user = {name: this.name, uuid: this.uuid}
+            this.state.haveName = true
+        }
+		else
+			this.uuid = uuidv1();
+
+        this.controlLoopRunning = false
+
+        this.remoteStream = null
+
+        this.gamepadData = {
+            driveJoystickData: {x:0, y:0},
+            lookJoystickData: {x:0, y:0},
+            buttonsPressed: {0:false, 1:false, 2:false},
+            keysPressed: {},
+        }
 
         this.streamId = props.match.params.id
         this.janusController = null;
@@ -164,6 +215,13 @@ export default class View extends React.Component{
     }
 
     getRoverFromStream = async () => {
+        
+        if (this.debug){
+            this.rover = "debug"
+            this.setState({haveRover:true}, this.openSocket)
+            return
+        } 
+
         let body = {
             request: 'info',
             id: parseInt(this.streamId)
@@ -174,7 +232,163 @@ export default class View extends React.Component{
             return
         }
         this.rover = response.info.description
-        this.setState({haveRover:true})
+        this.setState({haveRover:true}, this.openSocket)
+    }
+
+    closeConnection() {
+        clearInterval(this.controlLoop)
+        this.controlLoopRunning=false
+        this.socket.close()
+    }
+
+	updateUsersByRooms = (usersByRooms)=>{
+		//get users just in our room
+        //console.log('users', usersByRooms)
+		this.setState({usersInRoom: usersByRooms[this.rover]})
+	}
+
+	handleRequestAck = (message)=>{
+		if(message.uuid === this.uuid) {
+			if(message.requestGranted){
+				this.setState({
+					controlState:controlStates.HAVE,
+					controlText:controlTexts.HAVE,
+					})
+			} else {
+				this.setState({controlState:controlStates.UNAVAILABLE})
+			}
+		}
+	}
+
+	handleSecondsRemaining = (message)=>{
+		//get the index of the active user from the uuid of the seconds message
+		let userIndex = this.state.usersInRoom.map(function(user) { return user.uuid; })
+					.indexOf(message.uuid);
+
+		//set activeuser if found
+		if (userIndex >= 0) {
+				let user = this.state.usersInRoom[userIndex]
+				this.setState({activeUserInRoom: user})
+		}
+
+		//update state based on who is using
+		if(message.uuid === this.uuid) {
+			this.setState({controlState:controlStates.HAVE})
+		} else {
+			this.setState({controlState:controlStates.UNAVAILABLE})
+		}
+
+		//update control text
+		this.setState({timeLeft: message.secondsRemaining})
+
+		//update state when time expires
+		if(message.secondsRemaining === 0){
+			this.setState({
+				controlText:controlTexts.AVAILABLE,
+				controlState:controlStates.AVAILABLE,
+				activeUserInRoom: null,
+			})
+		}
+	}
+
+	handleAvailable = () => {
+		this.setState({
+			controlText:controlTexts.AVAILABLE,
+			controlState:controlStates.AVAILABLE,
+			activeUserInRoom: null,
+		})
+	}
+
+	onSocketConnect = () => {
+		this.socket.on('users by rooms', (usersByRooms) => this.updateUsersByRooms(usersByRooms))
+
+		this.socket.on('message', (message)=> {
+			//console.log('message received', message)
+			switch(message.type) {
+				case 'request ack':
+					this.handleRequestAck(message)
+					break
+				case 'seconds remaining':
+					this.handleSecondsRemaining(message)
+					break
+				case 'available':
+					this.handleAvailable()
+					break
+				default:
+					// code block
+				}
+		})
+
+		//defining and using all program logic within connected context..
+		this.sendControls = () => {
+			this.socket.emit('message', {
+				type: 'controls',
+				data: this.gamepadData,
+				uuid: this.uuid
+			})
+		}
+
+		let controlLoopFunc = ()=>{
+			if (this.state.controlState !== controlStates.UNAVAILABLE) {
+				this.sendControls()
+			}
+		}
+
+		// Send control updates to the server every .1 seconds.
+		this.controlLoop = setInterval(controlLoopFunc, 100)
+
+		this.socket.emit('user connected', {
+				name: this.name,
+				uuid: this.uuid,
+			})
+
+		//join room for rover
+		this.socket.emit('join', this.rover, (response)=>{
+			//console.log('join room response: ' + response)
+		})
+	}
+	
+	onRequestButton = ()=>{
+		this.setState({
+			controlText:controlTexts.REQUESTING,
+			controlState:controlStates.REQUESTING
+			})
+		//also need to check for user, give request an id
+		this.socket.emit('message', {
+			type: 'request',
+			uuid: this.uuid,
+		})
+
+		//if we don't get an ack, become available again after 5 seconds
+		setTimeout(()=>{
+			if(this.state.controlState === controlStates.REQUESTING){
+				this.setState({
+					controlState:controlStates.AVAILABLE,
+					controlText:controlTexts.AVAILABLE,
+					})
+			}
+		}, 5000)
+	}
+
+    onGotName = (name)=>{
+        this.name = name
+        this.user = {name: this.name, uuid: this.uuid}
+        this.setState({haveName:true}, this.openSocket)
+    }
+
+    hideModal = ()=>{
+		this.setState({showModal:false})
+	}
+
+	showModal = ()=>{
+		this.setState({showModal:true})
+	}
+
+    openSocket = ()=>{
+        if(this.state.haveName && this.state.haveRover){
+            this.socket = io()
+		    this.socket.on('connect', this.onSocketConnect);
+        }
     }
 
     render() {
@@ -189,23 +403,60 @@ export default class View extends React.Component{
                                     zIndex={9999}
                                     />
                                     }
-                {!this.debug && <ViewIntro zIndex={9998} />}
+                {!this.debug && <ViewIntro onGotName={this.onGotName} zIndex={9998} />}
+                <Modal
+                    centered
+                    show={this.state.showModal}
+                    onHide={this.hideModal}
+                >
+                    <Modal.Header className = 'no-border'>
+                        <Modal.Title className = 'p-4'>
+                            <StreamControllerUserList userList={this.state.usersInRoom} activeUser={this.state.activeUserInRoom}/>
+                        </Modal.Title>
+                        <button type="button" className="close" onClick={this.hideModal}>
+                            <span aria-hidden="true">×</span>
+                            <span className="sr-only">Close</span>
+                        </button>
+                    </Modal.Header>
+                </Modal>
                 <div className = "video-container" ref="container">
+                    <div className = 'd-flex s-3 position-absolute align-items-center p-4 t-0 r-0 z-9'>
+                        <span className = 'px-3 threeD'>{hudText(this.state.activeUserInRoom, this.state.controlState, this.state.timeLeft)}</span>
+                        <Button 
+                            variant="light"
+                            onClick={this.showModal}>
+                            <span className='threeD'>?</span>
+                        </Button>
+                    </div>
+                    <div className='z-9 w-100 h-100 p-2 d-flex justify-content-center align-items-center text-center'>
+                        {(this.state.controlState === controlStates.AVAILABLE || this.state.controlState === controlStates.REQUESTING) &&
+                        <Button
+                            className = 'position-absolute s-3 z-9 text-center'
+                            variant="light"
+                            disabled={this.state.controlState !== controlStates.AVAILABLE}
+                            onClick={this.onRequestButton}
+                        >
+                            <span className='threeD'>{this.state.controlText}</span>
+                        </Button>
+                        }
+					</div>
                     <div className = "video-container-inner">
                         <video src={this.remoteStream} ref='videoRef' muted autoPlay playsInline/>
                     </div>
                     <div className = "video-container-inner">
-                        {this.state.width &&
+                        {this.state.width && this.state.controlState === controlStates.HAVE &&
                             <Gamepad className='gamepad' onEvent={this.onGamepadEvent} nippleSize={Math.max(this.state.width/6, 100)} buttonSize={Math.max(this.state.width/15, 40)}/>
                         } 
                     </div>
                     <div className = "video-container-deco">
                         <Box height='40vw' backgroundColor={Colors.whiteTrue} left="-10%" top="50%" />
+                        <Box height='40vw' backgroundColor={Colors.whiteTrue} left="70%" top="150%" />
                         <Box height='40vw' backgroundColor={Colors.whiteTrue} left="70%" top="-20%" />
-                        <div className = "video-label top threeD">
+                        <Box height='40vw' backgroundColor={Colors.whiteTrue} left="-10%" top="-120%" />
+                        <div className = "video-label top threeD-shadow">
                             GOOD ROBOT - HYENA 👾
                         </div>   
-                        <div className = "video-label bottom threeD">
+                        <div className = "video-label bottom threeD-shadow">
                             LET'S CLEAN UP THE WORLD 👾
                         </div> 
                     </div>

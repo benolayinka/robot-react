@@ -69,7 +69,7 @@ class ViewIntro extends React.Component {
             return
         }
 
-        this.name = name
+        this.props.onGotName(name)
 
         setTimeout(() => {
             this.step()

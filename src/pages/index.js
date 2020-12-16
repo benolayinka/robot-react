@@ -5,3 +5,5 @@ export {default as StreamView} from './StreamView';
 export {default as StreamViewIndex} from './StreamViewIndex';
 export {default as View} from './View';
 export {default as Hello} from './Hello';
+export {default as SimNew} from './SimNew';
+export {default as Intro} from './Intro';

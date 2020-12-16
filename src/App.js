@@ -27,6 +27,7 @@ function App() {
           <Route path="/view/:id" component={Pages.View} />
           <Route path="/view" component={Pages.StreamViewIndex} />
           <Route path="/hello" component={Pages.Hello} />
+          <Route path="/intro" component={Pages.Intro} />
         </Switch>
     </Router> 
   );

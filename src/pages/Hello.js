@@ -20,16 +20,16 @@ export default class Hello extends React.Component{
     render(){
         return(
             <div style={{backgroundColor: Colors.pink}} className = 'overflow-hidden position-absolute h-100 w-100'>
-                <Container className = 'threeD h-100 p-3'>
+                <Container className = 'threeD-shadow h-100 p-3'>
                     <div className='animation-container text-center d-flex h-100 flex-column align-items-center justify-content-between'>
                         <div className="bounce-in-left skew order-2 p-2">
                             <h1>welcome to good robot!</h1>
                         </div>
                         <div className="bounce-in-left skew order-1 p-2">
-                            <Link to="/sim"><h1>learn the story!</h1><p>(under construction)</p></Link>
+                            <Link to="/intro"><h1>learn the story!</h1><p>(under construction)</p></Link>
                         </div>
                         <div className="bounce-in-left skew order-3 p-2">
-                            <Link to="/view/1"><h1>drive a robot!</h1></Link>
+                            <Link to="/view/4"><h1>drive a robot!</h1></Link>
                         </div>
                     </div>
                 </Container>

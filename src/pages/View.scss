@@ -55,3 +55,45 @@ video {
     bottom: -10%;
   }
 }
+
+.no-border{
+  border-radius:0rem !important;
+  border:none !important;
+}
+
+.btn-naked {
+  outline: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.btn-naked:focus {
+  outline: none;
+}
+
+.t-0 {
+  top: 0;
+}
+
+.t-50{
+  top: 50%;
+}
+
+.b-0 {
+  bottom: 0;
+}
+
+.r-0 {
+  right: 0;
+}
+
+.l-0 {
+  left: 0;
+}
+
+.z-9 {
+  z-index: 9;
+}
