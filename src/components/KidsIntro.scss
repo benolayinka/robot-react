@@ -1,0 +1,286 @@
+@import '../styles/Colors.scss';
+
+.btn-naked {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Buttons styles start */
+button {
+  display: inline-block;
+  /* font-weight: 400; */
+  /* color: #212529; */
+  text-align: center;
+  vertical-align: middle;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  
+  background-color: transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s; 
+
+  border: none;
+  background: transparent;
+  
+}
+
+.bg-none {
+  background: none!important;
+}
+
+.title {
+  font-family: "ITC Clearface Pro"
+}
+
+.dot {
+  height: 2em;
+  width: 2em;
+  margin: 0.5em;
+  border: 8px solid black;
+  border-color:black;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.filled{
+  background-color:black;
+}
+
+.head-title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.name {
+  font-family: "ITC Clearface Pro",serif;
+  font-weight: 300;
+  text-align: center;
+  border: 0;
+  border-bottom: 0px solid black;
+  outline: 0;
+  font-size: 110px;
+  color: black;
+  padding: 7px 0;
+  background: transparent;
+  max-width: 100%;
+  margin: 30px 0;
+}
+
+.name:focus {
+  background-color: transparent;
+  border-color: transparent;
+  color: black;
+  background-color: transparent;
+  border-color: transparent;
+  outline: 0;
+  box-shadow: 0 0 0 0;
+}
+
+.name::placeholder{
+  color: black;
+}
+
+.name:focus::placeholder {
+  color: transparent;
+}
+
+body {
+	font-family: "Apercu",sans-serif;
+	font-weight: 300;
+	color: black;
+}
+
+h1 {
+	font-size: 96px;
+	line-height: 124px;
+  font-family: "ITC Clearface Pro",serif;
+	font-weight: 300;
+	margin: 40px 0 30px;
+}
+
+h2 {
+	font-size: 24px;
+	line-height: 28px;
+	font-family: "Apercu",sans-serif;
+	font-weight: 300;
+	transition: 0.5s;
+	opacity: 1;
+	filter: alpha(opacity=100); /* For IE8 and earlier */		
+}
+
+h2:hover {
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+} 
+
+h3 {
+	font-size: 24px;
+	line-height: 28px;
+	font-family: "Apercu",sans-serif;
+	font-weight: 600;
+}
+
+p {
+	font-size: 32px;
+	line-height: 48px;
+	text-rendering: optimizeLegibility;
+}
+
+a {
+	font-family: "Apercu",sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	text-align: right;
+	text-decoration-line: underline;
+	color: black;
+	font-size: 24px;
+}
+
+.continue {
+	display: block;
+  text-align: center;
+}
+
+a:hover {
+	text-decoration-line: none;
+	color: black;
+}
+
+.btn {
+	font-family: "Apercu",sans-serif;
+	font-weight: bold;
+	background-color: $kids-blue;
+	color: white;
+  border-radius: 0px;
+  letter-spacing: 0.4px;
+}
+
+.intropage {
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.c-text {
+	margin-top: 150px;
+	padding: 20px;
+	margin-bottom: 75px;
+	transition: 0.5s;
+	opacity: 1;
+	filter: alpha(opacity=100); /* For IE8 and earlier */	
+}
+
+.c-text:hover {
+	opacity: 0.4;
+	filter: alpha(opacity=40); /* For IE8 and earlier */	
+}
+
+.talk {
+	padding-top: 75px;
+}
+
+.rotate90 {
+    -ms-transform: rotate(270deg); /* IE 9 */
+    -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+    transform: rotate(270deg);
+}
+
+
+.violet {
+	color: #50E3C2;
+}
+
+.white {
+	background-color: white;
+	color: black;
+}
+
+.col-xs-12 {
+	padding: 0px;
+}
+
+.name {
+    font-family: "ITC Clearface Pro",serif;
+    font-weight: 300;
+    text-align: center;
+    border: 0;
+    border-bottom: 0px solid black;
+    outline: 0;
+    font-size: 110px;
+    color: black;
+    padding: 7px 0;
+    background: transparent;
+    max-width: 100%;
+    margin: 30px 0;
+}
+
+@media screen and (max-width: 768px) {
+
+  .logo {
+    top: 21px;
+  }
+
+  .tagline {
+    bottom: 14px;
+  }
+
+  h1 {
+    font-size: 52px;
+    line-height: 68px;
+  }
+
+  h3 {
+      font-size: 18px;
+      line-height: 24px;
+  }
+
+  a {
+    font-size: 18px;
+  }
+
+  .name {
+    font-size: 52px;
+  }
+
+}
+
+@media screen and (max-width: 350px) {
+
+  h1 {
+    font-size: 34px;
+    line-height: 44px;
+  }
+
+  .name {
+    font-size: 34px;
+  }
+
+}
+
+/* ANIMATIONS */
+.slide-enter {
+  transform: translateX(100%);
+}
+.slide-enter-active {
+  transform: translateX(0%);
+  transition: transform 250ms ease-in-out;
+}
+.slide-exit {
+  transform: translateX(0%);
+}
+.slide-exit-active {
+  transform: translateX(-100%);
+  transition: transform 250ms ease-in-out;
+}

@@ -9,6 +9,12 @@ $blue:#68c3c0;
 $green: #137A63;
 $shadow: #533d4a;
 
+//kids colors
+$kids-bg: #FEBC48;
+$kids-blue: #1F1CFB;
+
+
+
 // the :export directive is the magic sauce for webpack
 :export {
     red:$red;
@@ -22,4 +28,6 @@ $shadow: #533d4a;
     shadow:$shadow;
     primaryColor:$pink;
     secondaryColor:$green;
+    kids-bg:$kids-bg;
+    kids-blue:$kids-blue;
 }

@@ -31,3 +31,49 @@ button {
   background: transparent;
   
 }
+
+.name {
+  font-family: "ITC Clearface Pro",serif;
+  font-weight: 300;
+  text-align: center;
+  border: 0;
+  border-bottom: 0px solid black;
+  outline: 0;
+  font-size: 110px;
+  color: black;
+  padding: 7px 0;
+  background: transparent;
+  max-width: 100%;
+  margin: 30px 0;
+}
+
+.name:focus {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.name::placeholder{
+  color: black;
+}
+
+.name:focus::placeholder {
+  color: transparent;
+}
+
+.form-hack {
+  margin-bottom:-12%;
+}
+
+.weird-center{
+  transition: height 0.15s ease-out;
+  bottom:50% !important;
+  position:absolute!important;
+}
+
+.fader {
+  opacity:0.5;
+}
+
+.fader:last-child{
+  opacity:1;
+}

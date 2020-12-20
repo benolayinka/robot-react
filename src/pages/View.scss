@@ -1,4 +1,5 @@
 .video-container {
+    background-color: transparent;
     position: absolute;
     width: 100vw; 
     height: 56.25vw; /* height:width ratio = 9/16 = .5625  */
@@ -8,8 +9,16 @@
     position: absolute;
     top:0;bottom:0; /* vertical center */
     left:0;right:0; /* horizontal center */
-    overflow: visible;
   }
+
+@media screen and (min-width: 768px) {
+  .video-container {
+    width: 80vw; 
+    height: 45vw; /* height:width ratio = 9/16 = .5625  */
+    max-height: 80vh;
+    max-width: 142.2vh; /* 16/9 = 1.778 */
+  }
+}
   
 .video-container-inner{
   /* width and height must be equal to preserve ratio */
@@ -37,8 +46,6 @@ video {
   /* ratio is handled in container */
   width:100%;
   height:100%;
-
-  border-radius: 25px;
 }
 
 .video-label {
@@ -96,4 +103,71 @@ video {
 
 .z-9 {
   z-index: 9;
+}
+
+.logo {
+	position: absolute;
+	width: 40px;
+	left: 30px;
+	top: 30px;
+}
+
+.indicator {
+    max-width: 48px;
+    padding-bottom: 20px;
+}
+
+.robotinfo {
+	position: absolute;
+	height: 12px;
+	right: 30px;
+	top: 30px;
+	font-family: Apercu;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 12px;
+	text-align: right;
+	text-decoration-line: underline;
+}
+
+.tagline {
+	position: absolute;
+	height: 12px;
+	right: 30px;
+	bottom: 22px;
+	font-family: Apercu;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 12px;
+	text-align: right;
+}
+
+.btn-dropdown {
+  background-color: white!important;
+}
+
+@media screen and (min-width: 768px) {
+  .btn-dropdown {
+    width: 64px;
+  }
+}
+
+.text-white{
+  color:white;
+}
+
+.shadow{
+  box-shadow: 0px 0px 10px 0px #000000 50%;
+}
+
+.text-shadow{
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.user-list{
+  background-color: white;
+  margin-top:10px;
+  width: 160px;
 }

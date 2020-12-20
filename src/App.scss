@@ -1,6 +1,33 @@
 @import 'styles/Colors.scss';
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
+@font-face {
+    font-family: Apercu;
+    src: url(fonts/Apercu-Regular-Pro.otf);
+}
+@font-face {
+    font-family: Apercu;
+    src: url(fonts/Apercu-Bold-Pro.otf);
+    font-weight: bold;
+}
+@font-face {
+    font-family: ITC Clearface Pro;
+    src: url(fonts/ClearfaceITCPro-Regular.otf);
+}
+@font-face {
+    font-family: ITC Clearface Pro;
+    src: url(fonts/ClearfaceITCPro-Bold.otf);
+    font-weight: bold;
+}
+
+.font-family-apercu {
+    font-family: "Apercu", sans-serif;
+}
+
+.font-family-clearface {
+    font-family: "ITC Clearface Pro", sans-serif;
+}
+
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
@@ -10,8 +37,9 @@ html {
 }
 
 body {
-    background-color: $pink;
-    font-family: "Roboto","HelveticaNeue","Helvetica Neue",sans-serif;
+    background-color: $kids-bg;
+    font-family: "Apercu", "Roboto","HelveticaNeue","Helvetica Neue",sans-serif;
+    min-width: 300px;
 }
 
 .full{
@@ -25,7 +53,7 @@ body {
 
 .loader{
     z-index: 9999;
-    background-color:$pink;
+    background-color:$kids-bg;
     width: 100%;
     height: 100%;
     display: flex;
@@ -44,7 +72,6 @@ body {
     color: $green;
     font-style: italic;
     font-weight: 900;
-
     text-shadow: $shadow 1px 1px, $shadow 2px 2px;
 }
 
@@ -66,4 +93,8 @@ body {
     height: 100vh;
     position:fixed;
     transform:rotate(10deg);
+}
+
+.clicker-form{
+    z-index:10000;
 }

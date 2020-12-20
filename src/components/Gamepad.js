@@ -185,38 +185,24 @@ function Gamepad(props) {
         fadeTime: 0,
     }
 
+    const center = "calc(50% +" + (px((props.nippleSize / 2))) + ")"
+
     return (
         <div ref={gamepadRef} className = {cx('gamepad', 'h-100', 'w-100', 'p-4', 'position-absolute', props.className)} >
             {/* inner container respects padding */}
             <div className = 'container-inner position-relative h-100 w-100'>
-                {/* hidden pseudo box to position popover halfway down video */}
-                <div ref={lookRef} style={{zIndex:-1}} className = 'h-25 w-100 position-absolute' />
-                <ReactNipple
-                    className='LookJoystick h-100 w-100'
-                    options={lookNippleOptions}
-                    style={{zIndex: 0}}
-                    onMove={handleLookJoystick}
-                    onEnd={handleLookJoystick}
-                />
-                <Overlay container={gamepadRef.current} target={lookRef.current} show={showLookTooltip} placement="bottom">
-                    <Popover id="popover-look">
-                    <Popover.Content>
-                        <span className='threeD'>drag the screen to look around!</span>
-                    </Popover.Content>
-                    </Popover>
-                </Overlay>
                 <div ref={driveRef}
                     style={{
                         width: props.nippleSize / 2,
                         bottom: px((props.nippleSize / 2)),
-                        left: px((props.nippleSize / 2)),
+                        left: '50%',
                         zIndex:-1}}
                     className = 'position-absolute' />
                 <ReactNipple
                     options={options}
                     className='DriveJoystick position-absolute'
                     style={{bottom: px((props.nippleSize / 2)),
-                            left: px((props.nippleSize / 2)),
+                            left: '50%',
                             zIndex:1,
                             }}
                     onMove={handleDriveJoystick}

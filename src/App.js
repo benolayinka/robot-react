@@ -19,7 +19,7 @@ function App() {
     <Router> 
         <Switch>
           <Route exact path="/">
-            <Redirect to="/hello" />
+            <Redirect to="/view/4" />
           </Route>
           <Route path="/nav" component={Pages.Nav} />
           <Route path="/sim" component={Pages.Sim} />

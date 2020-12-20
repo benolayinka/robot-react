@@ -47,7 +47,7 @@ class Loading extends React.Component {
     };
 
     const divStyle = {
-      backgroundColor: Colors.pink,
+      backgroundColor: Colors["bg-kids"],
       position: 'absolute',
       zIndex: this.state.done ? -1 : this.props.zIndex,
       width: '100%',
@@ -66,19 +66,19 @@ class Loading extends React.Component {
         <div>
           {this.props.failed ?
           <>
-          <h1 className="threeD skew">{this.props.failedElement}</h1>
+          <h1 className="">{this.props.failedElement}</h1>
           <Lottie options={defaultOptions} height={120} width={120} />
           </>
           :
           <>
             {!this.state.done ?
               <>
-              <h1 className="threeD skew">{this.props.loadingElement}</h1>
+              <h1 className="">{this.props.loadingElement}</h1>
               <Lottie options={defaultOptions} height={120} width={120} />
               </>
               :
               <>
-              <h1 className="threeD skew">{this.props.doneElement}</h1>
+              <h1 className="">{this.props.doneElement}</h1>
               <Lottie options={defaultOptions2} height={120} width={120} />
               </>
             }

@@ -2,6 +2,7 @@ import React from 'react'
 import {Modal, Button} from 'react-bootstrap'
 import './View.scss'
 import ViewIntro from '../components/ViewIntro'
+import KidsIntro from '../components/KidsIntro'
 import Gamepad from '../components/Gamepad'
 import Controller from '../components/Controller'
 import SVG from '../components/Svg'
@@ -69,6 +70,7 @@ export default class View extends React.Component{
 			activeUserInRoom: null,
             showModal: false,
             timeLeft: null,
+            showUsers: false,
         };
 
         //if query parameter includes ?debug=true
@@ -391,19 +393,18 @@ export default class View extends React.Component{
         }
     }
 
+    showUsers = ()=> {
+        this.setState({showUsers:true})
+    }
+
+    hideUsers = ()=> {
+        this.setState({showUsers:false})
+    }
+
     render() {
         return (
             <div className='View overflow-hidden position-absolute h-100 w-100'>
-                {!this.debug && <Loading
-                                    loadingElement={'connecting'}
-                                    failedElement={'whoops! cant connect'}
-                                    loaded={this.state.remoteStreamPlaying === true}
-                                    failed={this.state.haveRemoteStream === false}
-                                    timeout={1200}
-                                    zIndex={9999}
-                                    />
-                                    }
-                {!this.debug && <ViewIntro onGotName={this.onGotName} zIndex={9998} />}
+                {!this.debug && <KidsIntro onGotName={this.onGotName} zIndex={9998} />}
                 <Modal
                     centered
                     show={this.state.showModal}
@@ -419,14 +420,33 @@ export default class View extends React.Component{
                         </button>
                     </Modal.Header>
                 </Modal>
+                <img src="/images/Logo-Kids.svg" className="logo" />
+                <a href="#" className="robotinfo">Read more about the robot</a>
+                <p className="tagline">Ho, ho, ho, drive by the office.</p>
                 <div className = "video-container" ref="container">
-                    <div className = 'd-flex s-3 position-absolute align-items-center p-4 t-0 r-0 z-9'>
-                        <span className = 'px-3 threeD'>{hudText(this.state.activeUserInRoom, this.state.controlState, this.state.timeLeft)}</span>
+                    <div className = 'd-flex s-3 position-absolute align-items-center p-4 t-0 l-0 z-9'>
+                        <span className = 'text-white text-shadow px-3'>{hudText(this.state.activeUserInRoom, this.state.controlState, this.state.timeLeft)}</span>
+                    </div>
+                    
+                        <div className = 'd-flex flex-column align-items-end s-3 position-absolute p-4 t-0 r-0 z-9'>
                         <Button 
+                            className="btn-dropdown"
                             variant="light"
-                            onClick={this.showModal}>
-                            <span className='threeD'>?</span>
+                            onClick={this.showUsers}>
+                            <img src="/images/online.svg" />
                         </Button>
+                        {
+                        this.state.showUsers &&
+                        <div className="user-list">
+                            <div className="container p-4">
+                            <button type="button" className="close" onClick={this.hideUsers}>
+                                <span aria-hidden="true">×</span>
+                                <span className="sr-only">Close</span>
+                            </button>
+                            <StreamControllerUserList userList={this.state.usersInRoom} activeUser={this.state.activeUserInRoom}/>
+                            </div>    
+                        </div>
+                        }
                     </div>
                     <div className='z-9 w-100 h-100 p-2 d-flex justify-content-center align-items-center text-center'>
                         {(this.state.controlState === controlStates.AVAILABLE || this.state.controlState === controlStates.REQUESTING) &&
@@ -436,7 +456,7 @@ export default class View extends React.Component{
                             disabled={this.state.controlState !== controlStates.AVAILABLE}
                             onClick={this.onRequestButton}
                         >
-                            <span className='threeD'>{this.state.controlText}</span>
+                            <span className='text-white'>{this.state.controlText}</span>
                         </Button>
                         }
 					</div>
@@ -447,18 +467,6 @@ export default class View extends React.Component{
                         {this.state.width && this.state.controlState === controlStates.HAVE &&
                             <Gamepad className='gamepad' onEvent={this.onGamepadEvent} nippleSize={Math.max(this.state.width/6, 100)} buttonSize={Math.max(this.state.width/15, 40)}/>
                         } 
-                    </div>
-                    <div className = "video-container-deco">
-                        <Box height='40vw' backgroundColor={Colors.whiteTrue} left="-10%" top="50%" />
-                        <Box height='40vw' backgroundColor={Colors.whiteTrue} left="70%" top="150%" />
-                        <Box height='40vw' backgroundColor={Colors.whiteTrue} left="70%" top="-20%" />
-                        <Box height='40vw' backgroundColor={Colors.whiteTrue} left="-10%" top="-120%" />
-                        <div className = "video-label top threeD-shadow">
-                            GOOD ROBOT - HYENA 👾
-                        </div>   
-                        <div className = "video-label bottom threeD-shadow">
-                            LET'S CLEAN UP THE WORLD 👾
-                        </div> 
                     </div>
                 </div>
             </div>

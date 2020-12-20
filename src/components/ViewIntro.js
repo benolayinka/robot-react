@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import Lottie from "react-lottie";
 import Colors from '../styles/Colors.scss'
 import {TimelineLite} from 'gsap'
@@ -8,10 +8,9 @@ import './ViewIntro.scss'
 import {Slide} from './Slide'
 
 const intro = [
-            'hi, im diana!',
-            'im a real robot you can drive!',
-            'when i get bigger, im gonna clean trash off the beach',
-            'whats your name?',
+            '<h1>christmas drive-in 🎄</h1>',
+            '<h1>you are about to drive a real robot!',
+            '<h1>whats your name?</h1>',
         ]
 
 const outro = [
@@ -26,21 +25,17 @@ class ViewIntro extends React.Component {
         const clickerElem = (string) => {
             return (
                 <>
-                <h1>{string}</h1>
-                <div className='clicker d-flex flex-column justify-content-end' onClick={this.onClick}>
-                    <h4 className='p-4 bottom-0'>click to continue</h4>
-                </div>
+                <div className="fader" dangerouslySetInnerHTML={{ __html: string }} />
                 </>
             )
         }
 
         const introElems = intro.map(clickerElem)
-
         const FormName = 
-            <Form autoComplete="off" onSubmit={this.onSubmit}>
+            <Form autoComplete="off" onSubmit={this.onSubmit} className="clicker-form form-hack">
                 <Form.Group>
-                    <Form.Control name='name' type="text"/>
-                    <button className='btn-naked threeD' type="submit">
+                    <Form.Control name='name' type="text" className="name" placeholder="my name is.."/>
+                    <button className='btn-naked' type="submit">
                         start
                     </button>
                 </Form.Group>
@@ -48,7 +43,7 @@ class ViewIntro extends React.Component {
 
         const outroElems = outro.map(clickerElem)
 
-        this.elems = introElems.concat([FormName]).concat(outroElems)
+        this.elems = introElems.concat([FormName])
 
         this.state = {
             currentElement: this.elems[0],
@@ -77,6 +72,7 @@ class ViewIntro extends React.Component {
     }
 
     onClick = ()=>{
+        if(this.state.count != 3)
         this.step()
     }
 
@@ -123,13 +119,13 @@ class ViewIntro extends React.Component {
                         ...transitionStyles[state]
                     }}
                     >
-                        <Slide count={this.state.count}>
-                            {
-                                <div className='container text-center center skew threeD'>
-                                    {this.state.currentElement}
-                                </div>
-                            }
-                        </Slide>
+                        <div className='container d-flex flex-column weird-center text-center'>
+                            {this.elems.slice(0,this.state.count+1)}
+                        </div>
+                        <div className='p-4 b-0 position-absolute text-center center skew threeD'>
+                            <h4 className='p-4 b-0'>click to continue</h4>
+                        </div>
+                        <div className='clicker' onClick={this.onClick} />
                     </div>
                 )
                 

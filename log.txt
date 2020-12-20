@@ -11086,3 +11086,302 @@
 {"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T10:40:27.199Z"}
 {"message":"user connected: ben uuid: 9b1d8820-3f8b-11eb-aecc-ed47d6b2830a","level":"info","timestamp":"2020-12-16T10:44:09.503Z"}
 {"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T10:44:09.527Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-12-16T15:16:44.654Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-12-16T15:16:44.695Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-16T15:18:00.905Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T15:18:01.046Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-12-16T15:19:19.908Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-12-16T15:19:19.939Z"}
+{"message":"user connected: jop uuid: 24f3d420-3fb2-11eb-a195-d3a709b3084b","level":"info","timestamp":"2020-12-16T15:20:05.146Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T15:20:05.180Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-16T15:21:34.968Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T15:21:35.142Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-12-16T15:21:35.394Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-12-16T15:21:35.417Z"}
+{"message":"user connected: jop uuid: 65aa4bc0-3fb2-11eb-bee5-85b8eea81ec9","level":"info","timestamp":"2020-12-16T15:21:53.831Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T15:21:53.865Z"}
+{"message":"user connected: fred uuid: cd7e30e0-3fb2-11eb-87ad-a9ef8c48ac2e","level":"info","timestamp":"2020-12-16T15:24:55.975Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T15:24:56.000Z"}
+{"message":"user connected: ben uuid: eed42d20-3fc2-11eb-9e0f-793376a3f753","level":"info","timestamp":"2020-12-16T17:22:03.289Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-16T17:22:03.330Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-17T13:16:57.231Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-17T13:16:57.402Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-18T08:53:57.212Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T08:53:57.370Z"}
+{"message":"user connected: J uuid: e00f2a90-410e-11eb-bfad-dfd9b9690051","level":"info","timestamp":"2020-12-18T08:56:23.540Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T08:56:23.573Z"}
+{"message":"user connected: J uuid: e00f2a90-410e-11eb-bfad-dfd9b9690051","level":"info","timestamp":"2020-12-18T08:59:54.193Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T08:59:54.223Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-18T09:00:00.214Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T09:00:00.607Z"}
+{"message":"user connected: Jop uuid: 6a0fb020-410f-11eb-9433-e3de0c9c7624","level":"info","timestamp":"2020-12-18T09:01:14.765Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T09:01:14.794Z"}
+{"message":"user connected: Jop uuid: 6a0fb020-410f-11eb-9433-e3de0c9c7624","level":"info","timestamp":"2020-12-18T09:33:43.208Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T09:33:43.252Z"}
+{"message":"user connected: ben uuid: bcff12b0-4134-11eb-bd18-3bb0f3488198","level":"info","timestamp":"2020-12-18T13:28:12.319Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T13:28:12.346Z"}
+{"message":"user connected: ben uuid: a79739b0-4135-11eb-9f47-cd11af7e1939","level":"info","timestamp":"2020-12-18T13:34:03.795Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T13:34:03.824Z"}
+{"message":"user connected: ben uuid: a79739b0-4135-11eb-9f47-cd11af7e1939","level":"info","timestamp":"2020-12-18T13:34:06.400Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T13:34:06.431Z"}
+{"message":"user connected: ben uuid: e4b19ed0-4135-11eb-a32a-c3fa4ee37b89","level":"info","timestamp":"2020-12-18T13:36:22.813Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T13:36:22.843Z"}
+{"message":"user connected: Ben uuid: 0aafe0b0-4136-11eb-bacc-cfca07837cfa","level":"info","timestamp":"2020-12-18T13:38:26.058Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T13:38:26.142Z"}
+{"message":"user connected: ben uuid: cb5e33c0-4136-11eb-a3cc-37ffc595c20b","level":"info","timestamp":"2020-12-18T13:42:06.694Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T13:42:06.720Z"}
+{"message":"user connected: ben uuid: f974c170-4136-11eb-b599-fb0bed606205","level":"info","timestamp":"2020-12-18T13:44:33.413Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T13:44:33.461Z"}
+{"message":"user connected: ben uuid: 89b31b90-4139-11eb-af2b-fb640667df8b","level":"info","timestamp":"2020-12-18T14:01:49.913Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T14:01:49.943Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-18T14:25:44.875Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T14:25:45.017Z"}
+{"message":"user connected: ben uuid: 0e603a50-413d-11eb-910b-25203abf3181","level":"info","timestamp":"2020-12-18T14:26:56.494Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T14:26:56.519Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-12-18T14:29:16.399Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-12-18T14:29:16.423Z"}
+{"message":"user connected: Ben uuid: bc7eb6c0-4142-11eb-90ed-89c146a48b75","level":"info","timestamp":"2020-12-18T15:07:52.675Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T15:07:52.708Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-18T15:43:06.452Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T15:43:06.636Z"}
+{"message":"user connected: Jop uuid: b8678e90-4147-11eb-94a3-312401b4b402","level":"info","timestamp":"2020-12-18T15:43:28.417Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T15:43:28.480Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-18T15:50:45.225Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T15:50:45.429Z"}
+{"message":"user connected: ben uuid: dd095840-4148-11eb-ac4b-6d879a3ebca1","level":"info","timestamp":"2020-12-18T15:52:51.356Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T15:52:51.409Z"}
+{"message":"user connected: ben uuid: 3a6c3480-4149-11eb-aa66-6139cee8e56c","level":"info","timestamp":"2020-12-18T15:54:04.780Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T15:54:04.846Z"}
+{"message":"user connected: Joana uuid: 9769e650-4149-11eb-baa9-975d549da1be","level":"info","timestamp":"2020-12-18T15:56:48.701Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T15:56:48.747Z"}
+{"message":"user connected: Val uuid: e6ce4d30-4149-11eb-9701-4582bf7243e4","level":"info","timestamp":"2020-12-18T15:59:01.709Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T15:59:01.829Z"}
+{"message":"user connected: Ben uuid: ee5c8170-4149-11eb-aa4a-154afda02a39","level":"info","timestamp":"2020-12-18T15:59:29.139Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T15:59:29.178Z"}
+{"message":"user connected: Val uuid: e6ce4d30-4149-11eb-9701-4582bf7243e4","level":"info","timestamp":"2020-12-18T16:01:55.565Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:01:55.669Z"}
+{"message":"user connected: Val uuid: 5ea06f50-414a-11eb-8402-cd4ef7edda11","level":"info","timestamp":"2020-12-18T16:02:16.616Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:02:16.737Z"}
+{"message":"user connected: J uuid: 68cc7ff0-414a-11eb-b3c1-8db0bad5d683","level":"info","timestamp":"2020-12-18T16:02:33.196Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:02:33.251Z"}
+{"message":"user connected: J uuid: 68cc7ff0-414a-11eb-b3c1-8db0bad5d683","level":"info","timestamp":"2020-12-18T16:05:27.229Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:05:27.283Z"}
+{"message":"user connected: ben uuid: e5fb81f0-414b-11eb-8092-f5df7d7b2711","level":"info","timestamp":"2020-12-18T16:13:44.527Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:13:44.555Z"}
+{"message":"user connected: J uuid: 68cc7ff0-414a-11eb-b3c1-8db0bad5d683","level":"info","timestamp":"2020-12-18T16:15:42.156Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:15:42.232Z"}
+{"message":"user connected: Fred uuid: 421e8b30-414c-11eb-a95b-8318032cb2d9","level":"info","timestamp":"2020-12-18T16:15:53.629Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:15:53.671Z"}
+{"message":"user connected: J uuid: 68cc7ff0-414a-11eb-b3c1-8db0bad5d683","level":"info","timestamp":"2020-12-18T16:17:48.091Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:17:48.620Z"}
+{"message":"user connected: J uuid: 92645160-414c-11eb-97c6-971310fdba97","level":"info","timestamp":"2020-12-18T16:18:01.598Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:18:01.695Z"}
+{"message":"user connected: ben uuid: 238cf660-414d-11eb-a602-914470f11577","level":"info","timestamp":"2020-12-18T16:22:04.718Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:22:04.749Z"}
+{"message":"user connected: Chris uuid: 1fb60850-414e-11eb-836c-b7a1e4a38dad","level":"info","timestamp":"2020-12-18T16:29:10.027Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:29:10.101Z"}
+{"message":"user connected: J uuid: 92645160-414c-11eb-97c6-971310fdba97","level":"info","timestamp":"2020-12-18T16:29:54.903Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:29:54.959Z"}
+{"message":"user connected: Chris uuid: 1fb60850-414e-11eb-836c-b7a1e4a38dad","level":"info","timestamp":"2020-12-18T16:30:44.021Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:30:44.076Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-18T16:31:00.200Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-18T16:33:42.673Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:33:42.813Z"}
+{"message":"user connected: Frdd uuid: dcdfa170-414e-11eb-813a-ad63081285f3","level":"info","timestamp":"2020-12-18T16:34:34.490Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:34:34.523Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-18T16:36:19.365Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:36:19.496Z"}
+{"message":"user connected: Chd uuid: 22b82f50-414f-11eb-b579-4335ce0f1ec4","level":"info","timestamp":"2020-12-18T16:36:23.619Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:36:23.937Z"}
+{"message":"user connected: ChrissieT uuid: b819ea20-414f-11eb-ad38-b93fb0582ee0","level":"info","timestamp":"2020-12-18T16:40:46.814Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:40:47.013Z"}
+{"message":"user connected: ChrissieT uuid: b819ea20-414f-11eb-ad38-b93fb0582ee0","level":"info","timestamp":"2020-12-18T16:40:47.016Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T16:40:47.016Z"}
+{"message":"user connected: ben uuid: e93ea560-4153-11eb-bd34-457a0a3c072b","level":"info","timestamp":"2020-12-18T17:10:45.568Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T17:10:45.599Z"}
+{"message":"user connected: Bob  uuid: 5082cda0-4154-11eb-a8cf-7589194cf694","level":"info","timestamp":"2020-12-18T17:13:38.161Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T17:13:38.193Z"}
+{"message":"user connected: ben uuid: fbf185a0-4154-11eb-82dc-5be38126d349","level":"info","timestamp":"2020-12-18T17:18:14.235Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T17:18:14.263Z"}
+{"message":"user connected: Fred uuid: 8f4ec870-4156-11eb-8836-0b5b43877ea3","level":"info","timestamp":"2020-12-18T17:29:57.093Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T17:29:57.165Z"}
+{"message":"user connected: Fred uuid: 3118a130-4157-11eb-8fea-198e46fc89d0","level":"info","timestamp":"2020-12-18T17:34:19.094Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T17:34:19.210Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-18T17:40:54.163Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T17:40:54.283Z"}
+{"message":"user connected: Fred  uuid: 3033d490-4159-11eb-8555-a10677e529ea","level":"info","timestamp":"2020-12-18T17:48:27.888Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T17:48:28.942Z"}
+{"message":"user connected: Fred uuid: f0321180-4159-11eb-ac64-6f329934ea44","level":"info","timestamp":"2020-12-18T17:53:53.059Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T17:53:53.242Z"}
+{"message":"user connected: Fred  uuid: 50d72070-415a-11eb-908a-199771d58ab2","level":"info","timestamp":"2020-12-18T17:56:26.410Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T17:56:26.660Z"}
+{"message":"user connected: Fred  uuid: 5c3db770-415b-11eb-b946-7dde48ca15b0","level":"info","timestamp":"2020-12-18T18:03:57.100Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T18:03:57.375Z"}
+{"message":"user connected: Bob  uuid: 5082cda0-4154-11eb-a8cf-7589194cf694","level":"info","timestamp":"2020-12-18T18:18:37.865Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-18T18:18:37.907Z"}
+{"message":"robot connected: zumo video_port: 8010","level":"info","timestamp":"2020-12-19T12:11:25.679Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T12:11:25.858Z"}
+{"message":"user connected: ben uuid: 4ef96e40-41f3-11eb-a8e5-43f5c0d36833","level":"info","timestamp":"2020-12-19T12:11:31.245Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T12:11:31.270Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-12-19T12:21:05.876Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-12-19T12:21:05.901Z"}
+{"message":"user connected: ben uuid: 838cd450-4200-11eb-b86f-bd5eb0d9e647","level":"info","timestamp":"2020-12-19T13:46:02.366Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T13:46:02.394Z"}
+{"message":"user connected: ben uuid: af1e07f0-4206-11eb-b19a-bdcb4674c983","level":"info","timestamp":"2020-12-19T14:30:17.225Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T14:30:17.251Z"}
+{"message":"user connected: ben uuid: 969702b0-4209-11eb-b56c-f7a4df455163","level":"info","timestamp":"2020-12-19T14:50:59.018Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T14:50:59.048Z"}
+{"message":"user connected: ben uuid: 9cb6bd60-420a-11eb-83cd-874c61dc628e","level":"info","timestamp":"2020-12-19T14:58:15.602Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T14:58:15.630Z"}
+{"message":"user connected: ben uuid: b22f42c0-420a-11eb-87e3-cfa71a15a88e","level":"info","timestamp":"2020-12-19T14:58:53.605Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T14:58:53.632Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-12-19T15:02:42.999Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-12-19T15:02:43.029Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T15:05:03.891Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T15:05:04.020Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T15:29:58.447Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T15:29:58.592Z"}
+{"message":"user connected: ben uuid: e38e7980-420f-11eb-b260-63bdbcea4fc9","level":"info","timestamp":"2020-12-19T15:36:04.950Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T15:36:04.983Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T15:40:09.688Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T15:40:09.776Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T15:41:56.104Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T15:41:56.212Z"}
+{"message":"user connected: ben uuid: f2e96a40-4212-11eb-b062-aff09b5535de","level":"info","timestamp":"2020-12-19T15:57:56.572Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T15:57:56.597Z"}
+{"message":"user connected: ben uuid: 7fa34370-4213-11eb-abe8-eb225f3733ff","level":"info","timestamp":"2020-12-19T16:01:52.177Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T16:01:52.210Z"}
+{"message":"user connected: ben uuid: 22f0fd10-4214-11eb-b99e-89b9d5dc59f9","level":"info","timestamp":"2020-12-19T16:06:25.783Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T16:06:25.811Z"}
+{"message":"user connected: Jop uuid: 3ec418b0-4214-11eb-9c67-91590ea5fe17","level":"info","timestamp":"2020-12-19T16:07:13.983Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T16:07:14.011Z"}
+{"message":"user connected: ben uuid: 624ef420-4215-11eb-8782-cdfcc1089c46","level":"info","timestamp":"2020-12-19T16:15:27.004Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T16:15:27.035Z"}
+{"message":"user connected: ben uuid: d4029ea0-4215-11eb-93b5-2f841280f3c8","level":"info","timestamp":"2020-12-19T16:18:35.150Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T16:18:35.182Z"}
+{"message":"user connected: ben uuid: 1443bf30-4216-11eb-9ccd-439256d44c71","level":"info","timestamp":"2020-12-19T16:20:21.173Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T16:20:21.199Z"}
+{"message":"user connected: ben uuid: 50004200-4216-11eb-b557-e94fc1c8b845","level":"info","timestamp":"2020-12-19T16:22:57.941Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T16:22:57.969Z"}
+{"message":"user connected: ben uuid: 28d53890-4219-11eb-94c6-9329c9ab4b46","level":"info","timestamp":"2020-12-19T16:42:24.273Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T16:42:24.303Z"}
+{"message":"user connected: ben uuid: 8a037f40-421a-11eb-bcea-67bdad9815f9","level":"info","timestamp":"2020-12-19T16:52:16.625Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T16:52:16.661Z"}
+{"message":"user connected: ben uuid: 66bfb790-421c-11eb-a2ad-0b29c8ed891f","level":"info","timestamp":"2020-12-19T17:05:38.604Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T17:05:38.637Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-12-19T17:06:08.261Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-12-19T17:06:08.292Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T17:06:32.721Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T17:06:32.848Z"}
+{"message":"user connected: ben uuid: 66bfb790-421c-11eb-a2ad-0b29c8ed891f","level":"info","timestamp":"2020-12-19T17:11:19.048Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T17:11:19.092Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-12-19T17:11:19.375Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-12-19T17:11:19.421Z"}
+{"message":"user connected: ben uuid: 66bfb790-421c-11eb-a2ad-0b29c8ed891f","level":"info","timestamp":"2020-12-19T18:47:19.585Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T18:47:19.821Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-12-19T18:47:23.860Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-12-19T18:47:24.206Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T18:47:34.817Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T18:47:34.894Z"}
+{"message":"user connected: ben uuid: 66bfb790-421c-11eb-a2ad-0b29c8ed891f","level":"info","timestamp":"2020-12-19T19:44:09.268Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T19:44:10.159Z"}
+{"message":"user connected: debug uuid: debug","level":"info","timestamp":"2020-12-19T19:44:11.366Z"}
+{"message":"room joined: debug","level":"info","timestamp":"2020-12-19T19:44:11.468Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T19:44:11.522Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T19:44:11.727Z"}
+{"message":"user connected: ben uuid: b096e0f0-4235-11eb-8993-e9fbf2009390","level":"info","timestamp":"2020-12-19T20:06:40.488Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T20:06:40.941Z"}
+{"message":"user connected: ben uuid: d5125360-4235-11eb-b09a-2587d6e5c1e6","level":"info","timestamp":"2020-12-19T20:07:41.972Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T20:07:42.021Z"}
+{"message":"user connected: ben uuid: f4b3e6b0-4236-11eb-b934-a7eada4aa46d","level":"info","timestamp":"2020-12-19T20:15:43.657Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T20:15:43.765Z"}
+{"message":"user connected: ben uuid: 7e226570-4237-11eb-911f-0f6b52a09b77","level":"info","timestamp":"2020-12-19T20:19:33.441Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T20:19:33.637Z"}
+{"message":"user connected: ben uuid: 542b1210-4239-11eb-960d-7982bb9a4e0d","level":"info","timestamp":"2020-12-19T20:33:33.642Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T20:33:33.740Z"}
+{"message":"user connected: ben uuid: 60c50380-423b-11eb-82d1-51fbbec8d891","level":"info","timestamp":"2020-12-19T20:47:38.898Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T20:47:38.999Z"}
+{"message":"user connected: ben uuid: 9cb7d890-423b-11eb-b148-7d3d746c6255","level":"info","timestamp":"2020-12-19T20:49:14.327Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T20:49:14.784Z"}
+{"message":"user connected: ben uuid: bd4a02e0-423b-11eb-999f-e37a1576ff15","level":"info","timestamp":"2020-12-19T20:49:57.152Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T20:49:57.269Z"}
+{"message":"user connected: b uuid: a182ffc0-423c-11eb-a62b-a56393f6c511","level":"info","timestamp":"2020-12-19T20:56:22.090Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T20:56:22.193Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T21:03:55.876Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:03:56.067Z"}
+{"message":"user connected: ben uuid: 19603380-423f-11eb-8aa8-dd0c5da5ab89","level":"info","timestamp":"2020-12-19T21:13:58.942Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:13:59.054Z"}
+{"message":"user connected: ben uuid: 43c726b0-423f-11eb-ad66-35096ddb9b92","level":"info","timestamp":"2020-12-19T21:15:10.615Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:15:11.034Z"}
+{"message":"user connected: ben uuid: 57d48350-423f-11eb-a694-3f4a4ac78a62","level":"info","timestamp":"2020-12-19T21:15:43.327Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:15:43.457Z"}
+{"message":"user connected: ben uuid: 7d59ebb0-423f-11eb-a6b0-2d8db7c71b48","level":"info","timestamp":"2020-12-19T21:17:05.211Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:17:05.363Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T21:27:33.144Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:27:33.395Z"}
+{"message":"user connected: ben uuid: 5a4dfce0-4241-11eb-8f12-d50c6ded8fb2","level":"info","timestamp":"2020-12-19T21:30:25.750Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:30:25.830Z"}
+{"message":"user connected: b uuid: b0100740-4241-11eb-b3a3-4df7312e921d","level":"info","timestamp":"2020-12-19T21:32:31.775Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:32:31.856Z"}
+{"message":"user connected: nb uuid: dd88f560-4241-11eb-8f83-1160fc610348","level":"info","timestamp":"2020-12-19T21:33:47.912Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:33:48.034Z"}
+{"message":"user connected: ben uuid: 37b55ec0-4242-11eb-b10f-2ba26d5ebd3c","level":"info","timestamp":"2020-12-19T21:36:20.388Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:36:20.472Z"}
+{"message":"user connected: ben uuid: 72a414d0-4243-11eb-807d-2b8e822e9abd","level":"info","timestamp":"2020-12-19T21:45:09.847Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:45:09.933Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-19T21:49:24.742Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:49:25.472Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-19T21:49:46.677Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:49:46.883Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-19T21:58:33.786Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T21:58:33.956Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:58:34.188Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:58:34.697Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T21:59:05.598Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T21:59:06.120Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T23:16:16.435Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T23:16:16.656Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-19T23:16:17.209Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T23:16:17.356Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-19T23:50:09.714Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T23:50:10.699Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-19T23:50:10.839Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-19T23:50:11.005Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-20T01:50:26.780Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T01:50:27.058Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-20T01:50:28.100Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T01:50:29.184Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-20T03:09:13.062Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T03:09:13.264Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-20T03:09:15.463Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T03:09:15.488Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-20T05:09:53.076Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T05:09:53.227Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-20T06:34:14.264Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T06:34:14.605Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-20T06:34:16.282Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T06:34:16.446Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-20T07:45:08.851Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T07:45:09.156Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-20T07:45:10.436Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T07:45:10.572Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-20T08:30:38.405Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T08:30:38.487Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-20T08:30:41.000Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T08:30:41.149Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-20T08:53:15.029Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T08:53:15.207Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-20T08:53:15.742Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T08:53:15.844Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-20T09:51:10.261Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T09:51:10.317Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-20T09:51:10.492Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T09:51:10.567Z"}
+{"message":"robot connected: zumo video_port: 8003","level":"info","timestamp":"2020-12-20T11:43:56.715Z"}
+{"message":"user connected: ben uuid: 0528c760-4244-11eb-8167-6fbcff69e960","level":"info","timestamp":"2020-12-20T11:43:56.882Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T11:43:57.247Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T11:43:57.400Z"}
+{"message":"user connected: ben uuid: a39ad0e0-42b8-11eb-9c7a-47fcef3ed6af","level":"info","timestamp":"2020-12-20T11:44:16.972Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T11:44:17.303Z"}
+{"message":"user connected: ben uuid: 5dc2d7e0-42bb-11eb-aa84-edb92eb2fdd8","level":"info","timestamp":"2020-12-20T12:03:39.917Z"}
+{"message":"room joined: zumo","level":"info","timestamp":"2020-12-20T12:03:39.961Z"}
