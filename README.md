@@ -6,6 +6,10 @@ If running locally, the devlopment app is available at localhost:3000. <br />
 If running on the server, nginx should redirect dev.hotstname.com to hostname.com:3000 where the app is listening. See config at /etc/nginx/sites-enabled/default<br />
 If you're editing via ssh, sometimes the number of file listeners exceeds the system capacity. If the dev environment doesnt recompile on file change, read this: https://github.com/flathub/com.visualstudio.code/issues/29
 
+## Getting All The Packages
+
+This project uses some bit.dev packages, so before doing `npm i`, you have to do `npm config set @bit:registry https://node.bit.dev`
+
 ### Modifying the scene in ../src/3d/CannonScene.js
 
 CannonScene uses Three.js to render, and Cannon.js to simulate physics.
