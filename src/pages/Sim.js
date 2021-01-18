@@ -2,10 +2,11 @@ import React from 'react'
 import Div100vh from 'react-div-100vh'
 import FollowCameraRenderer from '../components/FollowCameraRenderer'
 import CannonScene from '../3d/CannonScene'
-import Gamepad from '../components/Gamepad'
 import ScoreBoard from '../components/ScoreBoard'
 import Loading from "../components/Loading"
 import Colors from '../styles/Colors.scss'
+import ReactNipple from 'react-nipple'
+import {Overlay, Tooltip} from 'react-bootstrap'
 
 export default class Sim extends React.Component{
     constructor(props) {
@@ -65,6 +66,17 @@ export default class Sim extends React.Component{
             position:'relative',
         }
 
+        const nippleSize = Math.max(this.state.width/6, 100)
+
+        const nippleOptions = {
+            color: 'transparent',
+            size: nippleSize,
+            mode: 'static',
+            restOpacity: 1,
+            fadeTime: 0,
+            position: {top: '50%', left:'50%'}
+        }
+
         return (
             <Div100vh className='Sim' >
                 <div ref='container' style={containerStyle}>
@@ -73,7 +85,30 @@ export default class Sim extends React.Component{
                     <div className = 'width' style={containerStyle}>
                         <ScoreBoard/>
                         <FollowCameraRenderer cannonScene={this.cannonScene} position={this.cannonScene.controlBody.position}/>
-                        <Gamepad showTooltips={false} onEvent={this.onGamepadEvent} nippleSize={Math.max(this.state.width/6, 100)} buttonSize={Math.max(this.state.width/15, 40)}/>
+                        <div className="p-4 position-absolute h-100 w-100 t-0 l-0">
+                            {/* relative inner container respects padding */}
+                            <div className="position-relative h-100 w-100">
+                                <div ref={this.driveRef}
+                                    className = 'position-absolute b-0 r-0'
+                                    style = {{width: nippleSize, height: nippleSize}}
+                                    >
+                                </div>
+                                <ReactNipple
+                                    options={nippleOptions}
+                                    className='DriveJoystick position-absolute b-0 r-0'
+                                    onMove={this.handleDriveJoystick}
+                                    onEnd={this.handleDriveJoystick}
+                                    style = {{width: nippleSize, height: nippleSize}}
+                                />
+                                <Overlay target={this.driveRef.current} show={this.state.showDriveTooltip} placement="left">
+                                    {(props) => (
+                                    <Tooltip {...props}>
+                                        Move me to drive!
+                                    </Tooltip>
+                                    )}
+                                </Overlay>
+                            </div>
+                        </div>
                     </div>
                     }
                 </div>

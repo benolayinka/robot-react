@@ -114,21 +114,22 @@ video {
 
 .indicator {
     max-width: 48px;
-    padding-bottom: 20px;
+    margin-bottom:20px;
 }
 
 .robotinfo {
 	position: absolute;
-	height: 12px;
-	right: 30px;
-	top: 30px;
-	font-family: Apercu;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 12px;
-	line-height: 12px;
-	text-align: right;
-	text-decoration-line: underline;
+  right:0;
+  top:0;
+  text-align: right;
+  font-size: 12px;
+  padding: 30px;
+}
+
+.kids-view-link{
+  font-family: Apercu;
+  text-decoration-line: underline;
+  color: black;
 }
 
 .tagline {
@@ -144,13 +145,24 @@ video {
 	text-align: right;
 }
 
+.btn-image {
+  position: relative;
+  top: -1px;
+  max-width: 100%;
+}
+
 .btn-dropdown {
   background-color: white!important;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
 }
 
 @media screen and (min-width: 768px) {
   .btn-dropdown {
     width: 64px;
+    height: 64px;
+    padding: 14px;
   }
 }
 
@@ -170,4 +182,114 @@ video {
   background-color: white;
   margin-top:10px;
   width: 160px;
+}
+
+.flip-container{
+  position: absolute;
+  width: 100%;
+  top: -50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  padding:15px;
+}
+
+.flip-container-inner{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 500px) {
+  .flip-container{
+    display:none;
+  }
+}
+
+.chat-phone{
+  position: absolute;
+  width: 100%;
+  bottom: -50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  margin: 0!important;
+  padding: 20px;
+  font-size:12px;
+}
+
+.chat{
+  position: absolute;
+	height: 12px;
+	left: 30px;
+	bottom: 22px;
+	font-family: Apercu;
+	font-style: normal;
+	font-size: 12px;
+	line-height: 12px;
+	text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+  .chat{
+    display:none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .chat-phone{
+    display:none;
+  }
+}
+
+$colors: red, orange, yellow, blue;
+$size: 10;
+
+@mixin rainbow-shadow($colors, $offset: 0, $size: $size) {
+  $len: length($colors);
+  $outp: 0px 0px transparent;
+  @for $i from 1 through $size {
+    $ind: floor( max($i + $offset, 1) / $size * length($colors) ) % $len + 1;
+    $col: nth($colors, $ind);
+    $outp: #{$outp}, #{$i}px #{$i}px #{$col};
+  }
+  
+  text-shadow: $outp;
+}
+
+.animated-rainbow-text {
+  animation: animated-rainbow-shadow 1s infinite;
+}
+
+@keyframes animated-rainbow-shadow {
+  @for $i from 0 to $size + 1 {
+    #{$i / $size * 100}% {
+      @include rainbow-shadow($colors, $i);
+    }
+  }
+}
+
+@mixin no-select() {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin nipple-shadow() {
+  @include no-select();
+  border-radius: 10px;
+  border: 2px solid white;
+  box-shadow: 0 0 2px 0 white;
+  color: white;
+}
+
+.front {
+  @include nipple-shadow();
+  opacity: 1;
+}
+
+.back {
+  @include nipple-shadow();
+  opacity: 0.5;
 }

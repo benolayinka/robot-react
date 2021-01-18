@@ -2,10 +2,12 @@ import React, {Fragment} from "react";
 import Lottie from "react-lottie";
 import Colors from '../styles/Colors.scss'
 import {TimelineLite} from 'gsap'
-import {Form, Button, Container, Row, Col, Jumbotron} from 'react-bootstrap'
+import {Form, Button, Container, Row, Col, Image} from 'react-bootstrap'
 import {Transition, TransitionGroup, CSSTransition} from 'react-transition-group'
 import './KidsIntro.scss'
 import {Slide} from './Slide'
+import Div100vh from 'react-div-100vh'
+import Snowfall from 'react-snowfall'
 
 function Dots(props){
     const active = props.progress - 1
@@ -18,55 +20,96 @@ class KidsIntro extends React.Component {
     constructor(props) {
         super(props);
 
+        this.snowRef = React.createRef();
+
+        const goodbye = (
+            <div className="position-absolute w-100 h-100 t-0 l-0 d-flex align-items-center">
+                <Container>
+                    <Row className="d-flex align-items-center h-100">
+                        <Col className="text-center">
+                            <h3 className="head-title">That's all, folks! 🎅</h3> 
+                            <h1 className="font-family-clearface">Thanks for driving</h1>
+                            <h1 className="font-family-clearface">Happy holidays and see you soon</h1>
+                            <h3> 🤖 🎄 </h3>
+                            <Image className="w-25" src="/images/christmas.jpg" />
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+        )
+
+        const preload = (
+            <div className="position-absolute w-100 h-100 t-0 l-0 d-flex align-items-center">
+                <Container>
+                    <Row className="d-flex align-items-center h-100">
+                        <Col className="text-center">
+                            <img src="/images/Indicator1.svg" className="indicator w-100" />
+                            <h3 className="head-title">Ho, ho, ho! 🎅🎄</h3> 
+                            <h1 className="title">Our drive in opens at 13:00 Berlin time 🚗</h1>
+                            <p className="lead">
+                                See you there!
+                            </p>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+        )
+
         const intro = (
-            <Container fluid className="position-absolute vh-100 t-0 l-0">
-                <Row className="intropage">
-                    <Col className="text-center">
-                        <img src="/images/Indicator1.svg" className="indicator w-100" />
-                        <h3 className="head-title">Welcome to:</h3> 
-                        <h1 className="">Kids Christmas <br /> Drive-in 🎄</h1>
-                        <p className="lead">
-                            <button className="btn-naked" onClick={this.onClick}>click to continue</button>
-                        </p>
-                    </Col>
-                </Row>
-            </Container>
+            <div className="position-absolute w-100 h-100 t-0 l-0 d-flex align-items-center">
+                <Container>
+                    <Row className="d-flex align-items-center h-100">
+                        <Col className="text-center">
+                            <img src="/images/Indicator1.svg" className="indicator w-100" />
+                            <h3 className="head-title">Welcome to:</h3> 
+                            <h1 className="title">Ben's Xmas Robot Drive in! 🎄</h1>
+                            <p className="lead">
+                                <button className="btn-naked kids-link" onClick={this.onClick}>click to continue</button>
+                            </p>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         )
 
         const robot = (
-            <Container fluid className="position-absolute vh-100 t-0 l-0">
-                <Row className="intropage">
-                    <Col className="text-center">
-                        <img src="/images/Indicator2.svg" className="indicator w-100" />
-                        <h1 className="">You're about to drive <br /> a real robot! 🤖</h1>
-                        <p className="lead text-muted">
-                            <button className="btn-naked" onClick={this.onClick}>click to continue</button>
-                        </p>
-                    </Col>
-                </Row>
-            </Container>
+            <div className="position-absolute h-100 w-100 t-0 l-0 d-flex align-items-center">
+                <Container>
+                    <Row className="d-flex align-items-center h-100">
+                        <Col className="text-center">
+                            <img src="/images/Indicator2.svg" className="indicator w-100" />
+                            <h1 className="title">You're about to drive a real robot! 🤖</h1>
+                            <p className="lead text-muted">
+                                <button className="btn-naked kids-link" onClick={this.onClick}>click to continue</button>
+                            </p>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         )
 
         const name = (
-            <Container fluid className="position-absolute vh-100 t-0 l-0">
-                <Row className="intropage">
-                    <Col className="text-center">
-                        <img src="/images/Indicator3.svg" className="indicator w-100" />
-                        <h3 className="head-title">What's your name?</h3> 
-                        <Form autoComplete="off" onSubmit={this.onSubmit}>
-                            <Form.Group>
-                                <Form.Control name='name' type="text" className="name" placeholder="type here.."/>
-                                <button className='btn-naked' type="submit">
-                                    start
-                                </button>
-                            </Form.Group>
-                        </Form>
-                    </Col>
-                </Row>
-            </Container>
+            <div className="position-absolute h-100 w-100 t-0 l-0 d-flex align-items-center">
+                <Container>
+                    <Row className="d-flex align-items-center h-100">
+                        <Col className="text-center">
+                            <img src="/images/Indicator3.svg" className="indicator w-100" />
+                            <h3 className="head-title">What's your name?</h3> 
+                            <Form autoComplete="off" onSubmit={this.onSubmit}>
+                                <Form.Group>
+                                    <Form.Control name='name' type="text" className="name" placeholder="Type here..."/>
+                                    <button className='btn-naked kids-link' type="submit">
+                                        start
+                                    </button>
+                                </Form.Group>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         )
 
-        this.pages = [intro, robot, name]
+        this.pages = [goodbye, intro, robot, name]
 
         this.state = {
             currentPage: this.pages[0],
@@ -135,17 +178,19 @@ class KidsIntro extends React.Component {
                 unmountOnExit
             >
                 {state => (
+                    <Div100vh>
                     <div
+                    ref={this.snowRef}
                     className="loader overflow-hidden position-absolute h-100 w-100"
                     style={{
                         zIndex: this.props.zIndex,
                         ...defaultStyle,
                         ...transitionStyles[state]
                     }}
-                    >
-                        <img src="/images/Logo-Kids.svg" className="logo" />
-                        <a href="#" className="robotinfo">Read more about the robot</a>
-                        <p className="tagline">Ho, ho, ho, drive by the office.</p>
+                    >   
+                        <Snowfall />
+                        <img src="/images/egghead.png" className="logo" />
+                        <p className="tagline">Merry xmas from Diana the robot! 🎅🎄</p>
                         <TransitionGroup>
                             <CSSTransition
                             classNames="slide"                                    
@@ -156,6 +201,7 @@ class KidsIntro extends React.Component {
                             </CSSTransition>                              
                         </TransitionGroup>
                     </div>
+                    </Div100vh>
                 )
                 
                 }
