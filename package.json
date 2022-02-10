@@ -19,7 +19,7 @@
     "janus-gateway": "git://github.com/meetecho/janus-gateway.git",
     "jspm": "^2.0.0-beta.7",
     "minnie-janus": "^0.7.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "opentype.js": "^1.1.0",
     "rc-tooltip": "^4.0.2",
     "react": "^16.12.0",
